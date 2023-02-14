@@ -1,0 +1,103 @@
+@import "variables";
+*{
+  direction: ltr;
+}
+
+// edit bootstrap---------
+#navbarSupportedContent{
+  flex-direction: row-reverse;
+}
+// edit bootstrap---------
+
+// public class-----------------------
+.input-icon{
+  span:first-of-type{
+    right: 10px;
+  }
+}
+.line-hover{
+  &::before{
+    left: 0px;
+  }
+}
+.mrl-half{
+  margin-right: 5px;
+}
+.mrl-1{
+  margin-right: 1rem;
+}
+.mrl-2{
+  margin-right: 2rem;
+}
+.mrl-3{
+  margin-right: 3rem;
+}
+.absolute-submit{
+  right: 5px;
+}
+.fixed-dots{
+  left: 20px;
+}
+.variety_data{
+  .one_variety{
+    .value{
+      span.icon:first-of-type{
+        right: 40px;
+      }
+      span.icon:last-of-type{
+        right: 15px;
+      }
+    }
+  }
+}
+.item-each-other{
+  span:last-of-type{
+    right: -3px;
+  }
+}
+// public class-----------------------
+
+// start of home page ---------------------
+.welcome_home {
+  .number_of_users {
+    .users {
+      img {
+        &:not(:first-of-type) {
+          margin-left: -25px;
+        }
+      }
+    }
+  }
+}
+
+// end of home page ---------------------
+
+// start of profile page ---------------------
+.profile{
+  .inner_profile{
+    .video{
+      span:first-of-type{
+        right: 15px;
+      }
+    }
+  }
+}
+@media (min-width: 767px) {
+  .profile {
+    .inner_profile {
+      .info {
+        .row {
+          div {
+            p.end {
+              span:first-of-type {
+                margin-left: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// end of profile page ---------------------
+
