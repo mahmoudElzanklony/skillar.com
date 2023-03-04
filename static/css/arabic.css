@@ -63,6 +63,11 @@
   margin-right: -25px;
 }
 
+.auth .shape {
+  right: 0px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 17% 100%);
+}
+
 .profile .inner_profile .video span:first-of-type {
   left: 15px;
 }

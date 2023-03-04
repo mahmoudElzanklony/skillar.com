@@ -22,8 +22,11 @@
           <li class="nav-item link mrl-1">
             <nuxt-link to="/jobs" class="nav-link line-hover">{{ words.jobs }}</nuxt-link>
           </li>
+          <li class="nav-item link mrl-1">
+            <nuxt-link to="/profile/ahmed" class="nav-link line-hover">{{ words.profile }}</nuxt-link>
+          </li>
           <li class="nav-item mrl-1">
-            <nuxt-link to="#" class="nav-link btn-bk-primary" href="#">{{ words.register }}</nuxt-link>
+            <nuxt-link to="/auth/register" class="nav-link btn-bk-primary">{{ words.register }}</nuxt-link>
           </li>
           <li class="nav-item">
             <button class="nav-link btn btn-outline-primary" @click="changeLang">

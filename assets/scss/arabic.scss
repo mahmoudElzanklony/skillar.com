@@ -83,6 +83,17 @@
 }
 
 // end of home page ---------------------
+// start of auth page ---------------------
+
+.auth{
+  .shape{
+    right: 0px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 17% 100%);
+
+  }
+}
+
+// end of auth page ---------------------
 // start of profile page ---------------------
 .profile{
   .inner_profile{

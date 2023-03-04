@@ -4,4 +4,5 @@ export default  {
   posts:'Posts',
   jobs:'Jobs',
   register:'Register',
+  profile:'Profile',
 };

@@ -39,6 +39,7 @@ export default {
     {src:'~/plugins/checkStyle.js',mode:'client'},
     {src:'~/plugins/jquery_plugin',mode:'client'},
     {src:'~/plugins/text_editor',mode:'client'},
+    {src:'~/plugins/tooltip_plugin',mode:'client'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

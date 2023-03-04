@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&family=Caveat&family=Merriweather+Sans&family=Whisper&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 @import "variables";
+@import "tooplit";
 
 
 // edit bootstrap-----------------------
@@ -31,6 +32,9 @@ label{
 .small{
   font-size: $button !important;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
 .btn-bk-primary{
   background-color: $main_color_white_bk;
   padding: 6px 23px !important;
@@ -46,6 +50,9 @@ label{
 .blue{
   color:$main_color;
 }
+.green{
+  color:$green !important;
+}
 .red{
   color:darkred;
 }
@@ -56,7 +63,7 @@ label{
   background-color: white;
 }
 .white{
-  color:white;
+  color:white !important;
 }
 .input-icon{
   position: relative;
@@ -100,6 +107,9 @@ label{
 @media (max-width: 767px) {
   .text-center-mobile{
     text-align: center;
+  }
+  .width-100-mobile{
+    width:100% !important;
   }
 }
 .fit-content{
@@ -312,6 +322,168 @@ label{
 .ck.ck-editor{
   width: 100%;
 }
+
+
+// start of profile page ----------------------------------
+.profile{
+  .inner_profile{
+    background-color: $main_color_more_white_bk;
+    border-radius: 8px;
+    border: 1px solid #dddddd;
+
+    .quick_statistics{
+      .statistics{
+        border: 1px solid #dddddd;
+        padding: 10px;
+        border-radius: 5px;
+        div{
+          p{
+            text-align: center;
+            margin-bottom: 5px;
+          }
+        }
+        img{
+          height: 70px;
+        }
+      }
+    }
+    .video{
+      background-image: url("/images/video.jpg");
+      height: 300px;
+      background-size: cover;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      div{
+        position: relative;
+        height: 100%;
+        background-color: #0a58ca70;
+        span{
+          color:white;
+          cursor: pointer;
+        }
+        span:first-of-type{
+          position: absolute;
+          top: 10px;
+        }
+        span:last-of-type{
+          font-size: 60px;
+        }
+      }
+    }
+  }
+  .nearest_jobs{
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+}
+.personal_info_profile{
+  .info{
+    .bk{
+      background-image: url("/images/users/bk.jpg");
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      position: relative;
+      margin-bottom: 60px;
+      div{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: absolute;
+        width: 95%;
+        bottom: -35px;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+        img{
+          width: 90px;
+          height: 90px;
+          border:1px solid #dddddd;
+          border-radius: 50%;
+        }
+        button{
+          position: relative;
+          top: 35px;
+        }
+      }
+    }
+    .row{
+      div{
+        p{
+          span:first-of-type{
+            color:$gray;
+            position: relative;
+            top:2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+@media (min-width: 767px) {
+  .profile{
+    .inner_profile{
+      .info{
+        .row{
+          div{
+            p.end{
+              justify-content: flex-start;
+              flex-direction: row-reverse;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// end of profile page ----------------------------------
+// start of auth page ----------------------------------
+
+.auth{
+  position: relative;
+  height: 700px;
+  .shape{
+    position: absolute;
+    height: 100%;
+    width: 58%;
+    background-color: #00000057;
+    z-index: -1;
+  }
+  .auth-content{
+    position: relative;
+    z-index: 9999;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    .form-data{
+      background-color: white;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      p{
+        text-align: center;
+      }
+    }
+  }
+  video{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: fill;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+  }
+}
+
+// end of auth page ----------------------------------
 // public classes----------------------------------
 html {
   scroll-behavior: smooth;
@@ -327,5 +499,6 @@ ul{
   padding: 0px;
   list-style:none;
 }
+
 
 

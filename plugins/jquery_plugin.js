@@ -36,6 +36,7 @@ $(document).ready(function (){
     $(this).parent().addClass('active');
   });
 
+
   // see changes of id of url
 /*  var main_sections = $('body #__nuxt #__layout > div').children();
   $(window).on('scroll',function (){

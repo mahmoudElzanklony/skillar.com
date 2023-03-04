@@ -4,4 +4,5 @@ export default  {
   posts:'المنشورات',
   jobs:'الوظائف',
   register:'تسجيل مستخدم جديد',
+  profile:'الملف الشخصي',
 };
