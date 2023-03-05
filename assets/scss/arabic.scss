@@ -16,6 +16,10 @@
 .mrl-half{
   margin-left: 5px;
 }
+.mrl-reverse-15{
+  margin-right: 15px;
+}
+
 .mrl-1{
   margin-left: 1rem;
 }
@@ -44,6 +48,46 @@
     left: -3px;
   }
 }
+
+
+.dynamic_tabs{
+  ul.row{
+    li{
+      &:not(:last-of-type){
+        border-left: 1px solid #dddddd;
+      }
+    }
+  }
+}
+@media (min-width:767px) and (max-width:992px) {
+  .dynamic_tabs{
+    ul.row{
+      li{
+        &:nth-of-type(3){
+          >span{
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width:767px) {
+  .dynamic_tabs{
+    ul.row{
+      li{
+        &:not(:first-of-type){
+          >span{
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
 // public class-----------------------
 .navbar-nav{
   li:not(:last-of-type){

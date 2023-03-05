@@ -36,6 +36,28 @@ $(document).ready(function (){
     $(this).parent().addClass('active');
   });
 
+  // toggle between dynamic tabs
+  $('#__nuxt').on('click','.dynamic_tabs ul li',function (){
+    if(event.target.tagName.toLocaleLowerCase() == 'p'){
+      $(event.target).parent().parent().addClass('active').siblings().removeClass('active')
+    }else if(event.target.tagName.toLocaleLowerCase() == 'p'){
+      $(event.target).parent().addClass('active').siblings().removeClass('active')
+    }else{
+      $(event.target).addClass('active').siblings().removeClass('active')
+    }
+  });
+  // toggle dots action slide up and down
+  $('#__nuxt').on('click','.dots-action li.dots',function (){
+    $('.dots-action li.dots > ul').slideUp();
+    $(this).find('>ul').slideToggle();
+  });
+  $('#__nuxt').on('click','.dots-action li.dots ul',function (e){
+    e.stopPropagation();
+    $('.dots-action li.dots > ul').slideUp();
+  });
+
+
+
 
   // see changes of id of url
 /*  var main_sections = $('body #__nuxt #__layout > div').children();

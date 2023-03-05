@@ -5,14 +5,14 @@
       <div class="shape width-100-mobile"></div>
       <div class="container">
         <div class="row align-items-center">
-          <div class="col-md-6 mb-2">
+          <div class="col-md-7 mb-2">
             <div class="info text-center-mobile">
               <h2 class="mb-0 white big">Skillar</h2>
               <h2 class="white big">{{ words.for_every_one }}</h2>
               <p class="white">{{ words.be_member_of_our_community }}</p>
             </div>
           </div>
-          <div class="col-md-6 mb-2">
+          <div class="col-md-5 mb-2">
             <div class="form-data">
               <form class="p-3">
                 <div class="form-group mb-3 input-icon flex-wrap">

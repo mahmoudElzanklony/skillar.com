@@ -18,30 +18,34 @@
                       </p>
                     </div>
                     <div class="data">
+
                         <div class="dynamic_tabs">
-                            <ul class="d-flex" :key="$route.fullPath">
-                               <li class="p-2 d-flex align-items-center" name="all_requests">
-                                  <span class="mrl-half"><i class="bi bi-card-list"></i></span>
+                            <ul class="row w-100 m-0" :key="$route.fullPath">
+                               <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center justify-content-between" name="all_requests">
+                                  <span class="mrl-half mrl-reverse-15"><i class="bi bi-card-list"></i></span>
                                   <div>
                                     <p class="fw-bold mb-0">50</p>
                                     <p class="mb-0">{{ words.all_requests }}</p>
                                   </div>
                                </li>
-                              <li class="p-2 d-flex align-items-center" name="in_consideration_requests">
+                              <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center justify-content-between"
+                                  name="in_consideration_requests">
                                 <span class="mrl-half"><i class="bi bi-arrow-up"></i></span>
                                 <div>
                                   <p class="fw-bold mb-0">50</p>
                                   <p class="mb-0">{{ words.in_consideration_requests }}</p>
                                 </div>
                                </li>
-                              <li class="p-2 d-flex align-items-center" name="accepted_requests">
+                              <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center justify-content-between"
+                                  name="accepted_requests">
                                 <span class="mrl-half"><i class="bi bi-check-lg"></i></span>
                                 <div>
                                   <p class="fw-bold mb-0">50</p>
                                   <p class="mb-0">{{ words.accepted_requests }}</p>
                                 </div>
                                </li>
-                              <li class="p-2 d-flex align-items-center" name="rejected_requests">
+                              <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center justify-content-between"
+                                  name="rejected_requests">
                                 <span class="mrl-half"><i class="bi bi-x-square"></i></span>
                                 <div>
                                   <p class="fw-bold mb-0">50</p>
@@ -56,7 +60,10 @@
                                      <div class="d-flex align-items-center">
                                        <img src="/images/companies/1.png" class="mrl-1">
                                        <div>
-                                         <p class="fw-bold mb-1">Team leader / full stack php</p>
+                                         <p class="fw-bold w-100 mb-1 d-flex align-items-center justify-content-between">
+                                           <span>Team leader / full stack php</span>
+                                           <span class="red" v-tooltip="words.delete"><i class="bi bi-trash"></i></span>
+                                         </p>
                                          <p class="mb-1">
                                            <span>Shutterland</span>
                                            <span class="gray">naser city - 5 street</span>
@@ -68,12 +75,12 @@
                                          </p>
                                        </div>
                                      </div>
-                                     <span class="icon" v-tooltip="words.delete"><i class="bi bi-trash"></i></span>
                                    </div>
                                  </div>
                                </div>
                             </div>
                         </div>
+
                     </div>
 
                   </div>
@@ -123,15 +130,7 @@ export default {
     JobComponent
   },
   mounted() {
-    $('#__nuxt').on('click','.dynamic_tabs ul li',function (){
-      if(event.target.tagName.toLocaleLowerCase() == 'p'){
-        $(event.target).parent().parent().addClass('active').siblings().removeClass('active')
-      }else if(event.target.tagName.toLocaleLowerCase() == 'p'){
-        $(event.target).parent().addClass('active').siblings().removeClass('active')
-      }else{
-        $(event.target).addClass('active').siblings().removeClass('active')
-      }
-    });
+
   },
   methods:{
      add_active(){
@@ -149,45 +148,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/scss/variables";
-.dynamic_tabs{
-  ul{
-    border-bottom: 1px solid #dddddd;
-    li{
-      min-width: 25%;
-      background-color: white;
-      span{
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color:$blue;
-        background-color: $main_color_white_bk;
-        i{
-          font-size: 20px;
-        }
-      }
-      p:last-of-type{
-        font-size: 15px;
-      }
-      &.active{
-        background-color: $main_color_more_white_bk;
-      }
-      &:not(:last-of-type){
-        border-right: 1px solid #dddddd;
-      }
-    }
-  }
-  .job_info{
-    img{
-      max-height: 80px;
-      border: 1px solid #dddddd;
-      border-radius: 8px;
-    }
-    span.btn{
-      padding: 3px 10px;
-    }
-  }
-}
+
 </style>

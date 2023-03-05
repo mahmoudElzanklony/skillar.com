@@ -180,7 +180,7 @@
 import WordsLang from "../../mixins/WordsLang";
 import $ from 'jquery';
 export default {
-  name: "job_id",
+  name: "job_save",
   mixins:[WordsLang],
   methods:{
     change_salary_type:function (){

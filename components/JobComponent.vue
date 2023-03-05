@@ -35,7 +35,8 @@ export default {
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 10px;
-  box-shadow: 1px 1px 8px 1px #ddd;
+  //box-shadow: 1px 1px 8px 1px #ddd;
+  border:1px solid #eee;
   img{
     height: 40px;
     border-radius: 6px;

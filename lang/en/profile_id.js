@@ -8,7 +8,7 @@ export default  {
   number_of_applied_jobs:'Number of applied jobs',
   number_of_nearest_jobs:'Number of nearest jobs',
   number_of_visiting:'Number of profile visiting',
-  number_of_messages_chat:'Number of messages chat',
+  number_of_messages_chat:'Number of messages',
   number_of_friends_feedback:'Number of feedback',
   number_of_not_seen_applied_jobs:'Number of not seen applied jobs',
   number_of_new_notifications:'Number of notifications',

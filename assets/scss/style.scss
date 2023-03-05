@@ -44,6 +44,9 @@ label{
 .top-1{
   top:1px;
 }
+.top-13{
+  top:13px;
+}
 .gray{
   color:$gray !important;
 }
@@ -268,6 +271,83 @@ label{
   }
 }
 
+.dynamic_tabs{
+  ul.row{
+    border-bottom: 1px solid #dddddd;
+    >li{
+      min-width: 25%;
+      background-color: white;
+      cursor: pointer;
+      span{
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color:$blue;
+        background-color: $main_color_white_bk;
+        i{
+          font-size: 20px;
+        }
+      }
+      div{
+        width:calc(100% - 57px);
+      }
+      p:last-of-type{
+        font-size: 15px;
+      }
+      &.active{
+        background-color: $main_color_white_bk;
+      }
+    }
+  }
+  .job_info{
+    img{
+      max-height: 80px;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+    }
+    img+div{
+      width: -webkit-fill-available;
+    }
+    span.btn{
+      padding: 3px 10px;
+    }
+  }
+}
+@media (min-width:767px) and (max-width:992px) {
+  .dynamic_tabs{
+    ul.row{
+      li{
+        &:first-of-type,&:nth-of-type(2){
+          border-bottom: 1px solid #dddddd;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .dynamic_tabs{
+    ul.row{
+      li{
+        border-bottom: 1px solid #dddddd;
+      }
+    }
+    .data{
+      .value{
+        >div{
+          display: block !important;
+          img{
+            display: block;
+            margin:0px auto !important;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 .file_upload{
   border-radius: 8px;
@@ -321,6 +401,45 @@ label{
 }
 .ck.ck-editor{
   width: 100%;
+}
+
+
+.dots-action{
+  position: relative;
+  >li{
+    position: relative;
+    >ul{
+      position: absolute;
+      background-color: white;
+      width: 150px;
+      border: 1px solid #eee;
+      border-radius: 3px;
+      margin-top: 3px;
+      display: none;
+      li{
+        padding: 3px;
+        font-weight: normal;
+        &:not(:last-of-type){
+          border-bottom: 1px solid #dddddd;
+        }
+      }
+      &::before{
+        content: '';
+        display: block;
+        position: absolute;
+        top: -6px;
+        margin-right: 4px;
+        margin-left: 4px;
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border:1px solid transparent;
+        border-bottom: 1px solid #eeeeee;
+        border-right: 1px solid #eeeeee;
+        transform: rotate(-134deg);
+      }
+    }
+  }
 }
 
 

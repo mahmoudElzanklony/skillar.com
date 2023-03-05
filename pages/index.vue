@@ -174,7 +174,7 @@
                     ></job-component>
                 </div>
             </div>
-            <nuxt-link to="#" class="d-block m-auto btn-bk-primary fit-content">{{ words.all_jobs }}</nuxt-link>
+            <nuxt-link to="/jobs" class="d-block m-auto btn-bk-primary fit-content">{{ words.all_jobs }}</nuxt-link>
         </div>
       </section>
 

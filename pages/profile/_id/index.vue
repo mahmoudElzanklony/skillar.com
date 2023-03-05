@@ -8,7 +8,7 @@
                 <div class="quick_statistics mb-3 p-3">
                   <div class="row">
                     <div class="col-lg-4 col-md-6 mb-2">
-                      <nuxt-link to="/profile/ahmed/jobs">
+                      <nuxt-link to="/profile/ahmed/applied-jobs">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_applied_jobs }}</p>
@@ -19,7 +19,7 @@
                       </nuxt-link>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-2">
-                      <nuxt-link to="/nearest_jobs">
+                      <nuxt-link to="/nearest-jobs">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_nearest_jobs }}</p>
