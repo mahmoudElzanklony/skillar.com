@@ -2,7 +2,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <nuxt-link class="navbar-brand" to="/">Skillar</nuxt-link>
+      <nuxt-link class="navbar-brand cursor-pointer" to="/" tag="img" src="/images/logo.png"></nuxt-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -17,16 +17,52 @@
             <nuxt-link to="#" class="nav-link line-hover" href="#">{{ words.about }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
-            <nuxt-link to="#" class="nav-link line-hover" href="#">{{ words.posts }}</nuxt-link>
+            <nuxt-link class="nav-link line-hover" to="/best-companies">{{ words.companies_rank }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
             <nuxt-link to="/jobs" class="nav-link line-hover">{{ words.jobs }}</nuxt-link>
           </li>
-          <li class="nav-item link mrl-1">
-            <nuxt-link to="/profile/ahmed" class="nav-link line-hover">{{ words.profile }}</nuxt-link>
-          </li>
           <li class="nav-item mrl-1">
             <nuxt-link to="/auth/register" class="nav-link btn-bk-primary">{{ words.register }}</nuxt-link>
+          </li>
+          <li class="user_profile mrl-1">
+            <ul class="dots-action cursor-pointer d-inline-block">
+              <li class="dots">
+                <img src="/images/users/2.webp" class="cursor-pointer">
+                <ul>
+                  <li>
+                    <nuxt-link to="/profile/ahmed">
+                      <span class="gray"><i class="bi bi-person-circle"></i></span>
+                      <span class="gray">{{ words.profile }}</span>
+                    </nuxt-link>
+                  </li>
+                  <li>
+                    <nuxt-link to="/notifications">
+                      <span><i class="bi bi-bell"></i></span>
+                      <span class="gray">{{ words.notifications }}</span>
+                    </nuxt-link>
+                  </li>
+                  <li>
+                    <nuxt-link to="/chat">
+                      <span><i class="bi bi-chat-dots"></i></span>
+                      <span class="gray">{{ words.chat }}</span>
+                    </nuxt-link>
+                  </li>
+                  <li>
+                    <nuxt-link to="/nearest-jobs">
+                      <span><i class="bi bi-geo-alt"></i></span>
+                      <span class="gray">{{ words.nearest_jobs }}</span>
+                    </nuxt-link>
+                  </li>
+                  <li style="border-top: 1px solid #dddddd">
+                    <nuxt-link to="/logout">
+                      <span><i class="bi bi-box-arrow-in-left"></i></span>
+                      <span class="gray">{{ words.logout }}</span>
+                    </nuxt-link>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <button class="nav-link btn btn-outline-primary" @click="changeLang">
@@ -93,6 +129,14 @@ nav{
         }
       }
 
+    }
+  }
+  .user_profile{
+    img{
+      width: 40px;
+      height: 40px;
+      border: 1px solid #eeeeee;
+      border-radius: 50%;
     }
   }
   .btn-outline-primary{

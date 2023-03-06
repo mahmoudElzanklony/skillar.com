@@ -38,7 +38,7 @@ export default {
   plugins: [
     {src:'~/plugins/checkStyle.js',mode:'client'},
     {src:'~/plugins/jquery_plugin',mode:'client'},
-    {src:'~/plugins/text_editor',mode:'client'},
+   // {src:'~/plugins/text_editor',mode:'client'},
     {src:'~/plugins/tooltip_plugin',mode:'client'},
   ],
 
@@ -63,5 +63,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  router: {
+   // middleware: ['config_plugins'],
   }
 }

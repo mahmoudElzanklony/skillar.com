@@ -14,7 +14,7 @@
                       <span class="normal fw-bold">{{ words.applied_jobs }}</span>
                       <p class="mb-0">
                         <span class="blue mrl-half" >15</span>
-                        <span><i class="bi bi-caret-down-fill"></i></span>
+                        <span><i class="bi bi-caret-up-fill"></i></span>
                       </p>
                     </div>
                     <div class="data">
@@ -148,5 +148,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/assets/scss/variables";
-
+.profile.profile-jobs{
+  .variety_data{
+    .one_variety{
+      .data{
+        display: block;
+      }
+    }
+  }
+}
 </style>

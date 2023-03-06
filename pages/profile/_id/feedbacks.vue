@@ -12,7 +12,7 @@
                   <span class="normal fw-bold">{{ words.friend_feedbacks }}</span>
                   <p class="mb-0">
                     <span class="blue mrl-half" >15</span>
-                    <span><i class="bi bi-caret-down-fill"></i></span>
+                    <span><i class="bi bi-caret-up-fill"></i></span>
                   </p>
                 </div>
                 <div class="data">
@@ -20,14 +20,28 @@
                     <div class="d-flex align-items-center">
                       <img src="/images/users/1.webp" class="mrl-half">
                       <div>
-                        <p class="mb-0 fw-bold">hager ali</p>
-                        <p class="mb-0">Sara is a good enginner i work with here before at algorithma company she can
+                        <div class="mb-0 fw-bold d-flex align-items-center justify-content-between">
+                          <span>hager ali</span>
+                          <ul class="dots-action cursor-pointer d-inline-block">
+                            <li class="dots">
+                              <i class="bi bi-three-dots-vertical gray"></i>
+                              <ul>
+                                <li v-tooltip="words.accept_apperance_feedback">
+                                  <span class="gray"><i class="bi bi-check-lg"></i></span>
+                                  <span>{{ words.accept }}</span>
+                                </li>
+                                <li>
+                                  <span class="red"><i class="bi bi-trash"></i></span>
+                                  <span>{{ words.delete }}</span>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="mb-0 line-height-22">Sara is a good enginner i work with here before at algorithma company she can
                           work under stress she do it best , test test test test test test test test test test</p>
                       </div>
                     </div>
-                    <span   v-tooltip="words.accept_apperance_feedback"
-                            class="icon green"><i class="bi bi-check-lg"></i></span>
-                    <span class="icon"><i class="bi bi-trash"></i></span>
                   </div>
                 </div>
               </div>
@@ -84,6 +98,11 @@ export default {
 @import "~/assets/scss/variables";
 .profile.profile-feedbacks{
   .variety_data{
+    .one_variety{
+      .data{
+        display: block;
+      }
+    }
     .value{
       img{
         max-height: 70px;

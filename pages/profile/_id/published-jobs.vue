@@ -38,7 +38,7 @@
                          title="Full stack"
                          company_name="Algorithma"
                          time="30M ago"
-                         id="1"
+                         :full_url="'/profile/ahmed/published-jobs?id='+i"
                          :skills="skills"
                          :show_details="words.open"
                          img="/images/companies/1.png"
@@ -165,6 +165,7 @@ import ShareComponent from "../../../components/ShareComponent";
 import Rate_employee from "../../../components/Modals/rate_employee";
 export default {
   name: "published_jobs",
+
   components: {
     Rate_employee,
     ShareComponent,

@@ -24,5 +24,7 @@ export default  {
   open:'open',
   nearest_jobs:'Nearest jobs',
   popular_jobs:'Popular jobs',
+  edit:'Edit',
+
 
 };

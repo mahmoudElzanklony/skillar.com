@@ -178,10 +178,11 @@
 
 <script>
 import WordsLang from "../../mixins/WordsLang";
+import text_editor from "../../mixins/text_editor";
 import $ from 'jquery';
 export default {
   name: "job_save",
-  mixins:[WordsLang],
+  mixins:[WordsLang,text_editor],
   methods:{
     change_salary_type:function (){
       var parent = event.target.parentElement;

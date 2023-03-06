@@ -4,6 +4,7 @@ export default  {
   email:'البريد الالكتروني',
   username:'اسم المستخدم',
   password:'كلمة المرور',
+  password_confirmation:'تأكيد كلمة المرور',
   country:'الدولة',
   city:'المدينة',
   login:'تسجيل دخول',

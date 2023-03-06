@@ -11,6 +11,9 @@
     color:white;
   }
 }
+.navbar-brand{
+  height: 60px;
+}
 // edit bootstrap-----------------------
 
 // public classes----------------------------------
@@ -57,7 +60,7 @@ label{
   color:$green !important;
 }
 .red{
-  color:darkred;
+  color:darkred !important;
 }
 .black{
   color:$black !important;
@@ -67,6 +70,15 @@ label{
 }
 .white{
   color:white !important;
+}
+.line-height-22{
+  line-height: 22px;
+}
+.flex-auto{
+  flex:auto;
+}
+.max-width{
+  width:-webkit-fill-available;
 }
 .input-icon{
   position: relative;
@@ -219,7 +231,7 @@ label{
           display: block;
           margin: auto;
         }
-        span{
+        >span{
           color:white !important;
         }
       }
@@ -416,6 +428,7 @@ label{
       border-radius: 3px;
       margin-top: 3px;
       display: none;
+      z-index: 99;
       li{
         padding: 3px;
         font-weight: normal;
@@ -472,20 +485,20 @@ label{
       background-size: cover;
       position: relative;
       border-radius: 8px;
-      overflow: hidden;
       div{
         position: relative;
         height: 100%;
         background-color: #0a58ca70;
+        border-radius: 8px;
         span{
           color:white;
           cursor: pointer;
         }
-        span:first-of-type{
+        >ul:first-of-type{
           position: absolute;
           top: 10px;
         }
-        span:last-of-type{
+        >span:last-of-type{
           font-size: 60px;
         }
       }

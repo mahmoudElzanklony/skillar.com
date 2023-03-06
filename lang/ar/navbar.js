@@ -5,4 +5,9 @@ export default  {
   jobs:'الوظائف',
   register:'تسجيل مستخدم جديد',
   profile:'الملف الشخصي',
+  companies_rank:'ترتيب  الشركات',
+  nearest_jobs:'اقرب الوظائف',
+  chat:'المحادثات',
+  notifications:'الاشعارات',
+  logout:'تسجيل الخروج',
 };

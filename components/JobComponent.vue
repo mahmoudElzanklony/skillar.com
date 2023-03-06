@@ -4,7 +4,11 @@
     <div class="job">
       <div class="job-header d-flex justify-content-between align-items-center">
         <img :src="img">
-        <nuxt-link :to="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
+        <nuxt-link v-if="full_url == undefined"
+                   :to="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
+        <nuxt-link v-else
+                   :to="full_url" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
+
       </div>
       <div class="job-body">
         <p class="fw-bold mb-1">{{ title }}</p>
@@ -24,7 +28,7 @@
 <script>
 export default {
   name: "JobComponent",
-  props:['img','title','skills','company_name','time','show_details','id']
+  props:['full_url','img','title','skills','company_name','time','show_details','id']
 }
 </script>
 

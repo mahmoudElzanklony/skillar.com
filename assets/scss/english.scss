@@ -51,6 +51,11 @@
         right: 15px;
       }
     }
+    .image{
+      .dots-action{
+        right: 5px;
+      }
+    }
   }
 }
 .item-each-other{
@@ -128,7 +133,10 @@
 .profile{
   .inner_profile{
     .video{
-      span:first-of-type{
+      ul.dots-action{
+        right: 15px;
+      }
+      >span:first-of-type{
         right: 15px;
       }
     }
@@ -153,3 +161,39 @@
 }
 // end of profile page ---------------------
 
+// start of chat page ---------------------
+
+.chat{
+  .outer{
+    .outer-body{
+      .friends{
+        border-right: 1px solid #dddddd;
+        ul{
+          li{
+            >strong{
+              right: 3px;
+            }
+          }
+        }
+      }
+      .chat-info{
+        .chat-header{
+          img{
+            width: 60px;
+          }
+          border-bottom: 1px solid #dddddd;
+        }
+        .sender{
+          text-align: right;
+        }
+        .receiver{
+          span::before{
+            left: -5px;
+            transform: rotate(137deg);
+          }
+        }
+      }
+    }
+  }
+}
+// end of chat page ---------------------

@@ -47,7 +47,12 @@ $(document).ready(function (){
     }
   });
   // toggle dots action slide up and down
-  $('#__nuxt').on('click','.dots-action li.dots',function (){
+  // start
+  $('#__nuxt').on('click',function (){
+    $('.dots-action li.dots > ul').slideUp();
+  });
+  $('#__nuxt').on('click','.dots-action li.dots',function (e){
+    e.stopPropagation();
     $('.dots-action li.dots > ul').slideUp();
     $(this).find('>ul').slideToggle();
   });
@@ -55,6 +60,7 @@ $(document).ready(function (){
     e.stopPropagation();
     $('.dots-action li.dots > ul').slideUp();
   });
+  // end
 
 
 

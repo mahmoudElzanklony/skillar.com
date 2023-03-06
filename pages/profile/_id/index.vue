@@ -41,7 +41,7 @@
                       </nuxt-link>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-2">
-                      <nuxt-link to="#">
+                      <nuxt-link to="/chat">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_messages_chat }}</p>
@@ -52,7 +52,7 @@
                       </nuxt-link>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-2">
-                      <nuxt-link to="#">
+                      <nuxt-link to="/profile/ahmed/feedbacks">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_friends_feedback }}</p>
@@ -63,7 +63,7 @@
                       </nuxt-link>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-2">
-                      <nuxt-link to="#">
+                      <nuxt-link to="/notifications">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_new_notifications }}</p>
@@ -77,8 +77,22 @@
                 </div>
                 <div class="video mb-3">
                   <div class="d-flex align-items-center justify-content-center">
-                    <span data-bs-toggle="modal"
-                          data-bs-target="#update_personal_video"><i class="bi bi-pencil-square"></i></span>
+                    <ul class="dots-action cursor-pointer d-inline-block">
+                      <li class="dots">
+                        <i class="bi white bi-three-dots-vertical gray"></i>
+                        <ul>
+                          <li data-bs-toggle="modal"
+                              data-bs-target="#update_personal_video">
+                            <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                            <span class="gray">{{ words.edit }}</span>
+                          </li>
+                          <li>
+                            <span class="red"><i class="bi bi-trash"></i></span>
+                            <span class="gray">{{ words.delete }}</span>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
                     <span data-bs-toggle="modal"
                           data-bs-target="#display_introduction_video"><i class="bi bi-file-earmark-play"></i></span>
                   </div>
@@ -109,16 +123,48 @@
                     </div>
                     <div class="data">
                       <div class="value">
-                        <p class="mb-0">Arabic</p>
+                        <div class="mb-0 d-flex align-items-center justify-content-between">
+                          <span>Arabic</span>
+                          <ul class="dots-action cursor-pointer d-inline-block">
+                            <li class="dots">
+                              <i class="bi gray bi-three-dots-vertical gray"></i>
+                              <ul>
+                                <li data-bs-toggle="modal"
+                                    data-bs-target="#update_personal_language">
+                                  <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                                  <span class="gray">{{ words.edit }}</span>
+                                </li>
+                                <li>
+                                  <span class="red"><i class="bi bi-trash"></i></span>
+                                  <span class="gray">{{ words.delete }}</span>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
                         <p class="mb-0">Mother language</p>
-                        <span class="icon"><i class="bi bi-pencil-square"></i></span>
-                        <span class="icon"><i class="bi bi-trash"></i></span>
                       </div>
                       <div class="value">
-                        <p class="mb-0">English</p>
+                        <div class="mb-0 d-flex align-items-center justify-content-between">
+                          <span>English</span>
+                          <ul class="dots-action cursor-pointer d-inline-block">
+                            <li class="dots">
+                              <i class="bi gray bi-three-dots-vertical gray"></i>
+                              <ul>
+                                <li data-bs-toggle="modal"
+                                    data-bs-target="#update_personal_language">
+                                  <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                                  <span class="gray">{{ words.edit }}</span>
+                                </li>
+                                <li>
+                                  <span class="red"><i class="bi bi-trash"></i></span>
+                                  <span class="gray">{{ words.delete }}</span>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
                         <p class="mb-0">Fluent language</p>
-                        <span class="icon"><i class="bi bi-pencil-square"></i></span>
-                        <span class="icon"><i class="bi bi-trash"></i></span>
                       </div>
                     </div>
                   </div>
@@ -134,17 +180,35 @@
                     </div>
                     <div class="data">
                       <div class="value">
-                        <div class="d-flex align-items-center">
-                          <span class="mrl-1 big"><i class="bi bi-buildings"></i></span>
-                          <div>
-                            <p class="mb-0 fw-bold small">Elhenawy school</p>
-                            <p class="mb-0 gray">i learned at elhenawy school at zagazig</p>
-                            <p class="mb-0 gray">V.good</p>
-                            <p class="mb-0 small gray">22/2/2018 : 06/06/2022</p>
+                        <div class="mb-0 ">
+                          <div class="d-flex align-items-center">
+                            <span class="mrl-1 big"><i class="bi bi-buildings"></i></span>
+                            <div class="max-width">
+                              <div class="d-flex align-items-center mb-0 max-width">
+                                <span class="fw-bold small flex-auto">Elhenawy school</span>
+                                <ul class="dots-action cursor-pointer d-inline-block">
+                                  <li class="dots">
+                                    <i class="bi gray bi-three-dots-vertical gray"></i>
+                                    <ul>
+                                      <li data-bs-toggle="modal"
+                                          data-bs-target="#update_personal_education">
+                                        <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                                        <span class="gray">{{ words.edit }}</span>
+                                      </li>
+                                      <li>
+                                        <span class="red"><i class="bi bi-trash"></i></span>
+                                        <span class="gray">{{ words.delete }}</span>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </div>
+                              <p class="mb-0 gray">i learned at elhenawy school at zagazig</p>
+                              <p class="mb-0 gray">V.good</p>
+                              <p class="mb-0 small gray">22/2/2018 : 06/06/2022</p>
+                            </div>
                           </div>
                         </div>
-                        <span class="icon"><i class="bi bi-pencil-square"></i></span>
-                        <span class="icon"><i class="bi bi-trash"></i></span>
                       </div>
                     </div>
                   </div>
@@ -177,11 +241,27 @@
                     </div>
                     <div class="data">
                       <div class="value">
-                        <p class="mb-0">Hospital project</p>
+                        <div class="mb-0 d-flex align-items-center justify-content-between">
+                          <span>Hospital project</span>
+                          <ul class="dots-action cursor-pointer d-inline-block">
+                            <li class="dots">
+                              <i class="bi gray bi-three-dots-vertical gray"></i>
+                              <ul>
+                                <li data-bs-toggle="modal"
+                                    data-bs-target="#update_personal_projects">
+                                  <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                                  <span class="gray">{{ words.edit }}</span>
+                                </li>
+                                <li>
+                                  <span class="red"><i class="bi bi-trash"></i></span>
+                                  <span class="gray">{{ words.delete }}</span>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
                         <p class="mb-0">some description about this project</p>
                         <a href="#">{{ words.visit }}</a>
-                        <span class="icon"><i class="bi bi-pencil-square"></i></span>
-                        <span class="icon"><i class="bi bi-trash"></i></span>
                       </div>
                     </div>
                   </div>
@@ -198,16 +278,30 @@
                       <div class="value mb-2" v-for="i in 2">
                         <div class="d-flex align-items-center">
                           <img class="mrl-1" style="max-height: 60px" :src="'/images/companies/'+i+'.png'">
-                          <div>
-                            <p class="mb-0">Full stack</p>
-                            <p class="mb-0">22/2/2018 : 06/06/2022</p>
+                          <div class="d-flex flex-wrap align-items-center justify-content-between max-width">
+                           <span>Full stack</span>
+                            <ul class="dots-action cursor-pointer d-inline-block">
+                              <li class="dots">
+                                <i class="bi gray bi-three-dots-vertical gray"></i>
+                                <ul>
+                                  <li data-bs-toggle="modal"
+                                      data-bs-target="#update_personal_experience">
+                                    <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                                    <span class="gray">{{ words.edit }}</span>
+                                  </li>
+                                  <li>
+                                    <span class="red"><i class="bi bi-trash"></i></span>
+                                    <span class="gray">{{ words.delete }}</span>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                            <p class="mb-0 w-100">22/2/2018 : 06/06/2022</p>
+                          </div>
                           </div>
                         </div>
-                        <span class="icon"><i class="bi bi-pencil-square"></i></span>
-                        <span class="icon"><i class="bi bi-trash"></i></span>
                       </div>
                     </div>
-                  </div>
                   <div class="one_variety" :name="words.certificates">
                     <div class="heading d-flex align-items-center justify-content-between">
                       <span class="normal fw-bold">{{ words.certificates }}</span>
@@ -223,8 +317,22 @@
                           <div class="col-lg-6 col-12" v-for="i in 3">
                             <div class="image position-relative">
                               <img class="mb-2" src="https://filestore.community.support.microsoft.com/api/images/a726a54a-d0f4-4c73-b268-a3759e249fee?upload=true">
-                              <span class="icon"><i class="bi bi-pencil-square"></i></span>
-                              <span class="icon"><i class="bi bi-trash"></i></span>
+                              <ul class="dots-action top-3 position-absolute cursor-pointer d-inline-block">
+                                <li class="dots">
+                                  <i class="bi white bi-three-dots-vertical gray"></i>
+                                  <ul>
+                                    <li data-bs-toggle="modal"
+                                        data-bs-target="#update_personal_experience">
+                                      <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                                      <span class="gray">{{ words.edit }}</span>
+                                    </li>
+                                    <li>
+                                      <span class="red"><i class="bi bi-trash"></i></span>
+                                      <span class="gray">{{ words.delete }}</span>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
                             </div>
                           </div>
                         </div>
@@ -286,6 +394,8 @@ import Update_personal_language from "../../../components/Modals/candidate/updat
 import Update_personal_certificate from "../../../components/Modals/candidate/update_personal_certificate";
 import Update_personal_skills from "../../../components/Modals/candidate/update_personal_skills";
 import ProfilePersonalInfoComponent from "../../../components/ProfilePersonalInfoComponent";
+
+import text_editor from "../../../mixins/text_editor";
 export default {
   name: "candidate",
   components: {
@@ -301,7 +411,7 @@ export default {
       skills:['php','laravel','oop','design pattern','mysql']
     }
   },
-  mixins:[WordsLang],
+  mixins:[WordsLang,text_editor],
 }
 </script>
 

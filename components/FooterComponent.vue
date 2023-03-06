@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-3 col-6">
-          <h1 class="fw-bold">Skillar</h1>
+          <nuxt-link to="/" class="cursor-pointer" tag="img" src="/images/logo.png"></nuxt-link>
         </div>
         <div class="col-lg-3 col-6">
           <div class="links">
@@ -73,6 +73,9 @@ export default {
 @import "~assets/scss/variables";
 footer{
   background-color: $main_color_more_white_bk;
+  img{
+    height: 100px;
+  }
   .links{
     p{
       font-weight: bold;

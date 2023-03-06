@@ -76,7 +76,7 @@
                   <span class="top-3 position-relative gray"><i class="bi bi-person-check"></i></span>
                   <span>{{ words.matching_job_profile }}</span>
                 </p>
-                <span class="fw-bold">90</span>
+                <span class="fw-bold">90%</span>
                 <div class="percentage w-100 progress">
                   <p style="width: 90%" class="progress-bar progress-bar-animated progress-bar-striped"></p>
                 </div>

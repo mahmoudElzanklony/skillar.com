@@ -13,6 +13,6 @@ export default  {
   accept_apperance_feedback:'Accept feedback to appear in my profile',
   write_your_feedback_about_your_friend:'Tell your friend about your feedback',
   save:'Save',
-
+  accept:'Accept',
 
 };

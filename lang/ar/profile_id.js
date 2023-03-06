@@ -25,5 +25,6 @@ export default  {
   nearest_jobs:'وظائف بالقرب مني',
   main_info:'البيانات الرئيسية',
   popular_jobs:'الوظائف المناسبة لك',
+  edit:'تعديل',
 
 };

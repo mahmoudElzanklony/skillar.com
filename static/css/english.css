@@ -62,6 +62,9 @@ h1 {
 .variety_data .one_variety .value span.icon:last-of-type {
   right: 15px;
 }
+.variety_data .one_variety .image .dots-action {
+  right: 5px;
+}
 
 .item-each-other span:last-of-type {
   right: -3px;
@@ -90,7 +93,10 @@ h1 {
   clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
 }
 
-.profile .inner_profile .video span:first-of-type {
+.profile .inner_profile .video ul.dots-action {
+  right: 15px;
+}
+.profile .inner_profile .video > span:first-of-type {
   right: 15px;
 }
 
@@ -98,6 +104,25 @@ h1 {
   .profile .inner_profile .info .row div p.end span:first-of-type {
     margin-left: 5px;
   }
+}
+.chat .outer .outer-body .friends {
+  border-right: 1px solid #dddddd;
+}
+.chat .outer .outer-body .friends ul li > strong {
+  right: 3px;
+}
+.chat .outer .outer-body .chat-info .chat-header {
+  border-bottom: 1px solid #dddddd;
+}
+.chat .outer .outer-body .chat-info .chat-header img {
+  width: 60px;
+}
+.chat .outer .outer-body .chat-info .sender {
+  text-align: right;
+}
+.chat .outer .outer-body .chat-info .receiver span::before {
+  left: -5px;
+  transform: rotate(137deg);
 }
 
 /*# sourceMappingURL=english.css.map */

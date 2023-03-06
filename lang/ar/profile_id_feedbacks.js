@@ -15,5 +15,6 @@ export default  {
   accept_apperance_feedback:'الموافقة علي ظهور التقييم في ملفي الشخصي',
   write_your_feedback_about_your_friend:'اخبر صديقك عن انطباعك عنه في العمل',
   save:'حفظ',
+  accept:'الموافقة',
 
 };

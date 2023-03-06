@@ -36,6 +36,9 @@
 .variety_data .one_variety .value span.icon:last-of-type {
   left: 40px;
 }
+.variety_data .one_variety .image .dots-action {
+  left: 5px;
+}
 
 .item-each-other span:last-of-type {
   left: -3px;
@@ -86,6 +89,9 @@
   clip-path: polygon(0 0, 100% 0, 100% 100%, 17% 100%);
 }
 
+.profile .inner_profile .video ul.dots-action {
+  left: 15px;
+}
 .profile .inner_profile .video span:first-of-type {
   left: 15px;
 }
@@ -94,6 +100,19 @@
   .profile .inner_profile .info .row div p.end span:first-of-type {
     margin-right: 5px;
   }
+}
+.chat .outer .outer-body .friends {
+  border-left: 1px solid #dddddd;
+}
+.chat .outer .outer-body .friends ul li > strong {
+  left: 3px;
+}
+.chat .outer .outer-body .sender {
+  text-align: left;
+}
+.chat .outer .outer-body .receiver span::before {
+  right: -5px;
+  transform: rotate(-46deg);
 }
 
 /*# sourceMappingURL=arabic.css.map */
