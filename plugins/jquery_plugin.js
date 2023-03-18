@@ -1,4 +1,7 @@
 import $ from 'jquery'
+window.$ = $;
+
+
 
 $(document).ready(function (){
 
@@ -7,6 +10,33 @@ $(document).ready(function (){
     $(this).parent().find('.active').removeClass();
     $(this).addClass('active');
     document.getElementById($(this).attr('to')).scrollIntoView();
+  });
+
+  // delete
+  $('#__nuxt').on('click','.delete',function (){
+    var target = $(event.target);
+    Swal.fire({
+      title: localStorage.lang == 'ar'?'هل أنت متأكد من عملية المسح':'are you sure from delete operation',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#035397',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: localStorage.lang == 'ar'?'تأكيد':'confirm',
+      cancelButtonText:localStorage.lang == 'ar'?'الغاء':'cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Toast.fire({
+          icon: 'success',
+          title: localStorage.lang == 'ar'?'تمت عملية المسح بنجاح':'deleted operation done successfully'
+        })
+        console.log(target);
+        console.log(target.hasClass('remove-element'));
+        if(target.hasClass('remove-element')){
+           target.parent().parent().parent().remove();
+        }
+      }
+    })
+
   });
 
 
@@ -46,6 +76,14 @@ $(document).ready(function (){
       $(event.target).addClass('active').siblings().removeClass('active')
     }
   });
+
+  // toggle open , close box modal
+  $('#__nuxt').on('click','.open-box-modal',function (){
+    console.log($('.modal'));
+    // $('.modal').modal('show');
+  });
+
+
   // toggle dots action slide up and down
   // start
   $('#__nuxt').on('click',function (){

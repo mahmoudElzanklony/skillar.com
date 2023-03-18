@@ -21,6 +21,7 @@ export default {
     script:[
       {src:'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'},
       {src:'https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js'},
+      {src:'https://cdn.jsdelivr.net/npm/apexcharts'},
     ],
   },
 
@@ -38,6 +39,7 @@ export default {
   plugins: [
     {src:'~/plugins/checkStyle.js',mode:'client'},
     {src:'~/plugins/jquery_plugin',mode:'client'},
+    {src:'~/plugins/sweet_alert',mode:'client'},
    // {src:'~/plugins/text_editor',mode:'client'},
     {src:'~/plugins/tooltip_plugin',mode:'client'},
   ],
@@ -63,6 +65,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    loaders:  {
+      vue: {
+        prettify: false
+      }
+    }
   },
   router: {
    // middleware: ['config_plugins'],

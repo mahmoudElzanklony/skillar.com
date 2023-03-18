@@ -1,12 +1,38 @@
 <template>
   <section>
 
-    <div class="job">
-      <div class="job-header d-flex justify-content-between align-items-center">
+    <div class="job position-relative">
+
+      <ul v-if="admin == 'yes'" class="dots-action cursor-pointer position-absolute d-inline-block">
+        <li class="dots">
+          <i class="bi bi-three-dots-vertical gray"></i>
+          <ul>
+            <li>
+              <a href="/jobs/1" target="_blank">
+                <span class="gray"><i class="bi bi-eye"></i></span>
+                <span class="gray">{{ controls.view }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="/jobs/save?id=1" target="_blank">
+                <span class="gray"><i class="bi bi-pencil-square"></i></span>
+                <span class="gray">{{ controls.edit }}</span>
+              </a>
+            </li>
+            <li>
+              <span class="red"><i class="bi bi-trash delete red remove-element"></i></span>
+              <span class="gray">{{ controls.delete }}</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+
+      <div class="job-header d-flex justify-content-between align-items-center position-relative">
         <img :src="img">
-        <nuxt-link v-if="full_url == undefined"
+        <nuxt-link v-if="full_url == undefined && admin != 'yes'"
                    :to="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
-        <nuxt-link v-else
+        <nuxt-link v-else-if="admin != 'yes'"
                    :to="full_url" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
 
       </div>
@@ -28,7 +54,10 @@
 <script>
 export default {
   name: "JobComponent",
-  props:['full_url','img','title','skills','company_name','time','show_details','id']
+  props:['full_url','img','title','skills','company_name','time','show_details','id','admin','controls'],
+  mounted() {
+    console.log(this.admin);
+  }
 }
 </script>
 
@@ -41,6 +70,12 @@ export default {
   margin-bottom: 10px;
   //box-shadow: 1px 1px 8px 1px #ddd;
   border:1px solid #eee;
+  .job-header{
+    >ul{
+       position: absolute;
+       top:10px;
+    }
+  }
   img{
     height: 40px;
     border-radius: 6px;

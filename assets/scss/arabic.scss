@@ -23,11 +23,17 @@
 .mrl-1{
   margin-left: 1rem;
 }
+.mlr-1{
+  margin-right: 1rem !important;
+}
 .mrl-2{
   margin-left: 2rem;
 }
 .mrl-3{
   margin-left: 3rem;
+}
+.related-block{
+  margin-right: -25px;
 }
 
 .variety_data{
@@ -202,3 +208,21 @@
   }
 }
 // end of chat page ---------------------
+
+// start of dashboard index page ---------------------
+.reports{
+  .report{
+    div{
+      &::before{
+        right: -16px;
+        border-left: 8px solid rgba(221, 221, 221, 0.2901960784) !important;
+      }
+    }
+  }
+}
+.dashboard{
+  .dots-action{
+    left: 10px;
+  }
+}
+// end of dashboard index page ---------------------

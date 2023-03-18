@@ -19,6 +19,7 @@ export default {
       }else{
         file = this.file_name;
       }
+      console.log(file);
       let words = import('~/lang/'+lang+'/'+file).then((e)=>{
         com.words = e.default;
       });

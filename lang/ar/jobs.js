@@ -11,4 +11,7 @@ export default  {
   filter:'بحث',
   open:'فتح',
   filter_jobs:'فلترة الوظائف',
+  view:'عرض',
+  edit:'تعديل',
+  delete:'مسح',
 };

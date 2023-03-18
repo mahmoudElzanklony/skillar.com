@@ -40,12 +40,20 @@ h1 {
   margin-right: 1rem;
 }
 
+.mlr-1 {
+  margin-left: 1rem !important;
+}
+
 .mrl-2 {
   margin-right: 2rem;
 }
 
 .mrl-3 {
   margin-right: 3rem;
+}
+
+.related-block {
+  margin-left: -25px;
 }
 
 .absolute-submit {
@@ -123,6 +131,15 @@ h1 {
 .chat .outer .outer-body .chat-info .receiver span::before {
   left: -5px;
   transform: rotate(137deg);
+}
+
+.reports .report div::before {
+  left: -16px;
+  border-right: 8px solid rgba(221, 221, 221, 0.2901960784) !important;
+}
+
+.dashboard .dots-action {
+  right: 10px;
 }
 
 /*# sourceMappingURL=english.css.map */

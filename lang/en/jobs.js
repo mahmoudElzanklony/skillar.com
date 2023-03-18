@@ -11,6 +11,8 @@ export default  {
   filter:'Search',
   open:'Open',
   filter_jobs:'Jobs filter',
-
+  view:'View',
+  edit:'Edit',
+  delete:'Delete',
 
 };
