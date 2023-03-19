@@ -506,6 +506,57 @@ label{
   }
 }
 
+// start of notifications -------------------------------------
+
+.notifications{
+  .outer{
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    .notification{
+      padding: 10px;
+      &:not(:last-of-type){
+        border-bottom: 1px solid #dddddd;
+      }
+      &.unread{
+        background-color: $main_color_more_white_bk;
+        .dot-unread{
+          width: 10px;
+          height: 10px;
+          background-color: $main_color;
+          border-radius: 50%;
+        }
+      }
+      img{
+        width: 70px;
+        border-radius: 4px;
+      }
+      ul{
+        list-style: disc;
+        list-style-position: inside;
+      }
+      .tags{
+        p{
+          padding: 3px 15px;
+          border-radius: 4px;
+          margin-bottom: 5px;
+          &:nth-child(odd){
+            border: 1px solid $main_color;
+            color:$main_color;
+            background-color: $main_color_white_bk;
+          }
+          &:nth-child(even){
+            background-color: $black;
+            color: white;
+            border-color: $black;
+          }
+        }
+      }
+    }
+  }
+}
+
+// end of notifications -------------------------------------
+
 
 // start of profile page ----------------------------------
 .profile{
