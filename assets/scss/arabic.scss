@@ -225,4 +225,19 @@
     left: 10px;
   }
 }
+
+
 // end of dashboard index page ---------------------
+
+@media (max-width: 767px) {
+  .dots-action > li > ul{
+    display: block;
+    width: 90px;
+    left: -20px;
+  }
+  nav{
+    .dots-action > li > ul{
+      left: unset;
+    }
+  }
+}

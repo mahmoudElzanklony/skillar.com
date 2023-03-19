@@ -514,6 +514,7 @@ label{
     border-radius: 8px;
     .notification{
       padding: 10px;
+      flex-wrap: wrap;
       &:not(:last-of-type){
         border-bottom: 1px solid #dddddd;
       }
@@ -535,10 +536,12 @@ label{
         list-style-position: inside;
       }
       .tags{
+        flex-wrap: wrap;
         p{
           padding: 3px 15px;
           border-radius: 4px;
           margin-bottom: 5px;
+          font-size: $small;
           &:nth-child(odd){
             border: 1px solid $main_color;
             color:$main_color;
@@ -772,6 +775,9 @@ html {
 }
 body{
   font-family: 'Cairo', sans-serif;
+}
+#__nuxt{
+  overflow-x:hidden;
 }
 a{
   text-decoration: none;

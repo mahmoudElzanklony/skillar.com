@@ -132,4 +132,15 @@
   left: 10px;
 }
 
+@media (max-width: 767px) {
+  .dots-action > li > ul {
+    display: block;
+    width: 90px;
+    left: -20px;
+  }
+  nav .dots-action > li > ul {
+    left: unset;
+  }
+}
+
 /*# sourceMappingURL=arabic.css.map */

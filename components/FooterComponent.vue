@@ -97,4 +97,12 @@ footer{
     }
   }
 }
+@media (max-width: 767px) {
+  footer{
+    img{
+      max-width: 100%;
+      height: fit-content;
+    }
+  }
+}
 </style>

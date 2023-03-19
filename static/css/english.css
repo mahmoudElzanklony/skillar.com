@@ -142,4 +142,16 @@ h1 {
   right: 10px;
 }
 
+@media (max-width: 767px) {
+  .dots-action > li > ul {
+    display: block;
+    width: 90px;
+    right: -20px;
+  }
+  nav .dots-action > li > ul {
+    right: 0px;
+    left: 0px;
+  }
+}
+
 /*# sourceMappingURL=english.css.map */
