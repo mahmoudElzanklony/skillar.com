@@ -101,14 +101,14 @@
 
 // public class-----------------------
 .navbar-nav{
-  li:not(:last-of-type){
+  >li:not(:last-of-type){
     margin-left: 15px;
   }
 }
 @media (min-width: 767px) {
   nav{
     #navbarSupportedContent{
-      flex-direction: row-reverse;
+      /*flex-direction: row-reverse;*/
     }
   }
 }
@@ -141,6 +141,9 @@
 // start of auth page ---------------------
 
 .auth{
+  .info{
+    padding-right: 150px;
+  }
   .shape{
     right: 0px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 17% 100%);

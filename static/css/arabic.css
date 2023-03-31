@@ -66,13 +66,13 @@
     margin-right: 15px;
   }
 }
-.navbar-nav li:not(:last-of-type) {
+.navbar-nav > li:not(:last-of-type) {
   margin-left: 15px;
 }
 
 @media (min-width: 767px) {
   nav #navbarSupportedContent {
-    flex-direction: row-reverse;
+    /*flex-direction: row-reverse;*/
   }
 }
 @media (max-width: 767px) {
@@ -92,6 +92,9 @@
   margin-right: -25px;
 }
 
+.auth .info {
+  padding-right: 150px;
+}
 .auth .shape {
   right: 0px;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 17% 100%);

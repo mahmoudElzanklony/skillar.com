@@ -8,6 +8,7 @@
       </form>
       <div class="row mb-3">
         <div class="col-lg-4 col-md-6" v-for="i in 20">
+
           <div class="user-card mb-3 position-relative">
             <ul class="dots-action cursor-pointer d-inline-block">
               <li class="dots">
@@ -44,6 +45,7 @@
               </ul>
             </div>
           </div>
+
         </div>
       </div>
       <update_personal_data></update_personal_data>

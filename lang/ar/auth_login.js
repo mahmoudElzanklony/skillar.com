@@ -8,4 +8,6 @@ export default  {
   register:'تسجيل مستخدم جديد',
   forget_password:'نسيت كلمه المرور',
   reset_password:'استعاده كلمة المرور',
+  or:'او',
+  register_with:'سجل عن طريق',
 };

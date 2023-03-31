@@ -8,4 +8,6 @@ export default  {
   register:'Register',
   forget_password:'Forget password',
   reset_password:'Reset password now',
+  register_with:'Login with',
+  or:'Or',
 };

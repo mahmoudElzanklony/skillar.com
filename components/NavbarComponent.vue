@@ -2,12 +2,13 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <nuxt-link class="navbar-brand cursor-pointer" to="/" tag="img" src="/images/logo.png"></nuxt-link>
+      <nuxt-link class="navbar-brand cursor-pointer position-relative"
+                 to="/" tag="img" style="top: -6px;" src="/images/logo.png"></nuxt-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center">
+      <div class="collapse navbar-collapse mrl-reverse-15" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center position-relative">
           <li class="nav-item link mrl-1">
             <nuxt-link to="/" class="nav-link line-hover" aria-current="page" href="#">
               {{ words.home }}
@@ -20,12 +21,23 @@
             <nuxt-link class="nav-link line-hover" to="/best-companies">{{ words.companies_rank }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
+            <nuxt-link class="nav-link line-hover" to="/colleagues">{{ words.colleagues }}</nuxt-link>
+          </li>
+          <li class="nav-item link mrl-1">
             <nuxt-link to="/jobs" class="nav-link line-hover">{{ words.jobs }}</nuxt-link>
           </li>
+        </ul>
+
+        <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center">
           <li class="nav-item mrl-1">
             <nuxt-link to="/auth/register" class="nav-link btn-bk-primary">{{ words.register }}</nuxt-link>
           </li>
-          <li class="user_profile mrl-1">
+          <li class="nav-item mrl-1">
+            <button class="nav-link btn btn-outline-primary" @click="changeLang">
+              {{ another_lang }}
+            </button>
+          </li>
+          <li class="user_profile ">
             <ul class="dots-action cursor-pointer d-inline-block">
               <li class="dots">
                 <img src="/images/users/2.webp" class="cursor-pointer">
@@ -64,12 +76,9 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <button class="nav-link btn btn-outline-primary" @click="changeLang">
-              {{ another_lang }}
-            </button>
-          </li>
+
         </ul>
+
       </div>
     </div>
   </nav>
@@ -110,8 +119,13 @@ export default {
 <style lang="scss" scoped>
 @import "~/assets/scss/variables";
 nav{
-  background-color: transparent !important;
   box-shadow: 1px 1px 10px 0px #ddd;
+  position: fixed;
+  top:0px;
+  right: 0px;
+  left: 0px;
+  z-index: 99999999999;
+  background-color: white !important;
   .navbar-brand{
     font-size: $semi_big !important;
     font-weight: bold;

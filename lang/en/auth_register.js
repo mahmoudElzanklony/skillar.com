@@ -11,4 +11,9 @@ export default  {
   you_have_already_account:'you have an account ?',
   register:'Register',
   select_best_choice:'Select best choice',
+  or:'Or',
+  register_with:'Register with',
+  agree_conditions:'I agree with ',
+  privacy_policy:'Privacy policy',
+  terms_of_conditions:'Terms of conditions',
 };

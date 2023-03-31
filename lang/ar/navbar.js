@@ -6,6 +6,7 @@ export default  {
   register:'تسجيل مستخدم جديد',
   profile:'الملف الشخصي',
   companies_rank:'ترتيب  الشركات',
+  colleagues:'زملائي',
   nearest_jobs:'اقرب الوظائف',
   chat:'المحادثات',
   notifications:'الاشعارات',

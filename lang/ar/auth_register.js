@@ -11,4 +11,9 @@ export default  {
   you_have_already_account:'لديك حساب بالفعل',
   register:'تسجيل مستخدم جديد',
   select_best_choice:'اختر ما يناسبك',
+  or:'او',
+  register_with:'سجل عن طريق',
+  agree_conditions:'اوافق علي ',
+  privacy_policy:'سياسة الخصوصية',
+  terms_of_conditions:'شروط المستخدم',
 };
