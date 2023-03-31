@@ -22,7 +22,7 @@ export default {
       {src:'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'},
       {src:'https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js'},
       {src:'https://cdn.jsdelivr.net/npm/apexcharts'},
-      {src:'https://www.google.com/recaptcha/enterprise.js?render=6LfvFEclAAAAAFBdk7D9g0MePCnSpil7pyumkMjA'},
+      {src:'https://www.google.com/recaptcha/api.js'},
     ],
   },
 
@@ -53,22 +53,22 @@ export default {
   ],
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    RECAPTCHA_SITE_KEY:'6LfvFEclAAAAAFBdk7D9g0MePCnSpil7pyumkMjA'
+   // RECAPTCHA_SITE_KEY:'6LfvFEclAAAAAFBdk7D9g0MePCnSpil7pyumkMjA'
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/recaptcha'
+    /*'@nuxtjs/recaptcha'*/
   ],
-  recaptcha: {
-    /* reCAPTCHA options */
-    siteKey: '6LdHC0clAAAAABoImcXD03QTtRerVwFGkAKU9ldc', // for example,
+  /*recaptcha: {
+    /!* reCAPTCHA options *!/
+    siteKey: '6LfvFEclAAAAAFBdk7D9g0MePCnSpil7pyumkMjA', // for example,
     hideBadge: false,
     size: 'invisible',
     version: 2
-  },
+  },*/
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

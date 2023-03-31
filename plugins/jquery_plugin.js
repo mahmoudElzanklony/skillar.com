@@ -3,7 +3,9 @@ window.$ = $;
 
 
 
+
 $(document).ready(function (){
+
 
   // click on dots box
   $('#__nuxt').on('click','.fixed-dots ul li',function (){

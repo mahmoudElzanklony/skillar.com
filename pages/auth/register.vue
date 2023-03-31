@@ -10,8 +10,7 @@
             <div class="form-data">
               <form class="p-3"
                     method="post"
-                    @submit.prevent="onSubmit"
-                    data-netlify-recaptcha="true">
+                    @submit.prevent="onSubmit">
                 <div class="social_media_apps_auth">
                   <p class="text-center mb-2 mt-3">{{ words.register_with }}</p>
                   <div class="text-center mb-2">
@@ -66,7 +65,8 @@
                   </p>
                 </div>
                 <div class="g-recaptcha mb-2"
-                        data-sitekey="6LfvFEclAAAAAFBdk7D9g0MePCnSpil7pyumkMjA"
+                        data-sitekey="6Ld2TEclAAAAANpPyGp_2WsRbnOosh29smJPP9uB"
+                        data-callback="verify_recaptha"
                         ></div>
                 <div class="form-group mb-4">
                   <input class="form-control btn btn-primary"
@@ -97,8 +97,11 @@
 </template>
 
 <script>
-import WordsLang from "../../mixins/WordsLang";
 
+</script>
+
+<script>
+import WordsLang from "../../mixins/WordsLang";
 export default {
   name: "register",
   mixins:[WordsLang],
@@ -108,36 +111,25 @@ export default {
     }
   },
   methods:{
-    async onSubmit(event) {
-      console.log(grecaptcha.enterprise);
-     /* grecaptcha.enterprise.ready(function() {
-        grecaptcha.enterprise.execute('6LdHC0clAAAAABoImcXD03QTtRerVwFGkAKU9ldc', {action: 'submit'}).then(function(token) {
+    verify_recaptha() {
+      console.log('yes');
+      console.log(grecaptcha);
+      document.querySelector('input[type="submit"]').removeAttribute('disabled');
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6Ld2TEclAAAAANpPyGp_2WsRbnOosh29smJPP9uB', {action: 'submit'}).then(function(token) {
           // Add your logic to submit to your backend server here.
           console.log(token)
         });
-      });*/
-      try {
-        const token = await this.$recaptcha.getResponse()
-        console.log('ReCaptcha token:', token)
-
-        // send token to server alongside your form data
-
-        // at the end you need to reset recaptcha
-        await this.$recaptcha.reset()
-
-        document.querySelector('input[type="submit"]').removeAttribute('disabled')
-        document.querySelector('input[type="submit"]').style.opacity = 1
-      } catch (error) {
-        console.log('Login error:', error)
-      }
-
-
+      });
     }
   },
   components:{
   },
   mounted() {
-
+    var com = this;
+    window.verify_recaptha = function (){
+      com.verify_recaptha();
+    }
   },
   created() {
     console.log(this.$route);
