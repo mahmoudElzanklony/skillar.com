@@ -66,7 +66,7 @@
                   </p>
                 </div>
                 <div class="g-recaptcha mb-2"
-                        data-sitekey="6Lc6nzojAAAAAKi24G5BpWqsr94F5wTNoi482_W4"
+                        data-sitekey="6LfvFEclAAAAAFBdk7D9g0MePCnSpil7pyumkMjA"
                         ></div>
                 <div class="form-group mb-4">
                   <input class="form-control btn btn-primary"
