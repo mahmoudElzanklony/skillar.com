@@ -45,9 +45,14 @@ export const actions = {
             website:'skillar'
           }
           document.cookie = "loginExternalSite="+JSON.stringify(data)+";domain=.skillar.com; path=/;"
-          if(localStorage.hasOwnProperty('skillar_name')){
-            window.location = localStorage.skillar_name
+          let cookies =document.cookie.split(';')
+          for(let cookie of cookies){
+            if(cookie.indexOf('skillar_name') >= 0){
+              window.location = JSON.parse(cookie.split('=')[1])
+              break
+            }
           }
+
           //window.location = '/';
         }
       }).catch((e)=>{
