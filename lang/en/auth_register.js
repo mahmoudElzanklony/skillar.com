@@ -8,6 +8,7 @@ export default  {
   country:'Country',
   city:'City',
   login:'Login',
+  phone:'Phone',
   you_have_already_account:'you have an account ?',
   register:'Register',
   select_best_choice:'Select best choice',

@@ -1,29 +1,31 @@
 <template>
   <section class="auth current_page">
-    <video src="/videos/bg.mp4" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"></video>
     <div class="auth-content">
-      <div class="shape width-100-mobile"></div>
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-7 mb-2">
-            <div class="info text-center-mobile">
-              <h2 class="mb-0 white big">Skillar</h2>
-              <h2 class="white big">{{ words.for_every_one }}</h2>
-              <p class="white">{{ words.be_member_of_our_community }}</p>
-            </div>
-          </div>
-          <div class="col-md-5 mb-2">
-            <div class="form-data">
-              <form class="p-3">
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+          <div class="col-md-5 mb-2 mt-3 d-flex align-items-center">
+            <div class="form-data w-100">
+
+              <form class="p-3" method="post" @submit.prevent="reset">
+                <h2>{{ words.forget_password }}</h2>
                 <div class="form-group mb-2 input-icon flex-wrap">
                   <label>{{ words.email }}</label>
                   <input class="form-control" name="email" required>
                   <span><i class="bi bi-envelope"></i></span>
                 </div>
+                <recaptcha-component></recaptcha-component>
                 <div class="form-group mb-4">
                   <input class="form-control btn btn-primary" type="submit" :value="words.send">
                 </div>
               </form>
+            </div>
+          </div>
+          <div class="col-md-7 mb-2 mobile-hide auth-bk">
+            <div class="info text-center-mobile flex align-items-center justify-content-between">
+              <img src="/images/auth/bk.png">
+              <div class="text-center">
+                <p class="mb-2 mt-3 white">{{ words.reset_password }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -34,11 +36,15 @@
 
 <script>
 import WordsLang from "../../mixins/WordsLang";
+import {mapActions} from "vuex";
+
 export default {
   name: "reset",
   mixins:[WordsLang],
   methods:{
-
+    ...mapActions({
+      'reset':'auth/reset/check_email_exists'
+    })
   },
   created() {
     console.log(this.$route);

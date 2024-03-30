@@ -5,6 +5,7 @@ export default  {
   username:'اسم المستخدم',
   password:'كلمة المرور',
   password_confirmation:'تأكيد كلمة المرور',
+  phone:'رقم الهاتف',
   country:'الدولة',
   city:'المدينة',
   login:'تسجيل دخول',

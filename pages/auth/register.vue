@@ -1,17 +1,15 @@
 <template>
   <section class="auth current_page">
-    <video src="/videos/bg.mp4" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"></video>
-    <div class="auth-content">
-      <div class="shape width-100-mobile"></div>
-      <div class="container">
-        <div class="row align-items-center">
+    <div class="auth-content mb-4">
+      <div class="container-fluid">
+        <div class="row h-100">
 
           <div class="col-md-5 mb-2">
-            <div class="form-data">
+            <div class="form-data mt-3">
               <form class="p-3"
                     method="post"
-                    @submit.prevent="onSubmit">
-                <div class="social_media_apps_auth">
+                    @submit.prevent="register">
+                <div class="social_media_apps_auth" v-if="false">
                   <p class="text-center mb-2 mt-3">{{ words.register_with }}</p>
                   <div class="text-center mb-2">
                     <a href="#" class="facebook mrl-1">
@@ -27,31 +25,43 @@
                     <span></span>
                   </p>
                 </div>
+                <h2>{{ words.register }}</h2>
                 <div class="form-group mb-2 input-icon flex-wrap">
                   <label>{{ words.username }}</label>
-                  <input class="form-control" name="email" >
                   <span><i class="bi bi-person"></i></span>
+                  <input class="form-control" name="username" >
+                  <p class="alert alert-danger"></p>
                 </div>
                 <div class="form-group mb-2 input-icon flex-wrap">
                   <label>{{ words.email }}</label>
-                  <input class="form-control" name="email" >
                   <span><i class="bi bi-envelope"></i></span>
+                  <input class="form-control" name="email" >
+                  <p class="alert alert-danger"></p>
                 </div>
                 <div class="form-group mb-3 input-icon flex-wrap">
                   <label>{{ words.password }}</label>
-                  <input class="form-control" name="password" type="password" >
                   <span><i class="bi bi-key"></i></span>
+                  <input class="form-control" name="password" type="password" >
+                  <p class="alert alert-danger"></p>
                 </div>
                 <div class="form-group mb-3 input-icon flex-wrap">
                   <label>{{ words.password_confirmation }}</label>
-                  <input class="form-control" name="password_confirmation" type="password" >
                   <span><i class="bi bi-key"></i></span>
+                  <input class="form-control" name="password_confirmation" type="password" >
+                  <p class="alert alert-danger"></p>
+                </div>
+                <div class="form-group mb-3 input-icon flex-wrap">
+                  <label>{{ words.phone }}</label>
+                  <span><i class="bi bi-phone"></i></span>
+                  <input class="form-control" name="phone" type="number" >
+                  <p class="alert alert-danger"></p>
                 </div>
                 <div class="form-group mb-3 input-icon flex-wrap">
                   <label>{{ words.country }}</label>
-                  <select class="form-control" name="country_id" >
+                  <select class="form-control" name="country_id"
+                          required>
                     <option value="">{{ words.select_best_choice }}</option>
-                    <option value="1" v-for="i in 5" :key="i" :value="i">egypt</option>
+                    <option  v-for="(i,index) in getCountriesGetter" :key="index" :value="i['id']">{{ i['name'] }}</option>
                   </select>
                   <span><i class="bi bi-arrow-down-short"></i></span>
                 </div>
@@ -64,10 +74,7 @@
                     <nuxt-link to="#">{{ words.terms_of_conditions }}</nuxt-link>
                   </p>
                 </div>
-                <div class="g-recaptcha mb-2"
-                        data-sitekey="6Ld2TEclAAAAANpPyGp_2WsRbnOosh29smJPP9uB"
-                        data-callback="verify_recaptha"
-                        ></div>
+                <recaptcha-component></recaptcha-component>
                 <div class="form-group mb-4">
                   <input class="form-control btn btn-primary"
                          disabled
@@ -78,16 +85,18 @@
 
                 <p class="mb-2">
                   <span>{{ words.you_have_already_account }}</span>
-                  <nuxt-link to="/auth/login">{{ words.login }}</nuxt-link>
+                  <a href="/auth/login">{{ words.login }}</a>
                 </p>
               </form>
             </div>
           </div>
-          <div class="col-md-7 mb-2 mobile-hide">
-            <div class="info text-center-mobile">
-              <h2 class="mb-0 white big">Skillar</h2>
-              <h2 class="white big">{{ words.for_every_one }}</h2>
-              <p class="white">{{ words.be_member_of_our_community }}</p>
+          <div class="col-md-7 mb-2 mobile-hide auth-bk">
+            <div class="info text-center-mobile flex align-items-center justify-content-between">
+              <img src="/images/auth/bk.png">
+              <div class="text-center">
+                <p class="mb-2 mt-3 white">{{ words.welcome_friend }}</p>
+                <p class="mb-0 white">{{ words.couple_clicks }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -102,26 +111,29 @@
 
 <script>
 import WordsLang from "../../mixins/WordsLang";
+import {mapGetters,mapActions} from 'vuex';
 export default {
   name: "register",
   mixins:[WordsLang],
+  async fetch({ store }) {
+    await store.dispatch('places/countries/getCountriesAction');
+  },
   data(){
     return {
-      message: null
+      message:null,
     }
   },
+  computed:{
+    ...mapGetters({
+      'getCountriesGetter':'places/countries/getCountriesGetter',
+      'getCitiesGetter':'places/cities/getCitiesGetter',
+    })
+  },
   methods:{
-    verify_recaptha() {
-      console.log('yes');
-      console.log(grecaptcha);
-      document.querySelector('input[type="submit"]').removeAttribute('disabled');
-      grecaptcha.ready(function() {
-        grecaptcha.execute('6Ld2TEclAAAAANpPyGp_2WsRbnOosh29smJPP9uB', {action: 'submit'}).then(function(token) {
-          // Add your logic to submit to your backend server here.
-          console.log(token)
-        });
-      });
-    }
+    ...mapActions({
+      'getCountriesAction':'places/countries/getCountriesAction',
+      'register':'auth/register/registerAction',
+    }),
   },
   components:{
   },
@@ -144,6 +156,14 @@ export default {
   input[type="checkbox"]{
     width: 18px;
     height: 18px;
+  }
+  .alert{
+    display: none;
+    width: 100%;
+    text-align: inherit !important;
+    font-size: $small;
+    font-weight: bold;
+    margin-top: 5px;
   }
   input[type="submit"]{
 

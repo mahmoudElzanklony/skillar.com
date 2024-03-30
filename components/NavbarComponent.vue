@@ -29,7 +29,7 @@
         </ul>
 
         <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center">
-          <li class="nav-item mrl-1">
+          <li class="nav-item mrl-1" v-if="!($auth.loggedIn)">
             <nuxt-link to="/auth/register" class="nav-link btn-bk-primary">{{ words.register }}</nuxt-link>
           </li>
           <li class="nav-item mrl-1">
@@ -37,7 +37,7 @@
               {{ another_lang }}
             </button>
           </li>
-          <li class="user_profile ">
+          <li class="user_profile " v-if="false">
             <ul class="dots-action cursor-pointer d-inline-block">
               <li class="dots">
                 <img src="/images/users/2.webp" class="cursor-pointer">
@@ -124,7 +124,7 @@ nav{
   top:0px;
   right: 0px;
   left: 0px;
-  z-index: 99999999999;
+  z-index: 999999;
   background-color: white !important;
   .navbar-brand{
     font-size: $semi_big !important;

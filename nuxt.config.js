@@ -43,7 +43,11 @@ export default {
     {src:'~/plugins/sweet_alert',mode:'client'},
    // {src:'~/plugins/text_editor',mode:'client'},
     {src:'~/plugins/tooltip_plugin',mode:'client'},
+    // {src:'~/plugins/text_editor',mode:'client'},
+    {src:'~/plugins/axios'},
+    {src:'~/plugins/route'},
   ],
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -60,6 +64,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     /*'@nuxtjs/recaptcha'*/
   ],
   /*recaptcha: {
@@ -73,7 +78,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'https://jd-api.skillar.com/api',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -86,5 +91,32 @@ export default {
   },
   router: {
    // middleware: ['config_plugins'],
-  }
+  },
+  auth: {
+    redirect:false,
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          required: true,
+          type: 'Bearer',
+          maxAge: 60 * 60 * 60,
+        },
+        user: {
+          property: false,
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/logout', method: 'post' },
+          user: { url: '/user', method: 'get', propertyName: 'user' }
+        },
+        refreshToken: {
+          property: 'token',
+          maxAge: 2016000 * 60,
+        },
+      }
+    }
+  },
 }
