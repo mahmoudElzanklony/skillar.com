@@ -51,7 +51,7 @@ export const actions = {
           let cookies =document.cookie.split(';')
           for(let cookie of cookies){
             if(cookie.indexOf('skillar_name') >= 0){
-              window.location = JSON.parse(cookie.split('=')[1])
+              window.location = cookie.split('=')[1]
               break
             }
           }
