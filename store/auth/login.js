@@ -39,11 +39,14 @@ export const actions = {
             title:dataresponse.data.errors
           });
         }
-        if(this.state.auth.user){
+        console.log(dataresponse)
+        console.log(this.state.auth)
+        if(this.state.auth.loggedIn){
           let data = {
             user:this.state.auth.user,
             website:'skillar'
           }
+          console.log('aaaaaaaaaaa')
           document.cookie = "loginExternalSite="+JSON.stringify(data)+";domain=.skillar.com; path=/;"
           let cookies =document.cookie.split(';')
           for(let cookie of cookies){
