@@ -74,7 +74,7 @@
                     <nuxt-link to="#">{{ words.terms_of_conditions }}</nuxt-link>
                   </p>
                 </div>
-                <recaptcha-component></recaptcha-component>
+                <RecaptchaComponent></RecaptchaComponent>
                 <div class="form-group mb-4">
                   <input class="form-control btn btn-primary"
                          disabled
@@ -111,6 +111,7 @@
 
 <script>
 import WordsLang from "../../mixins/WordsLang";
+import RecaptchaComponent from "@/components/RecaptchaComponent.vue";
 import {mapGetters,mapActions} from 'vuex';
 export default {
   name: "register",
@@ -136,6 +137,7 @@ export default {
     }),
   },
   components:{
+    RecaptchaComponent
   },
   mounted() {
     var com = this;

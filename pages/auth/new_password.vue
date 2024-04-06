@@ -19,7 +19,7 @@
                   <input class="form-control" name="password_confirmation" type="password" required>
                   <span><i class="bi bi-key"></i></span>
                 </div>
-                <recaptcha-component></recaptcha-component>
+                <RecaptchaComponent></RecaptchaComponent>
                 <div class="form-group mb-4">
                   <input class="form-control btn btn-primary" type="submit" :value="words.save">
                 </div>
@@ -44,7 +44,7 @@
 <script>
 import WordsLang from "../../mixins/WordsLang";
 import {mapActions} from "vuex";
-
+import RecaptchaComponent from "@/components/RecaptchaComponent.vue";
 export default {
   name: "new_password",
   mixins:[WordsLang],
@@ -56,6 +56,7 @@ export default {
   mounted() {
     this.activation_code = document.URL.split('serial_number=')[1];
   },
+  components:{RecaptchaComponent},
   async asyncData({route,store,redirect,$axios}){
     console.log(route.query)
     if(Object.keys(route.query).length > 0){

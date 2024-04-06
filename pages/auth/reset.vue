@@ -13,7 +13,7 @@
                   <input class="form-control" name="email" required>
                   <span><i class="bi bi-envelope"></i></span>
                 </div>
-                <recaptcha-component></recaptcha-component>
+                <RecaptchaComponent></RecaptchaComponent>
                 <div class="form-group mb-4">
                   <input class="form-control btn btn-primary" type="submit" :value="words.send">
                 </div>
@@ -37,7 +37,7 @@
 <script>
 import WordsLang from "../../mixins/WordsLang";
 import {mapActions} from "vuex";
-
+import RecaptchaComponent from "@/components/RecaptchaComponent.vue";
 export default {
   name: "reset",
   mixins:[WordsLang],
@@ -46,6 +46,7 @@ export default {
       'reset':'auth/reset/check_email_exists'
     })
   },
+  components:{RecaptchaComponent},
   created() {
     console.log(this.$route);
   }

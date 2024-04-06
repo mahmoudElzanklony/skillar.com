@@ -46,7 +46,6 @@ export const actions = {
             user:this.state.auth.user,
             website:'skillar'
           }
-          console.log('aaaaaaaaaaa')
           document.cookie = "loginExternalSite="+JSON.stringify(data)+";domain=.skillar.com; path=/;"
           let cookies =document.cookie.split(';')
           for(let cookie of cookies){
