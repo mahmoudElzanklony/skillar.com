@@ -37,7 +37,7 @@
 <script>
 import WordsLang from "../../mixins/WordsLang";
 import {mapActions} from "vuex";
-import RecaptchaComponent from "@/components/RecaptchaComponent.vue";
+import RecaptchaComponent from "@/components/RecaptchaComponent";
 export default {
   name: "reset",
   mixins:[WordsLang],
@@ -47,9 +47,7 @@ export default {
     })
   },
   components:{RecaptchaComponent},
-  created() {
-    console.log(this.$route);
-  }
+
 }
 </script>
 

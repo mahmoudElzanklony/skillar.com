@@ -44,7 +44,7 @@
 <script>
 import WordsLang from "../../mixins/WordsLang";
 import {mapActions} from "vuex";
-import RecaptchaComponent from "@/components/RecaptchaComponent.vue";
+import RecaptchaComponent from "@/components/RecaptchaComponent";
 export default {
   name: "new_password",
   mixins:[WordsLang],

@@ -111,7 +111,7 @@
 
 <script>
 import WordsLang from "../../mixins/WordsLang";
-import RecaptchaComponent from "@/components/RecaptchaComponent.vue";
+import RecaptchaComponent from "@/components/RecaptchaComponent";
 import {mapGetters,mapActions} from 'vuex';
 export default {
   name: "register",
@@ -139,15 +139,6 @@ export default {
   components:{
     RecaptchaComponent
   },
-  mounted() {
-    var com = this;
-    window.verify_recaptha = function (){
-      com.verify_recaptha();
-    }
-  },
-  created() {
-    console.log(this.$route);
-  }
 }
 </script>
 
