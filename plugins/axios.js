@@ -14,12 +14,9 @@ export default ({ $axios, req }, inject) => {
   $axios.onResponse(res => {
     console.log(res)
     if(res.data.hasOwnProperty('errors')){
-      /*if(res.data.errors[0] == 'The token could not be parsed from the request'){
-        document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        localStorage.removeItem('user_info');
-        window.location = '/auth/login'
-      }*/
     }
   })
+
+
 
 }

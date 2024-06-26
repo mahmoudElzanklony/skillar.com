@@ -25,6 +25,9 @@ export default  {
   nearest_jobs:'Nearest jobs',
   popular_jobs:'Popular jobs',
   edit:'Edit',
-
+  close:'Close',
+  save_data:'Save data',
+  show_more:'Show more',
+  show_less:'Show less',
 
 };

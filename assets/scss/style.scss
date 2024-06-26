@@ -25,6 +25,27 @@ nav{
 // edit bootstrap-----------------------
 
 // public classes----------------------------------
+.gray{
+  color:$gray !important;
+}
+.blue{
+  color:$main_color;
+}
+.green{
+  color:$green !important;
+}
+.red{
+  color:darkred !important;
+}
+.black{
+  color:$black !important;
+}
+.bk-white{
+  background-color: white;
+}
+.white{
+  color:white !important;
+}
 h1,h2,h3,p,span{
   color:$black
 }
@@ -58,6 +79,9 @@ label{
 .mx-500{
   max-height: 500px;
 }
+.top-reverse-20{
+  margin-top:-20px;
+}
 .top-1{
   top:1px;
 }
@@ -67,27 +91,7 @@ label{
 .top-13{
   top:13px;
 }
-.gray{
-  color:$gray !important;
-}
-.blue{
-  color:$main_color;
-}
-.green{
-  color:$green !important;
-}
-.red{
-  color:darkred !important;
-}
-.black{
-  color:$black !important;
-}
-.bk-white{
-  background-color: white;
-}
-.white{
-  color:white !important;
-}
+
 .line-height-22{
   line-height: 22px;
 }
@@ -938,4 +942,10 @@ table{
   z-index: 9999999999 !important;
 }
 
-
+.modal{
+  z-index: 999999;
+  .modal-content{
+    max-height: 600px;
+    overflow: auto;
+  }
+}

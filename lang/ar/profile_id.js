@@ -26,5 +26,8 @@ export default  {
   main_info:'البيانات الرئيسية',
   popular_jobs:'الوظائف المناسبة لك',
   edit:'تعديل',
-
+  close:'اغلاق',
+  save_data:'حفظ البيانات',
+  show_more:'عرض المزيد',
+  show_less:'عرض اقل',
 };

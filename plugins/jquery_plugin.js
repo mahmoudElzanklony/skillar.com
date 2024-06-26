@@ -100,6 +100,16 @@ $(document).ready(function (){
     e.stopPropagation();
     $('.dots-action li.dots > ul').slideUp();
   });
+
+  // toggle profile section p show and hide
+  $('#__nuxt').on('click','.toggle_p_show',function (e){
+    if($(this).find('span').html().trim() == $(this).find('span').attr('show')){
+       $(this).find('span').html($(this).find('span').attr('hide'));
+    }else{
+      $(this).find('span').html($(this).find('span').attr('show'));
+    }
+    $(this).parent().find('.toggle-show').toggleClass('d-none');
+  });
   // end
 
 

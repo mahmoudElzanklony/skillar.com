@@ -55,12 +55,13 @@ export const actions = {
             }
           }
 
-          //window.location = '/';
+          window.location = '/';
         }
-      }).catch((e)=>{
+      }).catch((error)=>{
+        console.log(error)
         Toast.fire({
           icon:'error',
-          title:'error in auth process'
+          title:'Email or password is not correct'
         });
         router.push('/auth/login');
         return false;
