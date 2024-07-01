@@ -9,6 +9,7 @@ export default  {
   username:'Username',
   email:'Email',
   password:'Password',
+  leave_password:'Leave password empty in case you dont want to edit it',
   country:'Country',
   government:'Government',
   city:'City',
@@ -16,5 +17,6 @@ export default  {
   video:'Introductory video',
   save:'Save',
   select_best_choice:'Select best choice',
+  image:'Image',
 
 };

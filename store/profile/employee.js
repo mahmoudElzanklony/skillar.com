@@ -33,8 +33,10 @@ export const actions = {
   async saveSectionInfoDataAction({ state,commit }) {
     let target = event.target;
     let data = new FormData(target)
+    let router = this.$router;
+    let page = window.location.pathname;
     this.$axios.post('/employee/save-info-item',data).then((e)=>{
-      formValidation(e.data,target,'',true);
+      formValidation(e.data,target,page,true,router);
     })
   },
   async getDataSection({ state,commit },payload) {
@@ -53,6 +55,17 @@ export const actions = {
         })
      }
 
+  },
+
+  async saveProfileInfoDataAction({ state,commit }) {
+    let target = event.target;
+    let data = new FormData(target)
+    let router = this.$router;
+    let page = window.location.pathname;
+    this.$axios.post('https://cvapi.skillar.com/api/user/update-personal-info',data)
+      .then((e)=>{
+        formValidation(e.data,target,page,true,router);
+      })
   },
 
 

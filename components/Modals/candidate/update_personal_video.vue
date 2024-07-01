@@ -8,7 +8,7 @@
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form method="post" @submit.prevent="saveVideoAction">
             <div class="file_upload mb-2">
                <div>
                   <span class="mrl-1">{{ words.upload_file_here }}</span>
@@ -32,12 +32,19 @@
 
 <script>
 import WordsLang from "../../../mixins/WordsLang";
+import {mapActions , mapGetters} from "vuex";
+
 export default {
   name: "update_personal_video",
   data(){
     return {
       file_name:'modals/update_personal_video',
     }
+  },
+  methods:{
+    ...mapActions({
+      'saveVideoAction':'profile/video/saveVideoDataAction'
+    })
   },
   mixins:[WordsLang],
 }

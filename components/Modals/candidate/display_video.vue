@@ -8,7 +8,10 @@
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-           <video class="w-100" controls loop autoplay src="http://teslaelectric-eg.com/assets/mp4/bg.mp4"></video>
+           <video class="w-100"
+                  style="max-height: 400px;"
+                  controls loop autoplay
+                  :src="computedUrl+'/videos/users/'+get_video?.file"></video>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ words.close }}</button>
@@ -21,9 +24,32 @@
 
 <script>
 import WordsLang from "../../../mixins/WordsLang";
+import {mapActions , mapGetters} from "vuex";
+
 export default {
   name: "display_video",
   mixins:[WordsLang],
+  created() {
+    if(this.get_video == null){
+      this.getVideoAction()
+    }
+  },
+  mounted() {
+    console.log(this.get_video)
+  },
+  methods:{
+    ...mapActions({
+      'getVideoAction':'profile/video/getDataAction'
+    })
+  },
+  computed:{
+    ...mapGetters({
+      'get_video':'profile/video/get_video_data'
+    }),
+    computedUrl() {
+      return process.env.baseUrl
+    }
+  },
   data(){
     return {
       file_name:'modals/display_personal_video',

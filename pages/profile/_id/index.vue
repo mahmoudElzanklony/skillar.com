@@ -102,13 +102,7 @@
                     <span class="fw-bold normal">{{ words.quick_description }}</span>
                     <nuxt-link to="#">{{ words.download_my_cv }}</nuxt-link>
                   </div>
-                  <p>
-                    Test data about me Test data about me Test data about me Test data about me Test data about me Test data about
-                    me Test data about me Test data about me Test data about me Test data about me Test data about me Test data
-                    About me Test data about me Test data about me Test data about me Test data about me Test data about me
-                    Test data about me Test data about me Test data about me Test data about me Test data about me Test data about
-                    Test data about me Test data about me Test data about me Test data about me Test data about me Test data
-                  </p>
+                  <p>{{ $auth?.user?.bio }}</p>
                 </div>
 
                 <div class="variety_data" v-if="sections_names.length > 0">
@@ -116,7 +110,7 @@
                        v-for="(i,index) in sections_names" :key="index"
                        :name="i.name">
                     <div class="heading d-flex align-items-center justify-content-between">
-                      <span class="normal fw-bold">{{ i.name }}</span>
+                      <span class="normal fw-bold">{{ i?.profile_name }}</span>
                       <p class="mb-0">
                         <span class="blue mrl-half" data-bs-toggle="modal"
                               @click="get_section_properties(i['id'])"
@@ -191,7 +185,7 @@ export default {
     ...mapActions({
       'sectionsNamesAction':'sections/sectionsNamesAction',
       'get_section_properties':'sections/sectionPropertiesAction',
-      'get_section_data':'profile/employee/getDataSection'
+      'get_section_data':'profile/employee/getDataSection',
     }),
 
   },

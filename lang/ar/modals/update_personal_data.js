@@ -8,6 +8,7 @@ export default  {
   username:'اسم المستخدم',
   email:'البريد الالكتروني',
   password:'كلمة المرور',
+  leave_password:'اترك كلمة  المرور فارغة في حالة عدم التعديل عليها',
   country:'الدولة',
   government:'المحافظة',
   city:'المدينة',
@@ -15,4 +16,5 @@ export default  {
   video:'فديو تعريفي',
   save:'حفظ',
   select_best_choice:'اختر المناسب لك',
+  image:'الصورة الشخصية',
 };

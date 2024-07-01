@@ -1,5 +1,11 @@
 import { resolve } from 'path'
+const dotenv = require('dotenv')
+const env = dotenv.config().parsed
 
+const envKeys = {}
+for (const key in env) {
+  envKeys[key] = env[key]
+}
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -24,6 +30,9 @@ export default {
       {src:'https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.41.0/apexcharts.min.js'},
       {src:'https://www.google.com/recaptcha/api.js'},
     ],
+  },
+  devServer: {
+    port: 4000
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -57,10 +66,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-  env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-   // RECAPTCHA_SITE_KEY:'6LfvFEclAAAAAFBdk7D9g0MePCnSpil7pyumkMjA'
-  },
+  env: envKeys,
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

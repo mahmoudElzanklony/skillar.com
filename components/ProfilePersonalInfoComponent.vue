@@ -3,7 +3,8 @@
     <div class="info">
       <div class="bk">
         <div>
-          <img src="/images/users/1.webp">
+          <image-component v-if="$auth?.state?.user?.image"
+                           :src="'/users/'+$auth?.state?.user?.image"></image-component>
           <button class="btn btn-primary" data-bs-toggle="modal"
                   data-bs-target="#update_personal_data">{{ edit_info }}</button>
         </div>
@@ -12,25 +13,19 @@
         <div class="col-lg-6">
           <p class="d-flex align-items-center">
             <span class="mrl-half"><i class="bi bi-person-circle"></i></span>
-            <span>Sara ahmed</span>
-          </p>
-        </div>
-        <div class="col-lg-6">
-          <p class="d-flex align-items-center end">
-            <span><i class="bi bi-briefcase"></i></span>
-            <span>Full stack enginner</span>
+            <span>{{ $auth?.state?.user?.username }}</span>
           </p>
         </div>
         <div class="col-lg-6">
           <p class="d-flex align-items-center">
-            <span class="mrl-half"><i class="bi bi-info"></i></span>
-            <span>Open for new opportunity</span>
+            <span class="mrl-half"><i class="bi bi-envelope"></i></span>
+            <span>{{ $auth?.state?.user?.email }}</span>
           </p>
         </div>
         <div class="col-lg-6">
-          <p class="d-flex align-items-center end">
+          <p class="d-flex align-items-center">
             <span><i class="bi bi-geo-alt"></i></span>
-            <span>Cairo , 4th street</span>
+            <span>{{ $auth?.state?.user?.address }}</span>
           </p>
         </div>
       </div>
@@ -39,9 +34,11 @@
 </template>
 
 <script>
+import ImageComponent from "./ImageComponent.vue";
 export default {
   name: "ProfilePersonalInfoComponent",
   props:['edit_info'],
+  components:{ImageComponent}
 }
 </script>
 
