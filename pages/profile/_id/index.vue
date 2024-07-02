@@ -7,34 +7,23 @@
                 <profile-personal-info-component :edit_info="words.edit_info"></profile-personal-info-component>
                 <div class="quick_statistics mb-3 p-3">
                   <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="col-lg-6 col-md-6 mb-2">
                       <nuxt-link to="/profile/ahmed/applied-jobs">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_applied_jobs }}</p>
-                            <p class="fw-bold">20</p>
+                            <p class="fw-bold">{{ statistics_data?.jobs }}</p>
                           </div>
                           <img src="/images/icons/Document.png">
                         </div>
                       </nuxt-link>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-2">
-                      <nuxt-link to="/nearest-jobs">
-                        <div class="statistics d-flex align-items-center justify-content-between">
-                          <div>
-                            <p class="fw-bold">{{ words.number_of_nearest_jobs }}</p>
-                            <p class="fw-bold">20</p>
-                          </div>
-                          <img src="/images/icons/Location.png">
-                        </div>
-                      </nuxt-link>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="col-lg-6 col-md-6 mb-2">
                       <nuxt-link to="#">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_visiting }}</p>
-                            <p class="fw-bold">20</p>
+                            <p class="fw-bold">{{ statistics_data?.views }}</p>
                           </div>
                           <img src="/images/icons/Show.png">
                         </div>
@@ -45,7 +34,7 @@
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_messages_chat }}</p>
-                            <p class="fw-bold">20</p>
+                            <p class="fw-bold">{{ statistics_data?.chat }}</p>
                           </div>
                           <img src="/images/icons/Chat.png">
                         </div>
@@ -56,7 +45,7 @@
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_friends_feedback }}</p>
-                            <p class="fw-bold">20</p>
+                            <p class="fw-bold">{{ statistics_data?.rates }}</p>
                           </div>
                           <img src="/images/icons/Profile.png">
                         </div>
@@ -67,7 +56,7 @@
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ words.number_of_new_notifications }}</p>
-                            <p class="fw-bold">20</p>
+                            <p class="fw-bold">{{ statistics_data?.notifications }}</p>
                           </div>
                           <img src="/images/icons/Notification.png">
                         </div>
@@ -186,17 +175,20 @@ export default {
       'sectionsNamesAction':'sections/sectionsNamesAction',
       'get_section_properties':'sections/sectionPropertiesAction',
       'get_section_data':'profile/employee/getDataSection',
+      'get_profile_statistics_action':'profile/statistics/getStatisticsProfile',
     }),
 
   },
   computed:{
     ...mapGetters({
       'sections_names':'sections/get_sections_names',
-      'data_sections':'profile/employee/get_data_sections'
+      'data_sections':'profile/employee/get_data_sections',
+      'statistics_data':'profile/statistics/get_data',
     })
   },
   mounted() {
     this.sectionsNamesAction();
+    this.get_profile_statistics_action()
   },
   mixins:[WordsLang,text_editor],
 }

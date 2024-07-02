@@ -1,6 +1,7 @@
 import formValidation from '/validation/formValidation';
 export const state = () => ({
   data_sections: [],
+  profile_id:null,
   selected_section_box_info:null,
 })
 
@@ -10,6 +11,9 @@ export const getters = {
   get_data_sections(state) {
     return state.data_sections
   },
+  get_profile_id(state){
+    return state.profile_id;
+  },
   get_selected_section_box_info(state) {
     return state.selected_section_box_info
   },
@@ -18,6 +22,9 @@ export const getters = {
 export const mutations = {
   InitializeDataSections(state,payload){
     state.data_sections = payload;
+  },
+  SetProfileId(state,payload){
+    state.profile_id = payload;
   },
   UpdateDataSections(state,payload){
     state.data_sections.push(payload)
@@ -57,15 +64,15 @@ export const actions = {
 
   },
 
+
   async saveProfileInfoDataAction({ state,commit }) {
     let target = event.target;
     let data = new FormData(target)
-    let router = this.$router;
-    let page = window.location.pathname;
-    this.$axios.post('https://cvapi.skillar.com/api/user/update-personal-info',data)
+    await this.$axios.post('https://cvapi.skillar.com/api/user/update-personal-info',data)
       .then((e)=>{
-        formValidation(e.data,target,page,true,router);
+        formValidation(e.data,target,'',true);
       })
+    setTimeout(()=>this.$router.go(0),2000);
   },
 
 

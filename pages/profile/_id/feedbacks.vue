@@ -11,39 +11,48 @@
                 <div class="heading d-flex align-items-center justify-content-between">
                   <span class="normal fw-bold">{{ words.friend_feedbacks }}</span>
                   <p class="mb-0">
-                    <span class="blue mrl-half" >15</span>
+                    <span class="blue mrl-half" >{{ feedbacks.length }}</span>
                     <span><i class="bi bi-caret-up-fill"></i></span>
                   </p>
                 </div>
-                <div class="data">
-                  <div class="value" v-for="i in 5" :key="i">
-                    <div class="d-flex align-items-center">
-                      <img src="/images/users/1.webp" class="mrl-half">
+                <div class="data" v-if="feedbacks.length > 0">
+                  <div :class="'value box_'+index" v-for="(i,index) in feedbacks" :key="index">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <image-component
+                        :src="'/users/'+i?.sender?.image?.name"></image-component>
                       <div>
                         <div class="mb-0 fw-bold d-flex align-items-center justify-content-between">
-                          <span>hager ali</span>
+                          <span>{{ i?.sender?.username }}</span>
                           <ul class="dots-action cursor-pointer d-inline-block">
                             <li class="dots">
                               <i class="bi bi-three-dots-vertical gray"></i>
                               <ul>
-                                <li v-tooltip="words.accept_apperance_feedback">
+                                <li
+                                  @click="update_status(i?.id)"
+                                  v-tooltip="words.accept_apperance_feedback"
+                                v-if="i?.status === 'pending'">
                                   <span class="gray"><i class="bi bi-check-lg"></i></span>
                                   <span>{{ words.accept }}</span>
                                 </li>
                                 <li>
-                                  <span class="red"><i class="bi bi-trash"></i></span>
+                                  <span class="red"
+                                        @click="delete_item('employee_feedbacks',i?.id,'employee_feedbacks','box_'+index)"><i class="bi bi-trash"></i></span>
                                   <span>{{ words.delete }}</span>
                                 </li>
                               </ul>
                             </li>
                           </ul>
                         </div>
-                        <p class="mb-0 line-height-22">Sara is a good enginner i work with here before at algorithma company she can
-                          work under stress she do it best , test test test test test test test test test test</p>
+                        <p class="mb-0 line-height-22">{{ i['info'] }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
+                <img v-else class="d-block m-auto" src="/images/No_data.gif">
+                <button class="btn btn-primary m-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#save_feedback"
+                        v-if="get_profile_id != $auth?.state?.user?.id">{{ words.write_feedback }}</button>
               </div>
             </div>
 
@@ -69,7 +78,7 @@
     <!-----------modals--------- -->
     <update_personal_data></update_personal_data>
 
-
+    <save_feedback></save_feedback>
 
   </section>
 </template>
@@ -79,9 +88,16 @@ import WordsLang from "../../../mixins/WordsLang";
 import JobComponent from "../../../components/JobComponent";
 import Update_personal_data from "../../../components/Modals/candidate/update_personal_data";
 import ProfilePersonalInfoComponent from "../../../components/ProfilePersonalInfoComponent";
+import {mapGetters , mapActions} from "vuex";
+import ImageComponent from "../../../components/ImageComponent.vue";
+import delete_item from "../../../mixins/delete_item.vue";
+import Save_feedback from "../../../components/Modals/candidate/save_feedback_box.vue";
 export default {
   name: "feedbacks",
+
   components: {
+    Save_feedback,
+    ImageComponent,
     ProfilePersonalInfoComponent,
     Update_personal_data,
     JobComponent},
@@ -90,7 +106,18 @@ export default {
       skills:['php','laravel','oop','design pattern','mysql']
     }
   },
-  mixins:[WordsLang],
+  methods:{
+    ...mapActions({
+      'update_status':'profile/feedbacks/updateStatusAction',
+    }),
+  },
+  computed:{
+    ...mapGetters({
+      'feedbacks':'profile/feedbacks/get_data',
+      'get_profile_id':'profile/employee/get_profile_id',
+    })
+  },
+  mixins:[WordsLang,delete_item],
 }
 </script>
 
@@ -106,8 +133,12 @@ export default {
     .value{
       img{
         max-height: 70px;
+        max-width: 70px;
         border: 1px solid #dddddd;
         border-radius: 8px;
+      }
+      img+div{
+        width: calc(100% - 72px);
       }
     }
   }

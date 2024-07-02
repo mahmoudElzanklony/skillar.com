@@ -144,7 +144,6 @@ export default {
     })
   },
   created() {
-    console.log(this.$auth?.state?.user)
     if(this.getCountriesGetter.length == 0){
       this.getCountriesAction();
     }

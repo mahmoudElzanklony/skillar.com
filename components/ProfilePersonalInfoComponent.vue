@@ -35,9 +35,41 @@
 
 <script>
 import ImageComponent from "./ImageComponent.vue";
+import {mapGetters , mapActions ,mapMutations} from "vuex";
+
 export default {
   name: "ProfilePersonalInfoComponent",
   props:['edit_info'],
+  data(){
+    return  {
+      current_id:null
+    }
+  },
+  computed:{
+    ...mapGetters({
+      'feedbacks':'profile/feedbacks/get_data'
+    })
+  },
+  methods:{
+    ...mapActions({
+      'feedbackGetDataAction':'profile/feedbacks/getDataAction'
+    }),
+    ...mapMutations({
+      'setProfileId':'profile/employee/SetProfileId'
+    })
+  },
+  mounted() {
+    let detect_id = document.URL.split('/profile/')[1];
+    if(isNaN(detect_id)){
+      this.current_id = detect_id.split('/')[0]
+    }else{
+      this.current_id = detect_id
+    }
+    this.setProfileId(this.current_id);
+    if(this.feedbacks.length == 0 && document.URL.indexOf('feedback') >= 0){
+       this.feedbackGetDataAction(this.current_id);
+    }
+  },
   components:{ImageComponent}
 }
 </script>

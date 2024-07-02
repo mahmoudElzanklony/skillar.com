@@ -5,7 +5,7 @@ export default  {
   delete:'مسح',
   add:'اضافة',
   add_item:'أضافة عنصر  جديد',
-
+  write_feedback:'انشاء تقييم',
   visit:'زيارة',
   open:'فتح',
   nearest_jobs:'وظائف بالقرب مني',

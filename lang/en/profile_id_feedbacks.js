@@ -14,5 +14,7 @@ export default  {
   write_your_feedback_about_your_friend:'Tell your friend about your feedback',
   save:'Save',
   accept:'Accept',
+  write_feedback:'Write feedback',
+
 
 };
