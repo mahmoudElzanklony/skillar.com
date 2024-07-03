@@ -1,34 +1,34 @@
 <template>
   <footer class="p-3 mt-3" id="footer">
-    <div class="container">
+    <div class="container" v-if="Object.keys($attrs).length > 0  &&  Object.keys($attrs.words).length > 0">
       <div class="row align-items-center">
         <div class="col-lg-3 col-6">
           <nuxt-link to="/" class="cursor-pointer" tag="img" src="/images/logo.png"></nuxt-link>
         </div>
         <div class="col-lg-3 col-6">
           <div class="links">
-            <p>{{ words.quick_links }}</p>
+            <p>{{ $attrs.words.footer.quick_links }}</p>
             <ul>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ words.jobs }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ words.companies }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ words.posts }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ words.plans }}</nuxt-link></li>
+              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.jobs }}</nuxt-link></li>
+              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.companies }}</nuxt-link></li>
+              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.posts }}</nuxt-link></li>
+              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.plans }}</nuxt-link></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-3 col-6">
           <div class="links">
-            <p>{{ words.resources }}</p>
+            <p>{{ $attrs.words.footer.resources }}</p>
             <ul>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ words.privacy }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ words.terms_of_service }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ words.user_condition }}</nuxt-link></li>
+              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.privacy }}</nuxt-link></li>
+              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.terms_of_service }}</nuxt-link></li>
+              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.user_condition }}</nuxt-link></li>
             </ul>
           </div>
         </div>
         <div class="col-lg-3 col-6">
           <div class="links contact">
-            <p>{{ words.contact }}</p>
+            <p>{{ $attrs.words.footer.contact }}</p>
             <ul>
               <li>
                 <nuxt-link to="#" class="position-relative">
@@ -57,15 +57,8 @@
 </template>
 
 <script>
-import WordsLang from "../mixins/WordsLang";
 export default {
     name:'Footer',
-    mixins:[WordsLang],
-    data(){
-      return {
-        file_name:'footer',
-      }
-    },
 }
 </script>
 

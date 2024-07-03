@@ -18,5 +18,5 @@ export default  {
   save:'Save',
   select_best_choice:'Select best choice',
   image:'Image',
-
+  my_cvs:'Display my cvs',
 };

@@ -17,4 +17,5 @@ export default  {
   save:'حفظ',
   select_best_choice:'اختر المناسب لك',
   image:'الصورة الشخصية',
+  my_cvs:'السير الذاتية الخاصة بي',
 };

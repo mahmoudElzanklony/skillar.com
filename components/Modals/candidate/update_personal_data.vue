@@ -1,10 +1,11 @@
 <template>
   <!-- Modal of update personal data -->
   <div class="modal fade" id="update_personal_data" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog"
+         v-if="Object.keys($parent.$parent.$attrs).length > 0  &&  Object.keys($parent.$parent.$attrs.words).length > 0">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ words.update_data }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{ $parent.$parent.$attrs.words.profile.main.update_data }}</h5>
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -12,7 +13,7 @@
             <div class="variety_data mb-2">
               <div class="one_variety">
                 <div class="heading d-flex align-items-center justify-content-between">
-                  <span class="normal fw-bold">{{ words.personal_data }}</span>
+                  <span class="normal fw-bold">{{ $parent.$parent.$attrs.words.profile.main.personal_data }}</span>
                   <p class="mb-0">
                     <span><i class="bi bi-caret-down-fill"></i></span>
                   </p>
@@ -21,7 +22,7 @@
                 <div class="row p-2">
                   <div class="col-12 mb-2">
                     <div class="form-group position-relative input-icon flex-wrap">
-                      <label>{{ words.username }}</label>
+                      <label>{{ $parent.$parent.$attrs.words.register.username }}</label>
                       <span><i class="bi bi-person-circle"></i></span>
                       <input class="form-control" name="username"
                              :value="$auth?.state?.user?.username" required>
@@ -29,7 +30,7 @@
                   </div>
                   <div class="col-12 mb-2">
                     <div class="form-group position-relative input-icon flex-wrap">
-                      <label>{{ words.email }}</label>
+                      <label>{{ $parent.$parent.$attrs.words.register.email }}</label>
                       <span><i class="bi bi-envelope"></i></span>
                       <input class="form-control" name="email"
                              :value="$auth?.state?.user?.email"
@@ -38,19 +39,19 @@
                   </div>
                   <div class="col-12 mb-2">
                     <div class="form-group position-relative input-icon flex-wrap">
-                      <label>{{ words.password }}</label>
+                      <label>{{ $parent.$parent.$attrs.words.register.password }}</label>
                       <span><i class="bi bi-lock"></i></span>
                       <input class="form-control" name="password"
-                             :placeholder="words.leave_password"
+                             :placeholder="$parent.$parent.$attrs.words.register.leave_password"
                              >
                     </div>
                   </div>
                   <div class="col-12 mb-2">
                     <div class="form-group position-relative input-icon flex-wrap">
-                      <label>{{ words.country }}</label>
+                      <label>{{ $parent.$parent.$attrs.words.register.country }}</label>
                       <span><i class="bi bi-arrow-down-short"></i></span>
                       <select class="form-control" name="country_id">
-                        <option value="">{{ words.select_best_choice }}</option>
+                        <option value="">{{ $parent.$parent.$attrs.words.general.select_best_choice }}</option>
                         <option value="1" v-for="(i,index) in getCountriesGetter" :key="index" :value="i['id']"
                                 :selected="$auth?.state?.user.country_id == i['id']">{{ i['name'] }}</option>
                       </select>
@@ -58,7 +59,7 @@
                   </div>
                   <div class="col-12 mb-2">
                     <div class="form-group position-relative input-icon flex-wrap">
-                      <label>{{ words.address }}</label>
+                      <label>{{ $parent.$parent.$attrs.words.register.address }}</label>
                       <span><i class="bi bi-geo-alt"></i></span>
                       <input class="form-control"
                              :value="$auth?.state?.user?.address"
@@ -67,7 +68,7 @@
                   </div>
                   <div class="col-12 mb-2">
                     <div class="form-group position-relative input-icon flex-wrap">
-                      <label>{{ words.image }}</label>
+                      <label>{{ $parent.$parent.$attrs.words.register.image }}</label>
                       <span><i class="bi bi-image"></i></span>
                       <input class="form-control" name="image" type="file">
                     </div>
@@ -77,7 +78,7 @@
               </div>
               <div class="one_variety">
                 <div class="heading d-flex align-items-center justify-content-between">
-                  <span class="normal fw-bold">{{ words.business_data }}</span>
+                  <span class="normal fw-bold">{{ $parent.$parent.$attrs.words.profile.main.business_data }}</span>
                   <p class="mb-0">
                     <span><i class="bi bi-caret-down-fill"></i></span>
                   </p>
@@ -85,13 +86,13 @@
 
                 <div class="row p-2">
                   <div class="col-12 mb-2">
-                    <label>{{ words.quick_description }}</label>
+                    <label>{{ $parent.$parent.$attrs.words.profile.main.quick_description }}</label>
                     <textarea class="form-control" name="bio" :value="$auth?.state?.user?.bio">{{ $auth?.state?.user?.bio }}</textarea>
                   </div>
                   <div class="col-12 mb-2" v-if="false">
                     <div class="file_upload mb-2">
                       <div>
-                        <span class="mrl-1">{{ words.resume }}</span>
+                        <span class="mrl-1">{{ $parent.$parent.$attrs.words.profile.main.resume }}</span>
                         <span class="gray"><i class="bi bi-cloud-arrow-up"></i></span>
                       </div>
                       <input type="file" name="video" required>
@@ -104,7 +105,7 @@
             <div>
             <div class="mb-2">
                 <div class="form-group position-relative input-icon flex-wrap">
-                  <input class="btn btn-primary" type="submit" :value="words.save">
+                  <input class="btn btn-primary" type="submit" :value="$parent.$parent.$attrs.words.general.save">
                 </div>
             </div>
             </div>
@@ -112,7 +113,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ words.close }}</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $parent.$parent.$attrs.words.general.close }}</button>
         </div>
       </div>
     </div>

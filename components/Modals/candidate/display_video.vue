@@ -4,7 +4,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ words.display_introduction }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{ $parent.$parent.$attrs.words.profile.main.display_video }}</h5>
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -14,7 +14,7 @@
                   :src="computedUrl+'/videos/users/'+get_video?.file"></video>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ words.close }}</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $parent.$parent.$attrs.words.general.close }}</button>
         </div>
       </div>
     </div>

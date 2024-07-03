@@ -1,7 +1,7 @@
 <template>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
+    <div class="container"  v-if="Object.keys($attrs).length > 0  &&  Object.keys($attrs.words).length > 0">
       <nuxt-link class="navbar-brand cursor-pointer position-relative"
                  to="/" tag="img" style="top: -6px;" src="/images/logo.png"></nuxt-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,26 +11,26 @@
         <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center position-relative">
           <li class="nav-item link mrl-1">
             <nuxt-link to="/" class="nav-link line-hover" aria-current="page" href="#">
-              {{ words.home }}
+              {{ $attrs.words.navbar.home }}
             </nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
-            <nuxt-link to="#" class="nav-link line-hover" href="#">{{ words.about }}</nuxt-link>
+            <nuxt-link to="#" class="nav-link line-hover" href="#">{{ $attrs.words.navbar.about }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
-            <nuxt-link class="nav-link line-hover" to="/best-companies">{{ words.companies_rank }}</nuxt-link>
+            <nuxt-link class="nav-link line-hover" to="/best-companies">{{ $attrs.words.navbar.companies_rank }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
-            <nuxt-link class="nav-link line-hover" to="/colleagues">{{ words.colleagues }}</nuxt-link>
+            <nuxt-link class="nav-link line-hover" to="/colleagues">{{ $attrs.words.navbar.colleagues }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
-            <nuxt-link to="/jobs" class="nav-link line-hover">{{ words.jobs }}</nuxt-link>
+            <nuxt-link to="/jobs" class="nav-link line-hover">{{ $attrs.words.navbar.jobs }}</nuxt-link>
           </li>
         </ul>
 
         <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center">
           <li class="nav-item mrl-1" v-if="!($auth.loggedIn)">
-            <nuxt-link to="/auth/register" class="nav-link btn-bk-primary">{{ words.register }}</nuxt-link>
+            <nuxt-link to="/auth/register" class="nav-link btn-bk-primary">{{ $attrs.words.navbar.register }}</nuxt-link>
           </li>
           <li class="nav-item mrl-1">
             <button class="nav-link btn btn-outline-primary" @click="changeLang">
@@ -45,31 +45,31 @@
                   <li>
                     <nuxt-link to="/profile/ahmed">
                       <span class="gray"><i class="bi bi-person-circle"></i></span>
-                      <span class="gray">{{ words.profile }}</span>
+                      <span class="gray">{{ $attrs.words.navbar.profile }}</span>
                     </nuxt-link>
                   </li>
                   <li>
                     <nuxt-link to="/notifications">
                       <span><i class="bi bi-bell"></i></span>
-                      <span class="gray">{{ words.notifications }}</span>
+                      <span class="gray">{{ $attrs.words.navbar.notifications }}</span>
                     </nuxt-link>
                   </li>
                   <li>
                     <nuxt-link to="/chat">
                       <span><i class="bi bi-chat-dots"></i></span>
-                      <span class="gray">{{ words.chat }}</span>
+                      <span class="gray">{{ $attrs.words.navbar.chat }}</span>
                     </nuxt-link>
                   </li>
                   <li>
                     <nuxt-link to="/nearest-jobs">
                       <span><i class="bi bi-geo-alt"></i></span>
-                      <span class="gray">{{ words.nearest_jobs }}</span>
+                      <span class="gray">{{ $attrs.words.navbar.nearest_jobs }}</span>
                     </nuxt-link>
                   </li>
                   <li style="border-top: 1px solid #dddddd">
                     <nuxt-link to="/logout">
                       <span><i class="bi bi-box-arrow-in-left"></i></span>
-                      <span class="gray">{{ words.logout }}</span>
+                      <span class="gray">{{ $attrs.words.navbar.logout }}</span>
                     </nuxt-link>
                   </li>
                 </ul>
@@ -86,7 +86,6 @@
 </template>
 
 <script>
-import WordsLang from "../mixins/WordsLang";
 export default {
   name: "NavbarComponent",
   data(){
@@ -95,7 +94,6 @@ export default {
       another_lang:'',
     }
   },
-  mixins:[WordsLang],
   methods:{
     changeLang(){
       if(localStorage.getItem('lang') == null || localStorage.getItem('lang') == 'ar'){

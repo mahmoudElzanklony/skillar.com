@@ -1,17 +1,17 @@
 <template>
   <section class="current_page profile mt-4">
-      <div class="container">
+      <div class="container" v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
           <div class="row">
             <div class="col-lg-9 mb-2">
               <div class="inner_profile pb-3">
-                <profile-personal-info-component :edit_info="words.edit_info"></profile-personal-info-component>
+                <profile-personal-info-component :edit_info="$parent.$attrs.words.profile.main.edit_info"></profile-personal-info-component>
                 <div class="quick_statistics mb-3 p-3">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 mb-2">
                       <nuxt-link to="/profile/ahmed/applied-jobs">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
-                            <p class="fw-bold">{{ words.number_of_applied_jobs }}</p>
+                            <p class="fw-bold">{{ $parent.$attrs.words.profile.main.number_of_applied_jobs }}</p>
                             <p class="fw-bold">{{ statistics_data?.jobs }}</p>
                           </div>
                           <img src="/images/icons/Document.png">
@@ -22,7 +22,7 @@
                       <nuxt-link to="#">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
-                            <p class="fw-bold">{{ words.number_of_visiting }}</p>
+                            <p class="fw-bold">{{ $parent.$attrs.words.profile.main.number_of_visiting }}</p>
                             <p class="fw-bold">{{ statistics_data?.views }}</p>
                           </div>
                           <img src="/images/icons/Show.png">
@@ -33,7 +33,7 @@
                       <nuxt-link to="/chat">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
-                            <p class="fw-bold">{{ words.number_of_messages_chat }}</p>
+                            <p class="fw-bold">{{ $parent.$attrs.words.profile.main.number_of_messages_chat }}</p>
                             <p class="fw-bold">{{ statistics_data?.chat }}</p>
                           </div>
                           <img src="/images/icons/Chat.png">
@@ -44,7 +44,7 @@
                       <nuxt-link to="/profile/ahmed/feedbacks">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
-                            <p class="fw-bold">{{ words.number_of_friends_feedback }}</p>
+                            <p class="fw-bold">{{ $parent.$attrs.words.profile.main.number_of_friends_feedback }}</p>
                             <p class="fw-bold">{{ statistics_data?.rates }}</p>
                           </div>
                           <img src="/images/icons/Profile.png">
@@ -55,7 +55,7 @@
                       <nuxt-link to="/notifications">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
-                            <p class="fw-bold">{{ words.number_of_new_notifications }}</p>
+                            <p class="fw-bold">{{ $parent.$attrs.words.profile.main.number_of_new_notifications }}</p>
                             <p class="fw-bold">{{ statistics_data?.notifications }}</p>
                           </div>
                           <img src="/images/icons/Notification.png">
@@ -73,11 +73,11 @@
                           <li data-bs-toggle="modal"
                               data-bs-target="#update_personal_video">
                             <span class="gray"><i class="bi bi-pencil-square"></i></span>
-                            <span class="gray">{{ words.edit }}</span>
+                            <span class="gray">{{ $parent.$attrs.words.general.edit }}</span>
                           </li>
                           <li>
                             <span class="red"><i class="bi bi-trash"></i></span>
-                            <span class="gray">{{ words.delete }}</span>
+                            <span class="gray">{{ $parent.$attrs.words.general.delete }}</span>
                           </li>
                         </ul>
                       </li>
@@ -88,8 +88,13 @@
                 </div>
                 <div class="description p-3">
                   <div class="main-heading d-flex align-items-center justify-content-between mb-2">
-                    <span class="fw-bold normal">{{ words.quick_description }}</span>
-                    <nuxt-link to="#">{{ words.download_my_cv }}</nuxt-link>
+                    <span class="fw-bold normal">{{ $parent.$attrs.words.profile.main.quick_description }}</span>
+                    <span data-bs-toggle="modal"
+                          @click="get_resumes_action"
+                          class="blue cursor-pointer"
+                          data-bs-target="#apply_for_job">
+                      {{ $parent.$attrs.words.profile.published_jobs.show_resume }}
+                    </span>
                   </div>
                   <p>{{ $auth?.user?.bio }}</p>
                 </div>
@@ -117,14 +122,14 @@
             </div>
             <div class="col-lg-3 mb-2">
                <div class="nearest_jobs">
-                 <h2 class="fw-bold mb-3">{{ words.popular_jobs }}</h2>
+                 <h2 class="fw-bold mb-3">{{ $parent.$attrs.words.profile.main.popular_jobs }}</h2>
                  <job-component v-for="i in 6" class="mb-3"
                                 title="Full stack"
                                 company_name="Algorithma"
                                 time="30M ago"
                                 id="1"
                                 :skills="skills"
-                                :show_details="words.open"
+                                :show_details="$parent.$attrs.words.profile.main.open"
                                 img="/images/companies/1.png"
                  ></job-component>
                </div>
@@ -142,6 +147,8 @@
 
     <display_video></display_video>
 
+    <apply_for_job :control="true"></apply_for_job>
+
   </section>
 </template>
 
@@ -157,10 +164,12 @@ import text_editor from "../../../mixins/text_editor";
 import {mapActions , mapGetters} from "vuex";
 import ShowSectionsData from "../../../components/profile/ShowSectionsData.vue";
 import Update_dynamic_box from "../../../components/Modals/candidate/update_dynamic_box.vue";
+import Apply_for_job from "~/components/Modals/candidate/apply_for_job.vue";
 
 export default {
   name: "candidate",
   components: {
+    Apply_for_job,
     Update_dynamic_box,
     ShowSectionsData,
     ProfilePersonalInfoComponent,
@@ -176,6 +185,7 @@ export default {
       'get_section_properties':'sections/sectionPropertiesAction',
       'get_section_data':'profile/employee/getDataSection',
       'get_profile_statistics_action':'profile/statistics/getStatisticsProfile',
+      'get_resumes_action':'profile/resumes/getDataAction',
     }),
 
   },
