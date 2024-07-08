@@ -1,21 +1,21 @@
 <template>
   <section class="auth current_page">
-    <div class="auth-content">
+    <div class="auth-content" v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
       <div class="container-fluid h-100">
         <div class="row h-100">
           <div class="col-md-5 mb-2 mt-3 d-flex align-items-center">
             <div class="form-data w-100">
 
               <form class="p-3" method="post" @submit.prevent="reset">
-                <h2>{{ words.forget_password }}</h2>
+                <h2>{{ $parent.$attrs.words.reset_password.forget_password }}</h2>
                 <div class="form-group mb-2 input-icon flex-wrap">
-                  <label>{{ words.email }}</label>
+                  <label>{{ $parent.$attrs.words.reset_password.email }}</label>
                   <input class="form-control" name="email" required>
                   <span><i class="bi bi-envelope"></i></span>
                 </div>
                 <RecaptchaComponent></RecaptchaComponent>
                 <div class="form-group mb-4">
-                  <input class="form-control btn btn-primary" type="submit" :value="words.send">
+                  <input class="form-control btn btn-primary" type="submit" :value="$parent.$attrs.words.reset_password.send">
                 </div>
               </form>
             </div>
@@ -24,7 +24,7 @@
             <div class="info text-center-mobile flex align-items-center justify-content-between">
               <img src="/images/auth/bk.png">
               <div class="text-center">
-                <p class="mb-2 mt-3 white">{{ words.reset_password }}</p>
+                <p class="mb-2 mt-3 white">{{ $parent.$attrs.words.reset_password.reset_password }}</p>
               </div>
             </div>
           </div>

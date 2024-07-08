@@ -6,14 +6,23 @@
             <div class="col-lg-8 col-md-6 mb-3">
               <div class="description box-shadow">
                 <div class="image">
-                  <img src="/images/companies/1.png">
+                  <image-component :src="'/users/'+job_info?.company?.image?.name"></image-component>
                 </div>
-                <p class="fw-bold">Full stack engineer</p>
+                <p class="fw-bold">{{ job_info?.name }}</p>
                 <p>
-                  <span class="gray">Some Description about algorithma company Some Description about algorithma company Some Description about algorithma company Some Description about algorithma company Some Description about algorithma company Some Description about algorithma company </span>
+                  <span class="gray" v-html="job_info?.description"></span>
+                </p>
+
+                <p v-if="false">
+                  <span class="gray d-none toggle-show" v-html="job_info?.description"></span>
+                </p>
+                <p class=" toggle_p_show" v-if="false">
+                    <span class="blue cursor-pointer small"
+                          :show="$parent.$attrs.words.profile.main.show_more"
+                          :hide="$parent.$attrs.words.profile.main.show_less">{{ $parent.$attrs.words.profile.main.show_more }}</span>
                 </p>
                 <div class="mb-3 d-flex align-items-center justify-content-between">
-                  <nuxt-link to="#">{{ $parent?.$attrs?.words?.jobs?.details.read_more }}</nuxt-link>
+
                   <button class="btn btn-primary"
                           data-bs-toggle="modal"
                           @click="get_my_cvs_action"
@@ -23,32 +32,31 @@
                   <ul>
                     <li class="mb-2">
                       <span class="gray mrl-half"><i class="bi bi-info"></i></span>
-                      <span>Algorithma Company</span>
+                      <span>{{ job_info?.company?.username }}</span>
                     </li>
                     <li class="mb-2">
                       <span class="gray mrl-half"><i class="bi bi-people"></i></span>
                       <span>{{ $parent?.$attrs?.words?.jobs?.details.employees_number_at_company }}</span>
-                      <span>55</span><span>{{ $parent?.$attrs?.words?.jobs?.details.employee }}</span>
+                      <span> {{ job_info.applicants.length }} </span><span>{{ $parent?.$attrs?.words?.jobs?.details.employee }}</span>
                     </li>
                     <li class="mb-2">
                       <span class="gray mrl-half"><i class="bi bi-briefcase"></i></span>
                       <span>{{ $parent?.$attrs?.words?.jobs?.details.job_way }}</span>
-                      <span>Remotely</span>
+                      <span>{{ (job_info.work_type) }}</span>
                     </li>
                     <li class="mb-2">
                       <span class="gray mrl-half"><i class="bi bi-geo-alt"></i></span>
-                      <span>مصر , القاهره , الحي الخامس بجوار مسجد الامام الشافعي</span>
+                      <span>{{ job_info.city.name }} , {{ job_info.city.country.name }}</span>
                     </li>
                   </ul>
                 </div>
-                <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.job_description }}</p>
-                <p class="gray end-border-bottom">
-                  Deploy, Configure, Manage and Troubleshoot large scale enterprise Microsoft Windows Environment running in Windows 2008, 2012, 2016, 2019. Install and configure and maintain server operating systems and repair server hardware Install and manage VMWare VSphere 5. x & 6. x Proactively maintain and develop all infrastructure technology to maintain a 24x7x365 uptime service Engineering of systems administration-related solutions for various project and operational needs Maintain best practices on managing systems and services across all environments Provide a point of escalation and support to the Service Desk Team. Participate in weekend maintenance activities, as required. Perform routine system administration duties. Monitor servers and troubleshoot problems.
+                <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.save_job.job_responsibilities }}</p>
+                <p class="gray end-border-bottom" v-html="job_info?.responsibilities">
                 </p>
                 <div class="skills">
                   <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.required_skills }}</p>
                   <ul class="d-flex align-items-center flex-wrap">
-                    <li v-for="i in 10" class="mrl-half mb-2"><nuxt-link to="#">programming</nuxt-link></li>
+                    <li v-for="(i,index) in job_info?.skills" :key="index" class="mrl-half mb-2"><span>{{ i?.title }}</span></li>
                   </ul>
                 </div>
               </div>
@@ -60,9 +68,9 @@
                     <span class="top-3 position-relative gray"><i class="bi bi-eye"></i></span>
                     <span>{{ $parent?.$attrs?.words?.jobs?.details.no_seen }}</span>
                   </p>
-                  <span class="fw-bold">40</span>
+                  <span class="fw-bold">{{ job_info?.views }}</span>
                   <div class="percentage w-100 progress">
-                    <p style="width: 50%" class="progress-bar progress-bar-animated progress-bar-striped"></p>
+                    <p :style="(job_info?.views <= 1000 ? 'width: '+(job_info.views * 10 / 100)+'%':'width:100%')" class="progress-bar progress-bar-animated progress-bar-striped"></p>
                   </div>
                 </div>
                 <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
@@ -72,7 +80,7 @@
                   </p>
                   <span class="fw-bold">15</span>
                   <div class="percentage w-100 progress">
-                    <p style="width: 20%" class="progress-bar progress-bar-animated progress-bar-striped"></p>
+                    <p :style="(job_info?.applicants.length <= 1000 ? 'width: '+(job_info.applicants.length * 10 / 100)+'%':'width:100%')" class="progress-bar progress-bar-animated progress-bar-striped"></p>
                   </div>
                 </div>
                 <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
@@ -110,10 +118,14 @@
 
 <script>
 import apply_for_job from "@/components/Modals/candidate/apply_for_job.vue";
-import {mapActions} from "vuex";
+import {mapActions , mapGetters} from "vuex";
 
 export default {
   name: "job_id",
+  async asyncData({store , route}){
+    console.log(route)
+    await store.dispatch('jobs/getJobInfoAction',route.params.id);
+  },
   data(){
     return {
       file_name:'job_details',
@@ -124,15 +136,17 @@ export default {
   validate({params}){
     return !(isNaN(params.id));
   },
+  computed:{
+    ...mapGetters({
+      'job_info':'jobs/get_item'
+    })
+  },
   methods:{
     ...mapActions({
       'get_my_cvs_action':'profile/resumes/getDataAction'
     })
   },
   components:{apply_for_job},
-  created() {
-    console.log(this.$route);
-  }
 }
 </script>
 
@@ -177,7 +191,7 @@ export default {
           &:hover{
             background-color: $main_color;
           }
-          &:hover a{
+          &:hover span{
             color:white;
           }
         }

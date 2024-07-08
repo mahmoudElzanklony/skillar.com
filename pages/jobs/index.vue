@@ -1,24 +1,25 @@
 <template>
   <section class="jobs current_page pt-3 pb-3">
-      <div class="container">
+      <div class="container" v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
         <div class="filter mb-3 position-relative">
           <h2 class="d-flex justify-content-between mb-3 align-items-center section-title-control d-sm-none">
-            <span class="fw-bold blue">{{ words.filter_jobs }}</span>
+            <span class="fw-bold blue">{{ $parent.$attrs.words.jobs.main.filter_jobs }}</span>
             <span class="gray"><i class="bi bi-arrow-down-short"></i></span>
           </h2>
-          <filteration-jobs-component :words="words"></filteration-jobs-component>
+          <filteration-jobs-component></filteration-jobs-component>
         </div>
         <div class="current_jobs">
-            <div class="row">
-              <div class="col-lg-3 col-md-6 col-12" v-for="(i,index) in 15" :key="index">
+            <div class="row infinite_scroll" action_path="jobs/getJobsAction" method="get">
+
+              <div class="col-lg-3 col-md-6 col-12 mb-4 el show" v-for="(i,index) in jobs_data" :key="index">
                 <job-component
-                  title="Full stack"
-                  company_name="Algorithma"
-                  time="30M ago"
-                  id="1"
-                  :skills="skills"
-                  :show_details="words.open"
-                  img="/images/companies/1.png"
+                  :title="i?.name"
+                  :company_name="i?.company?.username"
+                  :time="i?.published"
+                  :id="i?.id"
+                  :skills="i?.skills"
+                  :show_details="i?.status"
+                  :img="i?.company?.image?.name"
                 ></job-component>
               </div>
             </div>
@@ -28,17 +29,33 @@
 </template>
 
 <script>
-import WordsLang from "../../mixins/WordsLang";
 import JobComponent from "../../components/JobComponent";
 import FilterationJobsComponent from "../../components/FilterationJobsComponent";
+import {mapGetters , mapActions} from "vuex";
+import animateData from "@/mixins/animateData";
 export default {
   name: "jobs",
+  async asyncData({store}){
+    await store.dispatch('jobs/categories/getDataAction')
+    await store.dispatch('places/countries/getCountriesAction')
+    await store.dispatch('jobs/getJobsAction','?page=1')
+  },
+  mixins:[animateData],
   components: {FilterationJobsComponent, JobComponent},
-  mixins:[WordsLang],
-  data(){
-    return {
-      skills:['php','laravel','oop','design pattern','mysql']
+  computed:{
+    ...mapGetters({
+      'jobs_data':'jobs/get_jobs'
+    })
+  },
+  methods:{
+    resetCurrentPage(){
+      this.current_page = 2;
     }
+  },
+  mounted() {
+    document.querySelectorAll('.infinite_scroll .el').forEach(tem => {
+      this.observer.observe(tem)
+    })
   },
 
 }

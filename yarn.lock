@@ -1842,6 +1842,10 @@
     "anymatch" "^3.0.0"
     "source-map" "^0.6.0"
 
+"@voerro/vue-tagsinput@github:voerro/vue-tagsinput":
+  "resolved" "git+ssh://git@github.com/voerro/vue-tagsinput.git#ddec7af7e1133343e406397894d59998d61bb148"
+  "version" "2.7.1"
+
 "@vue/babel-helper-vue-jsx-merge-props@^1.4.0":
   "integrity" "sha512-JkqXfCkUDp4PIlFdDQ0TdXoIejMtTHP67/pvxlgeY+u5k3LEdKuWZ3LK6xkxo52uDoABIVyRwqVkfLQJhk7VBA=="
   "resolved" "https://registry.npmjs.org/@vue/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.4.0.tgz"

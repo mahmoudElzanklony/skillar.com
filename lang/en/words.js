@@ -25,6 +25,7 @@ export default {
     colleagues:'Colleagues',
     nearest_jobs:'Nearest jobs',
     chat:'Chat',
+    add_job:'Add job',
     notifications:'Notifications',
     logout:'Logout',
   },
@@ -258,9 +259,13 @@ export default {
     main:{
       select_best_choice:'Select best option',
       country:'Country',
+      category:'Category',
       city:'City',
       work_field:'Work field',
       job_type:'Job type',
+      work_time:'Work time',
+      min_experience: 'Min experience',
+      max_experience: 'Max experience',
       experience_type:'Experience Type',
       start_date_posting:'Start date posting',
       end_date_posting:'End date posting',
@@ -283,6 +288,8 @@ export default {
       job_requirement:'Job requirement',
       job_requirement_info:'Provide job description and requirement that employee should have\n' +
         'keep it short and to point',
+      job_responsibilities:'Job responsibilities',
+      job_responsibilities_info:'Provide job responsibilities the employee should have for this job',
       short_description:'Short description',
 
       job_skills:'Jobs skills',
@@ -317,8 +324,8 @@ export default {
     details:{
       read_more:'Read more',
       employee:'Employee',
-      employees_number_at_company:'Employees number of company',
-      job_way:'Job way',
+      employees_number_at_company:'Applicants apply to this job ',
+      job_way:'Work way',
       job_description:'Job description',
       required_skills:'Required Skills',
       apply_job:'Apply for job',

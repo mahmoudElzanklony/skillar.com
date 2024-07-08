@@ -1,6 +1,7 @@
 <template>
   <section class="auth current_page">
-     <div class="auth-content" v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
+     <div class="auth-content"
+          v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
        <div class="container-fluid h-100">
          <div class="row h-100">
            <div class="col-md-5 mb-2 mt-4 h-100 d-flex align-items-center">

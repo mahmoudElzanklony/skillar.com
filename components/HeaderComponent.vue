@@ -1,18 +1,18 @@
 <template>
   <header class="mt-5" id="header">
-    <div class="container">
+    <div class="container" v-if="Object.keys($parent.$parent.$attrs).length > 0  &&  Object.keys($parent.$parent.$attrs.words.header).length > 0">
       <div class="row align-items-center">
         <div class="col-md-6 mb-5">
           <h1 class="fw-bold">
-            <span>{{ words.main_title_one }}</span>
+            <span>{{ $parent.$parent.$attrs.words.header.main_title_one }}</span>
             <br>
-            <span>{{ words.main_title_two }}</span>
+            <span>{{ $parent.$parent.$attrs.words.header.main_title_two }}</span>
             <br>
-            <span>{{ words.main_title_three }}</span>
+            <span>{{ $parent.$parent.$attrs.words.header.main_title_three }}</span>
           </h1>
-          <p class="gray">{{ words.sub_title }}</p>
+          <p class="gray">{{ $parent.$parent.$attrs.words.header.sub_title }}</p>
           <nuxt-link to="#" class="btn btn-primary d-inline-flex align-items-center">
-            <span class="p-relative white mrl-1">{{ words.know_more }}</span>
+            <span class="p-relative white mrl-1">{{ $parent.$parent.$attrs.words.header.know_more }}</span>
             <span class="white" v-if="lang == null || lang == 'ar'"><i class="bi bi-arrow-left position-relative top-1"></i></span>
             <span class="white" v-else><i class="bi bi-arrow-right position-relative top-1"></i></span>
           </nuxt-link>
@@ -24,25 +24,25 @@
             <img src="/images/icons/Location.png">
             <img src="/images/icons/Tick.png">
              <form>
-                <h1 class="fw-bold text-center">{{ words.form_main_title }}</h1>
+                <h1 class="fw-bold text-center">{{ $parent.$parent.$attrs.words.header.form_main_title }}</h1>
                 <p class="gray text-center">
-                  <span class="gray">{{ words.form_sub_title }}</span>
+                  <span class="gray">{{ $parent.$parent.$attrs.words.header.form_sub_title }}</span>
                   <br>
-                  <span class="gray">{{words.apply_to_job}}</span>
+                  <span class="gray">{{$parent.$parent.$attrs.words.header.apply_to_job}}</span>
                 </p>
                 <div class="mb-2 input-icon">
                     <span><i class="bi bi-briefcase"></i></span>
-                    <input class="form-control" name="name" :placeholder="words.current_job">
+                    <input class="form-control" name="name" :placeholder="$parent.$parent.$attrs.words.header.current_job">
                 </div>
                 <div class="mb-2 input-icon">
                   <span><i class="bi bi-arrow-down-short"></i></span>
                    <select class="form-control">
-                      <option value="">{{ words.select_your_country }}</option>
+                      <option value="">{{ $parent.$parent.$attrs.words.header.select_your_country }}</option>
                       <option v-for="i in 10">Egypt</option>
                    </select>
                 </div>
                 <div class="mb-2">
-                    <input type="submit" class="btn btn-primary w-100" :value="words.register">
+                    <input type="submit" class="btn btn-primary w-100" :value="$parent.$parent.$attrs.words.header.register">
                 </div>
              </form>
           </div>
@@ -53,17 +53,15 @@
 </template>
 
 <script>
-import WordsLang from "../mixins/WordsLang";
 export default {
   name: "HeaderComponent",
-  mixins:[WordsLang],
   data(){
     return {
       lang:'',
-      file_name:'header',
     }
   },
   mounted() {
+
       this.lang = localStorage.getItem('lang');
   }
 }

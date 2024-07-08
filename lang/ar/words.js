@@ -26,6 +26,7 @@ export default {
     nearest_jobs:'اقرب الوظائف',
     chat:'المحادثات',
     notifications:'الاشعارات',
+    add_job:'أضافة وظيفة',
     logout:'تسجيل الخروج',
   },
   footer:{
@@ -450,10 +451,14 @@ export default {
     main:{
       select_best_choice:'أختر المناسب لك',
       country:'الدولة',
+      category:'القسم',
+      work_time:'عدد ساعات العمل',
       city:'المدينة',
       work_field:'مجال العمل',
       job_type:'نوع الوظيفة',
       experience_type:'نوع الخبره',
+      min_experience: 'اقل سنين خبرة',
+      max_experience: 'اقصي سنين خبره',
       start_date_posting:'بداية تاريخ النشر',
       end_date_posting:'نهاية تاريخ النشر',
       job_title:'المسمي الوظيفي',
@@ -473,6 +478,8 @@ export default {
 
       job_requirement:'متطلبات الوظيفة',
       job_requirement_info:'من فضلك قم بتوفير متطلبات الوظيفة التي لا غني عنها التي لابد من توافرها من متقدم الوظيفة',
+      job_responsibilities:'مهام الوظيفة',
+      job_responsibilities_info:'من فضلك قم بتوفير مسؤليات و مهام الوظيفة التي لا غني عنها التي لابد من توافر من متقدم الوظيفة',
       short_description:'وصف مختصر',
 
       job_skills:'مهارات الوظيفة',
@@ -503,7 +510,7 @@ export default {
     details:{
       read_more:'رؤية المزيد',
       employee:'موظف',
-      employees_number_at_company:'عدد موظفين الشركة',
+      employees_number_at_company:'عدد المتقدمين للوظيفة ',
       job_way:'طريقة العمل',
       job_description:'وصف الوظيفة',
       required_skills:'المهارات المطلوبة',

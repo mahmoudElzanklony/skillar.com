@@ -1,27 +1,27 @@
 <template>
   <section class="auth current_page">
     <div class="auth-content">
-      <div class="container-fluid h-100">
+      <div class="container-fluid h-100" v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
         <div class="row h-100">
           <div class="col-md-5 mb-2 mt-3 d-flex align-items-center">
             <div class="form-data w-100">
               <form class="p-3" method="post" @submit.prevent="reset_password">
-                <h2 >{{ words.new_password }}</h2>
+                <h2 >{{ $parent.$attrs.words.new_password.new_password }}</h2>
                 <input type="hidden" name="serial_number" :value="$route.query.serial_number">
                 <div class="form-group mb-3 input-icon flex-wrap">
-                  <label>{{ words.password }}</label>
+                  <label>{{ $parent.$attrs.words.new_password.password }}</label>
                   <span><i class="bi bi-key"></i></span>
                   <input class="form-control" name="password" type="password" required>
                   <p class="alert alert-danger w-100 mt-2"></p>
                 </div>
                 <div class="form-group mb-3 input-icon flex-wrap">
-                  <label>{{ words.password_confirmation }}</label>
+                  <label>{{ $parent.$attrs.words.new_password.password_confirmation }}</label>
                   <input class="form-control" name="password_confirmation" type="password" required>
                   <span><i class="bi bi-key"></i></span>
                 </div>
                 <RecaptchaComponent></RecaptchaComponent>
                 <div class="form-group mb-4">
-                  <input class="form-control btn btn-primary" type="submit" :value="words.save">
+                  <input class="form-control btn btn-primary" type="submit" :value="$parent.$attrs.words.new_password.save">
                 </div>
               </form>
             </div>
@@ -30,7 +30,7 @@
             <div class="info text-center-mobile flex align-items-center justify-content-between">
               <img src="/images/auth/bk.png">
               <div class="text-center">
-                <p class="mb-2 mt-3 white">{{ words.new_password }}</p>
+                <p class="mb-2 mt-3 white">{{ $parent.$attrs.words.new_password.new_password }}</p>
               </div>
             </div>
           </div>

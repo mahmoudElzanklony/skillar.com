@@ -28,24 +28,26 @@
       </ul>
 
 
-      <div class="job-header d-flex justify-content-between align-items-center position-relative">
-        <img :src="img">
-        <nuxt-link v-if="full_url == undefined && admin != 'yes'"
-                   :to="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
-        <nuxt-link v-else-if="admin != 'yes'"
-                   :to="full_url" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
+      <a :href="'/jobs/'+id" target="_blank">
+        <div class="job-header d-flex justify-content-between align-items-center position-relative">
+          <image-component :src="'/users/'+img"></image-component>
+          <nuxt-link v-if="full_url == undefined && admin != 'yes'"
+                     :to="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
+          <nuxt-link v-else-if="admin != 'yes'"
+                     :to="full_url" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
 
-      </div>
-      <div class="job-body">
-        <p class="fw-bold mb-1">{{ title }}</p>
-        <ul class="d-flex flex-wrap">
-          <li class="mrl-1" v-for="(skill,index) in skills" :key="index">{{ skill }}</li>
-        </ul>
-      </div>
-      <div class="job-footer d-flex align-items-center justify-content-between">
-        <p class="fw-bold">{{ company_name }}</p>
-        <p class="gray">{{ time }}</p>
-      </div>
+        </div>
+        <div class="job-body">
+          <p class="fw-bold mb-1">{{ title }}</p>
+          <ul class="d-flex flex-wrap">
+            <li class="mrl-1" v-for="(skill,index) in skills" :key="index">{{ skill?.title }}</li>
+          </ul>
+        </div>
+        <div class="job-footer d-flex align-items-center justify-content-between">
+          <p class="fw-bold">{{ company_name }}</p>
+          <p class="gray">{{ time }}</p>
+        </div>
+      </a>
     </div>
 
   </section>
@@ -55,9 +57,7 @@
 export default {
   name: "JobComponent",
   props:['full_url','img','title','skills','company_name','time','show_details','id','admin','controls'],
-  mounted() {
-    console.log(this.admin);
-  }
+
 }
 </script>
 

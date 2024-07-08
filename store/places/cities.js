@@ -1,5 +1,5 @@
 export const state = () => ({
-  data: []
+  data: [],
 })
 
 export const getters = {
@@ -20,7 +20,7 @@ export const actions = {
       if (event.target.name != 'country_id') {
         return false;
       }
-      var country_id = event.target.value;var country_id = event.target.value;
+      var country_id = event.target.value;
     }else{
       var country_id = payload;
     }

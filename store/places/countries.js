@@ -65,9 +65,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async getCountriesAction({ commit }) {
-
-
+  getCountriesAction({ commit }) {
      return this.$axios.get('countries').then((e)=>{
       commit('InitializeData',e.data.data)
     }).catch((e)=>{
