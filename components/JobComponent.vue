@@ -27,14 +27,12 @@
         </li>
       </ul>
 
-
-      <a :href="'/jobs/'+id" target="_blank">
-        <div class="job-header d-flex justify-content-between align-items-center position-relative">
+       <div class="job-header d-flex justify-content-between align-items-center position-relative">
           <image-component :src="'/users/'+img"></image-component>
-          <nuxt-link v-if="full_url == undefined && admin != 'yes'"
-                     :to="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
-          <nuxt-link v-else-if="admin != 'yes'"
-                     :to="full_url" class="btn btn-outline-primary">{{ show_details }}</nuxt-link>
+          <a v-if="full_url == undefined && admin != 'yes'" target="_blank"
+                     :href="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</a>
+          <a v-else target="_blank"
+             :href="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</a>
 
         </div>
         <div class="job-body">
@@ -47,7 +45,6 @@
           <p class="fw-bold">{{ company_name }}</p>
           <p class="gray">{{ time }}</p>
         </div>
-      </a>
     </div>
 
   </section>

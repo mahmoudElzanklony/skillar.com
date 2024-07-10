@@ -437,7 +437,7 @@ export default {
       job_time:'عدد ساعات العمل',
       filter:'بحث',
       open:'فتح',
-      not_viewed_requests:'طلبات لم يتم رؤيتها',
+      not_viewed_requests:'طلبات معلقة',
       top_best_requests:'افضل المرشحين',
       accepted_requests:'طلبات تم الموافقة عليها',
       rejected_requests:'طلبات تم رفضها',

@@ -244,7 +244,7 @@ export default {
       job_time:'Job time',
       filter:'Search',
       open:'Open',
-      not_viewed_requests:'Not viewed requests',
+      not_viewed_requests:'Pending requests',
       top_best_requests:'Top best requests',
       accepted_requests:'Accepted requests',
       rejected_requests:'Rejected requests',
@@ -295,7 +295,7 @@ export default {
         'keep it short and to point',
       job_responsibilities:'Job responsibilities',
       job_responsibilities_info:'Provide job responsibilities the employee should have for this job',
-      short_description:'Short description',
+      short_description:'Jon description',
 
       job_skills:'Jobs skills',
       job_skills_info:'Provide job skills  that employee should have in this job',

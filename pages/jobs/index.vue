@@ -36,6 +36,8 @@ import animateData from "@/mixins/animateData";
 export default {
   name: "jobs",
   async asyncData({store}){
+    // empty store
+    await store.commit('jobs/EmptyData');
     await store.dispatch('jobs/categories/getDataAction')
     await store.dispatch('places/countries/getCountriesAction')
     await store.dispatch('jobs/getJobsAction','?page=1')

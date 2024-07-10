@@ -1,7 +1,7 @@
 <template>
   <section class="current_page profile published-jobs mt-4">
     <div class="container" v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
-      <form class="mb-4">
+      <form class="mb-4" v-if="false">
         <div class="row align-items-center">
           <div class="col-md-4">
             <div class="form-group input-icon flex-wrap">
@@ -32,37 +32,46 @@
           </div>
         </div>
       </form>
-      <div class="row">
-        <div class="col-lg-3 mb-2">
-          <job-component v-for="i in 6" class="mb-3"
-                         title="Full stack"
-                         company_name="Algorithma"
-                         time="30M ago"
-                         :full_url="'/profile/ahmed/published-jobs?id='+i"
-                         :skills="skills"
-                         :show_details="$parent.$attrs.words.profile.published_jobs.open"
-                         img="/images/companies/1.png"
-          ></job-component>
+      <div class="row infinite_scroll" action_path="jobs/getJobsAction" method="get">
+
+        <div class="col-lg-3">
+          <div class="mb-4 el show cursor-pointer" v-for="(i,index) in jobs_data" :key="index" @click="select_this_job(i)">
+            <job-component
+                           :title="i?.name"
+                           :company_name="i?.company?.username"
+                           :time="i?.published"
+                           :id="i?.id"
+                           :skills="i?.skills"
+                           :show_details="i?.status"
+                           :img="i?.company?.image?.name"
+            ></job-component>
+          </div>
         </div>
         <div class="col-lg-9 mb-2">
-          <div class="job_description">
+          <div class="job_description" v-if="specific_job">
             <div class="heading d-flex align-items-center justify-content-between mb-3">
-               <img src="/images/companies/1.png">
+               <image-component :src="'/users/'+specific_job?.company?.image?.name"></image-component>
                <div class="controls d-flex justify-content-between">
-                 <p class="gray mrl-1 position-relative top-3">{{ new Date().toLocaleString() }}</p>
-                 <nuxt-link class="mrl-half" to="/jobs/save?id=1">
+                 <p class="gray mrl-1 position-relative top-3">{{ specific_job?.published }}</p>
+                 <a class="mrl-half" :href="'/jobs/save?id='+specific_job?.id">
                    <span><i class="bi bi-pencil-square"></i></span>
-                 </nuxt-link>
+                 </a>
                  <nuxt-link to="" data-bs-toggle="modal" data-bs-target="#shareModal">
                    <span><i class="bi bi-share"></i></span>
                  </nuxt-link>
                </div>
             </div>
             <div class="content">
-              <h2 class="fw-bold">Fullstack engineer</h2>
-              <p class="fw-bold gray mb-1">{{ $parent.$attrs.words.profile.published_jobs.job_requirement }}</p>
-              <p class="mb-4 gray">Deploy, Configure, Manage and Troubleshoot large scale enterprise Microsoft Windows Environment running in Windows 2008, 2012, 2016, 2019. Install and configure and maintain server operating systems and repair server hardware Install and manage VMWare VSphere 5. x & 6. x Proactively maintain and develop all infrastructure technology to maintain a 24x7x365 uptime service Engineering of systems administration-related solutions for various project and operational needs Maintain best practices on managing systems and services across all environments Provide a point of escalation and support to the Service Desk Team. Participate in weekend maintenance activities, as required. Perform routine system administration duties. Monitor servers and troubleshoot problems.
-              </p>
+              <h2 class="fw-bold mb-4">{{ specific_job?.name }}</h2>
+              <p class="fw-bold gray mb-1">{{ $parent.$attrs.words.jobs.save_job.short_description }}</p>
+              <p class="mb-4 gray" v-html="specific_job?.description"></p>
+              <p class="fw-bold gray mb-1">{{ $parent.$attrs.words.jobs.save_job.skills }}</p>
+              <ul class="mb-4 gray">
+                <li class="gray mb-2" v-for="(skill,key) in specific_job?.skills" :key="key">
+                  <strong>{{ skill?.title }}</strong> :
+                  <span>{{ skill?.description }}</span>
+                </li>
+              </ul>
 
               <div class="dynamic_tabs">
                 <div>
@@ -163,6 +172,8 @@ import JobComponent from "../../../components/JobComponent";
 import $ from "jquery";
 import ShareComponent from "../../../components/ShareComponent";
 import Rate_employee from "../../../components/Modals/rate_employee";
+import animateData from "@/mixins/animateData";
+import {mapGetters} from "vuex";
 export default {
   name: "published_jobs",
 
@@ -171,7 +182,38 @@ export default {
     ShareComponent,
     JobComponent
   },
+  async asyncData({store , $auth}){
+    await store.dispatch('jobs/getJobsAction','?company_id='+$auth?.$state?.user?.id+'&page=1')
+  },
+  mixins:[animateData],
+  computed:{
+    ...mapGetters({
+      'jobs_data':'jobs/get_jobs',
+      'specific_job':'jobs/get_item',
+      'applicants':'jobs/applicants/get_data'
+    })
+  },
+  methods:{
+    resetCurrentPage(){
+      this.current_page = 2;
+    },
+
+    add_active(){
+      $(event.target).addClass('active').siblings().removeClass('active')
+    },
+    async select_this_job(job){
+      let data = new FormData();
+      data.append('job_id',job?.id)
+      await this.$store.dispatch('jobs/applicants/getDataAction',data)
+      await this.$store.commit('jobs/InitializeItem',job)
+    },
+  },
   mounted() {
+    document.querySelectorAll('.infinite_scroll .el').forEach(tem => {
+      this.observer.observe(tem)
+    })
+
+
     $('#__nuxt').on('click','.dynamic_tabs ul li',function (){
       if(event.target.tagName.toLocaleLowerCase() == 'p'){
         $(event.target).parent().parent().addClass('active').siblings().removeClass('active')
@@ -182,17 +224,11 @@ export default {
       }
     });
   },
-  methods:{
-    add_active(){
-      $(event.target).addClass('active').siblings().removeClass('active')
-    }
-  },
   data(){
     return{
-      skills:['php','laravel','oop','design pattern','mysql'],
+      last_item_observed_selector :'.infinite_scroll > div:first-of-type > div:last-of-type',
     }
   },
-  mixins:[WordsLang],
 }
 </script>
 
