@@ -12,7 +12,7 @@
           <form @submit.prevent="save_data">
             <div :class="'mb-3 checkbox-item flex-wrap box_'+(index)+(control === true ? ' d-flex justify-content-between':'')"
                  v-for="(i,index) in cvs_data" :key="index">
-              <input type="radio" name="cv" :value="i?.id" v-if="!control">
+              <input type="radio" name="user_resume_id" :value="i?.id" v-if="!control">
               <span class="mrl-half">{{ i?.name }}</span>
               <p class="mb-0" v-if="control">
                 <a :href="computedSrc+'/pdfs/'+i?.file" target="_blank" class="mx-2"><i class="bi bi-eye"></i></a>
@@ -69,12 +69,18 @@ export default {
   methods:{
     ...mapActions({
       'save_resume':'profile/resumes/saveDataAction',
-      'get_resumes_action':'profile/resumes/getDataAction'
+      'get_resumes_action':'profile/resumes/getDataAction',
+      'apply_job':'profile/applications/applyJobAction'
     }),
     save_data(){
       let data = new FormData(event.target)
       if(this.control){
          this.save_resume(data);
+      }else{
+        if(this.$route?.params?.id){
+          data.append('job_id',this.$route?.params.id);
+          this.apply_job(data);
+        }
       }
     }
   },

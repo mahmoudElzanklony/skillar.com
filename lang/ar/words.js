@@ -424,6 +424,8 @@ export default {
       main_info:'البيانات الرئيسية',
       popular_jobs:'الوظائف المناسبة لك',
       friend_feedbacks:'تقيمات اصدقائي',
+      feedback:'انطباع',
+      save_feedback:'حفظ بيانات الانطباع عن صديقي',
       accept_apperance_feedback:'الموافقة علي ظهور التقييم في ملفي الشخصي',
       write_your_feedback_about_your_friend:'اخبر صديقك عن انطباعك عنه في العمل',
       save:'حفظ',
@@ -445,6 +447,10 @@ export default {
       rate_employee:'تقييم الموظف',
       show_resume:'عرض السيرة الذاتية',
       delete_request:'مسح الطلب',
+      share_link:'مشاركة الرابط',
+      accepted_request:'الموافقه عليه وتعيينه للوظيفة',
+      top_best_request:'من افضل الطلبات حتي الان',
+      rejected_request:'رفض الطلب',
     }
   },
   jobs:{
@@ -519,6 +525,7 @@ export default {
       no_people_applied:'عدد المتقدمين',
       matching_job_profile:'مطابقة الوظيفه لملفك الشخصي',
       similar_jobs:'وظائف مشابهه',
+      your_applied_this_job:'لقد قمت بالتقديم علي هذه الوظيفة من قبل',
     }
   },
   orders_data:{

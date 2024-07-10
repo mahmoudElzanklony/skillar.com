@@ -1,15 +1,15 @@
 <template>
   <section class="current_page profile profile-feedbacks mt-4">
-    <div class="container">
+    <div class="container" v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
       <div class="row">
         <div class="col-lg-9 mb-2">
           <div class="inner_profile pb-3">
-            <profile-personal-info-component :edit_info="words.edit_info"></profile-personal-info-component>
+            <profile-personal-info-component :edit_info="$parent.$attrs.words.profile.feedbacks.edit_info"></profile-personal-info-component>
 
             <div class="variety_data">
-              <div class="one_variety" :name="words.friend_feedbacks">
+              <div class="one_variety" :name="$parent.$attrs.words.profile.feedbacks.friend_feedbacks">
                 <div class="heading d-flex align-items-center justify-content-between">
-                  <span class="normal fw-bold">{{ words.friend_feedbacks }}</span>
+                  <span class="normal fw-bold">{{ $parent.$attrs.words.profile.feedbacks.friend_feedbacks }}</span>
                   <p class="mb-0">
                     <span class="blue mrl-half" >{{ feedbacks.length }}</span>
                     <span><i class="bi bi-caret-up-fill"></i></span>
@@ -29,15 +29,15 @@
                               <ul>
                                 <li
                                   @click="update_status(i?.id)"
-                                  v-tooltip="words.accept_apperance_feedback"
+                                  v-tooltip="$parent.$attrs.words.profile.feedbacks.accept_apperance_feedback"
                                 v-if="i?.status === 'pending'">
                                   <span class="gray"><i class="bi bi-check-lg"></i></span>
-                                  <span>{{ words.accept }}</span>
+                                  <span>{{ $parent.$attrs.words.profile.feedbacks.accept }}</span>
                                 </li>
                                 <li>
                                   <span class="red"
                                         @click="delete_item('employee_feedbacks',i?.id,'employee_feedbacks','box_'+index)"><i class="bi bi-trash"></i></span>
-                                  <span>{{ words.delete }}</span>
+                                  <span>{{ $parent.$parent.$attrs.words.profile.feedbacks.delete }}</span>
                                 </li>
                               </ul>
                             </li>
@@ -52,7 +52,7 @@
                 <button class="btn btn-primary m-2"
                         data-bs-toggle="modal"
                         data-bs-target="#save_feedback"
-                        v-if="get_profile_id != $auth?.state?.user?.id">{{ words.write_feedback }}</button>
+                        v-if="get_profile_id != $auth?.state?.user?.id">{{ $parent.$attrs.words.profile.feedbacks.write_feedback }}</button>
               </div>
             </div>
 
@@ -60,14 +60,14 @@
         </div>
         <div class="col-lg-3 mb-2">
           <div class="nearest_jobs">
-            <h2 class="fw-bold mb-3">{{ words.popular_jobs }}</h2>
+            <h2 class="fw-bold mb-3">{{ $parent.$attrs.words.profile.feedbacks.popular_jobs }}</h2>
             <job-component v-for="i in 6" class="mb-3"
                            title="Full stack"
                            company_name="Algorithma"
                            time="30M ago"
                            id="1"
                            :skills="skills"
-                           :show_details="words.open"
+                           :show_details="$parent.$attrs.words.profile.feedbacks.open"
                            img="/images/companies/1.png"
             ></job-component>
           </div>

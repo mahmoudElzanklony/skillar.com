@@ -230,6 +230,8 @@ export default {
       nearest_jobs:'Nearest jobs',
       popular_jobs:'Popular jobs',
       friend_feedbacks:'Friends feedbacks',
+      save_feedback:'Save feedback info about my friend',
+      feedback:'Feedback',
       accept_apperance_feedback:'Accept feedback to appear in my profile',
       write_your_feedback_about_your_friend:'Tell your friend about your feedback',
       save:'Save',
@@ -252,7 +254,10 @@ export default {
       rate_employee:'Rate employee',
       show_resume:'Show resume',
       delete_request:'Delete request',
-
+      share_link:'Share link',
+      accepted_request:'Approval and hiring for the job',
+      top_best_request:'Top best request until now',
+      rejected_request:'Rejected request',
     }
   },
   jobs:{
@@ -333,6 +338,7 @@ export default {
       no_people_applied:'Participants number',
       matching_job_profile:'Matching job with your profile',
       similar_jobs:'Similar jobs',
+      your_applied_this_job:'You applied for this job before',
     }
   },
   admin:{

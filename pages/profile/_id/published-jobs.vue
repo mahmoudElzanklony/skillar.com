@@ -1,14 +1,14 @@
 <template>
   <section class="current_page profile published-jobs mt-4">
-    <div class="container">
+    <div class="container" v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
       <form class="mb-4">
         <div class="row align-items-center">
           <div class="col-md-4">
             <div class="form-group input-icon flex-wrap">
-              <label class="w-100">{{ words.job_time }}</label>
+              <label class="w-100">{{ $parent.$attrs.words.profile.published_jobs.job_time }}</label>
               <span><i class="bi bi-arrow-down-short"></i></span>
               <select class="form-control" name="country_id">
-                <option>{{ words.select_best_choice }}</option>
+                <option>{{ $parent.$attrs.words.profile.published_jobs.select_best_choice }}</option>
                 <option value="1" v-for="i in 5">Programming</option>
                 <option value="1" v-for="i in 5">Teaching</option>
               </select>
@@ -16,10 +16,10 @@
           </div>
           <div class="col-md-4">
             <div class="form-group input-icon flex-wrap">
-              <label class="w-100">{{ words.job_type }}</label>
+              <label class="w-100">{{ $parent.$attrs.words.profile.published_jobs.job_type }}</label>
               <span><i class="bi bi-arrow-down-short"></i></span>
               <select class="form-control" name="country_id">
-                <option>{{ words.select_best_choice }}</option>
+                <option>{{ $parent.$attrs.words.profile.published_jobs.select_best_choice }}</option>
                 <option value="1" v-for="i in 5">Programming</option>
                 <option value="1" v-for="i in 5">Teaching</option>
               </select>
@@ -27,7 +27,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group input-icon flex-wrap">
-              <input type="submit" class="btn btn-primary w-100 position-relative top-13" :value="words.filter">
+              <input type="submit" class="btn btn-primary w-100 position-relative top-13" :value="$parent.$attrs.words.profile.published_jobs.filter">
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
                          time="30M ago"
                          :full_url="'/profile/ahmed/published-jobs?id='+i"
                          :skills="skills"
-                         :show_details="words.open"
+                         :show_details="$parent.$attrs.words.profile.published_jobs.open"
                          img="/images/companies/1.png"
           ></job-component>
         </div>
@@ -60,7 +60,7 @@
             </div>
             <div class="content">
               <h2 class="fw-bold">Fullstack engineer</h2>
-              <p class="fw-bold gray mb-1">{{ words.job_requirement }}</p>
+              <p class="fw-bold gray mb-1">{{ $parent.$attrs.words.profile.published_jobs.job_requirement }}</p>
               <p class="mb-4 gray">Deploy, Configure, Manage and Troubleshoot large scale enterprise Microsoft Windows Environment running in Windows 2008, 2012, 2016, 2019. Install and configure and maintain server operating systems and repair server hardware Install and manage VMWare VSphere 5. x & 6. x Proactively maintain and develop all infrastructure technology to maintain a 24x7x365 uptime service Engineering of systems administration-related solutions for various project and operational needs Maintain best practices on managing systems and services across all environments Provide a point of escalation and support to the Service Desk Team. Participate in weekend maintenance activities, as required. Perform routine system administration duties. Monitor servers and troubleshoot problems.
               </p>
 
@@ -71,28 +71,28 @@
                     <span class="mrl-half mrl-reverse-15"><i class="bi bi-card-list"></i></span>
                     <div>
                       <p class="fw-bold mb-0">50</p>
-                      <p class="mb-0">{{ words.not_viewed_requests }}</p>
+                      <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.not_viewed_requests }}</p>
                     </div>
                   </li>
                   <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center" name="top_best_requests">
                     <span class="mrl-half"><i class="bi bi-arrow-up"></i></span>
                     <div>
                       <p class="fw-bold mb-0">50</p>
-                      <p class="mb-0">{{ words.top_best_requests }}</p>
+                      <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.top_best_requests }}</p>
                     </div>
                   </li>
                   <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center" name="accepted_requests">
                     <span class="mrl-half"><i class="bi bi-check-lg"></i></span>
                     <div>
                       <p class="fw-bold mb-0">50</p>
-                      <p class="mb-0">{{ words.accepted_requests }}</p>
+                      <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.accepted_requests }}</p>
                     </div>
                   </li>
                   <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center" name="rejected_requests">
                     <span class="mrl-half"><i class="bi bi-x-square"></i></span>
                     <div>
                       <p class="fw-bold mb-0">50</p>
-                      <p class="mb-0">{{ words.rejected_requests }}</p>
+                      <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.rejected_requests }}</p>
                     </div>
                   </li>
                 </ul>
@@ -115,11 +115,11 @@
                                     <li data-bs-toggle="modal"
                                         data-bs-target="#rate_employee">
                                       <span class="gray"><i class="bi bi-person-vcard"></i></span>
-                                      <span>{{ words.rate_employee }}</span>
+                                      <span>{{ $parent.$attrs.words.profile.published_jobs.rate_employee }}</span>
                                     </li>
                                     <li>
                                       <span class="red"><i class="bi bi-trash"></i></span>
-                                      <span>{{ words.delete_request }}</span>
+                                      <span>{{ $parent.$attrs.words.profile.published_jobs.delete_request }}</span>
                                     </li>
                                   </ul>
                                 </li>
@@ -128,11 +128,11 @@
                             <p class="mb-0">
                               <span class="fw-bold">Full stack php developer</span>
                               <span class="gray d-block small">
-                                {{ words.applied_at_date }} {{ new Date().toLocaleString() }}
+                                {{ $parent.$attrs.words.profile.published_jobs.applied_at_date }} {{ new Date().toLocaleString() }}
                               </span>
-                              <nuxt-link to="#">{{ words.show_resume }}</nuxt-link>
+                              <nuxt-link to="#">{{ $parent.$attrs.words.profile.published_jobs.show_resume }}</nuxt-link>
                             </p>
-                            <p class="mb-0 gray small">{{ words.profile_match_skills }}</p>
+                            <p class="mb-0 gray small">{{ $parent.$attrs.words.profile.published_jobs.profile_match_skills }}</p>
                             <div class="progress">
                               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                             </div>

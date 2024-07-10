@@ -5,24 +5,24 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            {{ words.save_feedback }}
+            {{ $parent.$parent.$attrs.words.profile.feedbacks.save_feedback }}
           </h5>
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form @submit.prevent="save_feedback">
             <div class="form-group position-relative input-icon flex-wrap mb-2">
-              <label>{{ words.feedback }}</label>
+              <label>{{ $parent.$parent.$attrs.words.profile.feedbacks.feedback }}</label>
               <span><i class="bi bi-info-circle"></i></span>
               <textarea class="form-control" name="info" required></textarea>
             </div>
             <div class="form-group position-relative input-icon flex-wrap mb-2">
-              <input class="btn btn-primary" type="submit" :value="words.save">
+              <input class="btn btn-primary" type="submit" :value="$parent.$parent.$attrs.words.general.save">
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ words.close }}</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $parent.$parent.$attrs.words.general.close }}</button>
         </div>
       </div>
     </div>

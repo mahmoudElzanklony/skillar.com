@@ -1,136 +1,150 @@
 <template>
   <section class="job_details current_page">
-      <div v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
-        <div class="container" >
-          <div class="row">
-            <div class="col-lg-8 col-md-6 mb-3">
-              <div class="description box-shadow">
-                <div class="image">
-                  <image-component :src="'/users/'+job_info?.company?.image?.name"></image-component>
-                </div>
+    <div v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
+      <div class="container" >
+        <div class="row">
+          <div class="col-lg-8 col-md-6 mb-3">
+            <div class="description box-shadow">
+              <div class="image">
+                <image-component :src="'/users/'+job_info?.company?.image?.name"></image-component>
+              </div>
+              <div class="d-flex align-items-center justify-content-between">
                 <p class="fw-bold">{{ job_info?.name }}</p>
-                <p>
-                  <span class="gray" v-html="job_info?.description"></span>
-                </p>
+                <button class="btn btn-primary"
+                        v-if="job_info?.status === 'open' && $auth.$state.user.role.name !== 'company' && application_info === null"
+                        data-bs-toggle="modal"
+                        @click="get_my_cvs_action"
+                        data-bs-target="#apply_for_job">{{ $parent?.$attrs?.words?.jobs?.details.apply_job }}</button>
+                <span v-if="job_info?.status !== 'open'" :class="'badge bg-'+(job_info?.status === 'hired' ? 'success':'dark')">{{ job_info?.status }}</span>
 
-                <p v-if="false">
-                  <span class="gray d-none toggle-show" v-html="job_info?.description"></span>
-                </p>
-                <p class=" toggle_p_show" v-if="false">
+              </div>
+              <p>
+                <span class="gray" v-html="job_info.description"></span>
+              </p>
+
+              <p v-if="false">
+                <span class="gray d-none toggle-show" v-html="job_info.description"></span>
+              </p>
+              <p class=" toggle_p_show" v-if="false">
                     <span class="blue cursor-pointer small"
                           :show="$parent.$attrs.words.profile.main.show_more"
                           :hide="$parent.$attrs.words.profile.main.show_less">{{ $parent.$attrs.words.profile.main.show_more }}</span>
-                </p>
-                <div class="mb-3 d-flex align-items-center justify-content-between">
+              </p>
 
-                  <button class="btn btn-primary"
-                          data-bs-toggle="modal"
-                          @click="get_my_cvs_action"
-                          data-bs-target="#apply_for_job">{{ $parent?.$attrs?.words?.jobs?.details.apply_job }}</button>
-                </div>
-                <div class="another_info">
-                  <ul>
-                    <li class="mb-2">
-                      <span class="gray mrl-half"><i class="bi bi-info"></i></span>
-                      <span>{{ job_info?.company?.username }}</span>
-                    </li>
-                    <li class="mb-2">
-                      <span class="gray mrl-half"><i class="bi bi-people"></i></span>
-                      <span>{{ $parent?.$attrs?.words?.jobs?.details.employees_number_at_company }}</span>
-                      <span> {{ job_info.applicants.length }} </span><span>{{ $parent?.$attrs?.words?.jobs?.details.employee }}</span>
-                    </li>
-                    <li class="mb-2">
-                      <span class="gray mrl-half"><i class="bi bi-briefcase"></i></span>
-                      <span>{{ $parent?.$attrs?.words?.jobs?.details.job_way }}</span>
-                      <span>{{ (job_info.work_type) }}</span>
-                    </li>
-                    <li class="mb-2">
-                      <span class="gray mrl-half"><i class="bi bi-geo-alt"></i></span>
-                      <span>{{ job_info.city.name }} , {{ job_info.city.country.name }}</span>
-                    </li>
-                  </ul>
-                </div>
-                <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.save_job.job_responsibilities }}</p>
-                <p class="gray end-border-bottom" v-html="job_info?.responsibilities">
+              <div class="another_info">
+                <ul>
+                  <li class="mb-2">
+                    <span class="gray mrl-half"><i class="bi bi-info"></i></span>
+                    <span>{{ job_info?.company?.username }}</span>
+                  </li>
+                  <li class="mb-2">
+                    <span class="gray mrl-half"><i class="bi bi-people"></i></span>
+                    <span>{{ $parent?.$attrs?.words?.jobs?.details.employees_number_at_company }}</span>
+                    <span> {{ job_info.applicants.length }} </span><span>{{ $parent?.$attrs?.words?.jobs?.details.employee }}</span>
+                  </li>
+                  <li class="mb-2">
+                    <span class="gray mrl-half"><i class="bi bi-briefcase"></i></span>
+                    <span>{{ $parent?.$attrs?.words?.jobs?.details.job_way }}</span>
+                    <span>{{ (job_info.work_type) }}</span>
+                  </li>
+                  <li class="mb-2">
+                    <span class="gray mrl-half"><i class="bi bi-geo-alt"></i></span>
+                    <span>{{ job_info.city.name }} , {{ job_info.city.country.name }}</span>
+                  </li>
+                  <li class="mb-2">
+                    <span class="gray mrl-half"><i class="bi bi-calendar"></i></span>
+                    <span>{{ job_info.published }}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="job_application">
+                <p v-if="application_info" :class="'d-flex justify-content-between alert alert-'+(application_info?.status === 'pending' ? 'dark':application_info?.status === 'rejected' ? 'danger':'success')">
+                  <span>{{ $parent?.$attrs?.words?.jobs?.details.your_applied_this_job }}</span>
+                  <span :class="'badge  bg-'+(application_info?.status === 'pending' ? 'dark':application_info?.status === 'rejected' ? 'danger':'success')">{{ application_info?.status?.replace('_',' ') }}</span>
                 </p>
-                <div class="skills">
-                  <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.required_skills }}</p>
-                  <ul class="d-flex align-items-center flex-wrap">
-                    <li v-for="(i,index) in job_info?.skills" :key="index" class="mrl-half mb-2"><span>{{ i?.title }}</span></li>
-                  </ul>
+              </div>
+              <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.save_job.job_responsibilities }}</p>
+              <p class="gray end-border-bottom" v-html="job_info.responsibilities"></p>
+              <div class="skills">
+                <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.required_skills }}</p>
+                <ul class="d-flex align-items-center flex-wrap">
+                  <li v-for="(i,index) in job_info?.skills" :key="index" class="mrl-half mb-2"><span>{{ i?.title }}</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="statistics box-shadow mb-3">
+              <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
+                <p class="mb-1">
+                  <span class="top-3 position-relative gray"><i class="bi bi-eye"></i></span>
+                  <span>{{ $parent?.$attrs?.words?.jobs?.details.no_seen }}</span>
+                </p>
+                <span class="fw-bold">{{ job_info?.views }}</span>
+                <div class="percentage w-100 progress">
+                  <p :style="(job_info?.views <= 1000 ? 'width: '+(job_info.views * 10 / 100)+'%':'width:100%')" class="progress-bar progress-bar-animated progress-bar-striped"></p>
+                </div>
+              </div>
+              <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
+                <p class="mb-1">
+                  <span class="top-3 position-relative gray"><i class="bi bi-people"></i></span>
+                  <span>{{ $parent?.$attrs?.words?.jobs?.details.no_people_applied }}</span>
+                </p>
+                <span class="fw-bold">{{ job_info?.applicants.length }}</span>
+                <div class="percentage w-100 progress">
+                  <p :style="(job_info?.applicants.length <= 1000 ? 'width: '+(job_info.applicants.length * 10 / 100)+'%':'width:100%')" class="progress-bar progress-bar-animated progress-bar-striped"></p>
+                </div>
+              </div>
+              <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
+                <p class="mb-1">
+                  <span class="top-3 position-relative gray"><i class="bi bi-person-check"></i></span>
+                  <span>{{ $parent?.$attrs?.words?.jobs?.details.matching_job_profile }}</span>
+                </p>
+                <span class="fw-bold">90%</span>
+                <div class="percentage w-100 progress">
+                  <p style="width: 90%" class="progress-bar progress-bar-animated progress-bar-striped"></p>
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="statistics box-shadow mb-3">
-                <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
-                  <p class="mb-1">
-                    <span class="top-3 position-relative gray"><i class="bi bi-eye"></i></span>
-                    <span>{{ $parent?.$attrs?.words?.jobs?.details.no_seen }}</span>
-                  </p>
-                  <span class="fw-bold">{{ job_info?.views }}</span>
-                  <div class="percentage w-100 progress">
-                    <p :style="(job_info?.views <= 1000 ? 'width: '+(job_info.views * 10 / 100)+'%':'width:100%')" class="progress-bar progress-bar-animated progress-bar-striped"></p>
-                  </div>
-                </div>
-                <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
-                  <p class="mb-1">
-                    <span class="top-3 position-relative gray"><i class="bi bi-people"></i></span>
-                    <span>{{ $parent?.$attrs?.words?.jobs?.details.no_people_applied }}</span>
-                  </p>
-                  <span class="fw-bold">15</span>
-                  <div class="percentage w-100 progress">
-                    <p :style="(job_info?.applicants.length <= 1000 ? 'width: '+(job_info.applicants.length * 10 / 100)+'%':'width:100%')" class="progress-bar progress-bar-animated progress-bar-striped"></p>
-                  </div>
-                </div>
-                <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
-                  <p class="mb-1">
-                    <span class="top-3 position-relative gray"><i class="bi bi-person-check"></i></span>
-                    <span>{{ $parent?.$attrs?.words?.jobs?.details.matching_job_profile }}</span>
-                  </p>
-                  <span class="fw-bold">90%</span>
-                  <div class="percentage w-100 progress">
-                    <p style="width: 90%" class="progress-bar progress-bar-animated progress-bar-striped"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="similar_jobs box-shadow">
-                <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.similar_jobs }}</p>
-                <div class="mb-3" v-for="i in 5" :key="i">
-                  <job-component
-                    title="Full stack"
-                    company_name="Algorithma"
-                    time="30M ago"
-                    id="1"
-                    :skills="skills"
-                    :show_details="$parent?.$attrs?.words?.jobs?.details.open"
-                    img="/images/companies/1.png"
-                  ></job-component>
-                </div>
+            <div class="similar_jobs box-shadow">
+              <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.similar_jobs }}</p>
+              <div class="mb-3" v-for="(i,index) in jobs" :key="index">
+                <job-component
+                  :title="i?.name"
+                  :company_name="i?.company?.username"
+                  :time="i?.published"
+                  :id="i?.id"
+                  :skills="i?.skills"
+                  :show_details="i?.status"
+                  :img="i?.company?.image?.name"
+                ></job-component>
               </div>
             </div>
           </div>
         </div>
-        <apply_for_job></apply_for_job>
       </div>
+      <apply_for_job></apply_for_job>
+    </div>
   </section>
 </template>
 
 <script>
 import apply_for_job from "@/components/Modals/candidate/apply_for_job.vue";
 import {mapActions , mapGetters} from "vuex";
-
+import filterJobs from "@/mixins/FilterJobs";
 export default {
   name: "job_id",
   async asyncData({store , route}){
     console.log(route)
     await store.dispatch('jobs/getJobInfoAction',route.params.id);
+    let filters = '?name='+store.getters['jobs/get_item'].name+'&nid='+store.getters['jobs/get_item'].id+'&page=1';
+    await store.dispatch('jobs/getJobsAction',filters);
+    await store.dispatch('profile/applications/getSpecificOneAction',store.getters['jobs/get_item'].id);
   },
+  mixins:[filterJobs],
   data(){
     return {
       file_name:'job_details',
-      skills:['php','laravel','oop','design pattern','mysql']
-
     }
   },
   validate({params}){
@@ -138,7 +152,9 @@ export default {
   },
   computed:{
     ...mapGetters({
-      'job_info':'jobs/get_item'
+      'job_info':'jobs/get_item',
+      'jobs':'jobs/get_jobs',
+      'application_info':'profile/applications/get_item'
     })
   },
   methods:{
@@ -170,9 +186,9 @@ export default {
       margin-bottom: 10px;
     }
     >p:last-of-type{
-        span,button{
-          font-size: $button;
-        }
+      span,button{
+        font-size: $button;
+      }
     }
     .another_info{
       ul{
