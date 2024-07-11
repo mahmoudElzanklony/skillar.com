@@ -19,11 +19,11 @@
                         data-bs-target="#update_dynamic_box"
                        >
                       <span class="gray"><i class="bi bi-pencil-square"></i></span>
-                      <span class="gray">{{ $parent.words.edit }}</span>
+                      <span class="gray">{{ $parent.$parent.$attrs.words.general.edit }}</span>
                     </li>
                     <li @click="delete_item('employee_profile_sections_data',item.id,'employee_profile_sections_data','.box_'+index)">
                       <span class="red"><i class="bi bi-trash"></i></span>
-                      <span class="gray">{{ $parent.words.delete }}</span>
+                      <span class="gray">{{ $parent.$parent.$attrs.words.general.delete }}</span>
                     </li>
                   </ul>
                 </li>
@@ -40,8 +40,8 @@
             </p>
             <p class="mb-0 toggle_p_show">
               <span class="blue cursor-pointer small"
-                    :show="$parent.words.show_more"
-                    :hide="$parent.words.show_less">{{ $parent.words.show_more }}</span>
+                    :show="$parent.$parent.$attrs.words.general.show_more"
+                    :hide="$parent.$parent.$attrs.words.general.show_less">{{ $parent.$parent.$attrs.words.general.show_more }}</span>
             </p>
           </div>
         </div>
@@ -114,10 +114,10 @@ export default {
       }
     },
     computed:{
-      ...mapGetters({
-        'get_data_sections':'profile/employee/get_data_sections'
-      }),
-    },
+        ...mapGetters({
+          'get_data_sections':'profile/employee/get_data_sections'
+        }),
+      },
     methods:{
       ...mapMutations({
         'get_selected_box_info':'profile/employee/InitializeSelectedSectionBoxInfo'

@@ -248,7 +248,7 @@ export default {
       top_best_requests:'Top best requests',
       accepted_requests:'Accepted requests',
       rejected_requests:'Rejected requests',
-      profile_match_skills:'Profile match skills',
+      profile_match_skills:'Profile skills',
       job_requirement:'Job requirements',
       applied_at_date:'Applied at date ',
       rate_employee:'Rate employee',
