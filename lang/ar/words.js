@@ -700,6 +700,8 @@ export default {
     open:'فتح',
     view:'عرض',
     upload_file_here:'ارفع الملف هنا',
+    show_more:'عرض المزيد',
+    show_less:'عرض اقل',
 
   },
 }

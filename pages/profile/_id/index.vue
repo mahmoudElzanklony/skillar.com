@@ -8,10 +8,11 @@
                 <div class="quick_statistics mb-3 p-3">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 mb-2">
-                      <nuxt-link to="/profile/ahmed/applied-jobs">
+                      <nuxt-link :to="$auth?.$state?.user?.role?.name === 'company' ? '/profile/'+current_id+'/published-jobs':'/profile/'+current_id+'/applied-jobs'">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
-                            <p class="fw-bold">{{ $parent.$attrs.words.profile.main.number_of_applied_jobs }}</p>
+                            <p class="fw-bold" v-if="$auth?.$state?.user?.role?.name !== 'company'">{{ $parent.$attrs.words.profile.main.number_of_applied_jobs }}</p>
+                            <p class="fw-bold" v-else>{{ $parent.$attrs.words.footer.jobs }}</p>
                             <p class="fw-bold">{{ statistics_data?.jobs }}</p>
                           </div>
                           <img src="/images/icons/Document.png">
@@ -29,7 +30,7 @@
                         </div>
                       </nuxt-link>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="col-lg-4 col-md-6 mb-2" v-if="authorizeControl">
                       <nuxt-link to="/chat">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
@@ -41,7 +42,7 @@
                       </nuxt-link>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-2">
-                      <nuxt-link to="/profile/ahmed/feedbacks">
+                      <nuxt-link :to="'/profile/'+current_id+'/feedbacks'">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold">{{ $parent.$attrs.words.profile.main.number_of_friends_feedback }}</p>
@@ -51,7 +52,7 @@
                         </div>
                       </nuxt-link>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="col-lg-4 col-md-6 mb-2" v-if="authorizeControl">
                       <nuxt-link to="/notifications">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
@@ -66,7 +67,7 @@
                 </div>
                 <div class="video mb-3">
                   <div class="d-flex align-items-center justify-content-center">
-                    <ul class="dots-action cursor-pointer d-inline-block">
+                    <ul class="dots-action cursor-pointer d-inline-block" v-if="authorizeControl">
                       <li class="dots">
                         <i class="bi white bi-three-dots-vertical gray"></i>
                         <ul>
@@ -90,7 +91,7 @@
                   <div class="main-heading d-flex align-items-center justify-content-between mb-2">
                     <span class="fw-bold normal">{{ $parent.$attrs.words.profile.main.quick_description }}</span>
                     <span data-bs-toggle="modal"
-                          @click="get_resumes_action"
+                          @click="get_resumes_action(current_id)"
                           class="blue cursor-pointer"
                           data-bs-target="#apply_for_job">
                       {{ $parent.$attrs.words.profile.published_jobs.show_resume }}
@@ -98,39 +99,38 @@
                   </div>
                   <p>{{ $auth?.user?.bio }}</p>
                 </div>
-
-                <div class="variety_data" v-if="sections_names.length > 0">
+                <div class="variety_data" v-if="sections_names.length > 0 && $auth?.$state?.user.role?.name == 'admin'">
                   <div class="one_variety"
                        v-for="(i,index) in sections_names" :key="index"
                        :name="i.name">
                     <div class="heading d-flex align-items-center justify-content-between">
                       <span class="normal fw-bold">{{ i?.profile_name }}</span>
                       <p class="mb-0">
-                        <span class="blue mrl-half" data-bs-toggle="modal"
+                        <span class="blue mrl-half" data-bs-toggle="modal" v-if="authorizeControl"
                               @click="get_section_properties(i['id'])"
                               data-bs-target="#update_dynamic_box"><i class="bi bi-plus"></i></span>
-                        <span @click="get_section_data(i['id'])"><i class="bi bi-caret-down-fill"></i></span>
+                        <span @click="get_section_data([i['id'],current_id])"><i class="bi bi-caret-down-fill"></i></span>
                       </p>
                     </div>
                     <ShowSectionsData :item="i"></ShowSectionsData>
                   </div>
 
                 </div>
-                <loader v-else :color="'#0a58ca'" style="text-align: center" size="30px"></loader>
+                <loader v-else-if="$auth?.$state?.user.role?.name !== 'company'" :color="'#0a58ca'" style="text-align: center" size="30px"></loader>
 
               </div>
             </div>
             <div class="col-lg-3 mb-2">
                <div class="nearest_jobs">
                  <h2 class="fw-bold mb-3">{{ $parent.$attrs.words.profile.main.popular_jobs }}</h2>
-                 <job-component v-for="i in 6" class="mb-3"
-                                title="Full stack"
-                                company_name="Algorithma"
-                                time="30M ago"
-                                id="1"
-                                :skills="skills"
-                                :show_details="$parent.$attrs.words.profile.main.open"
-                                img="/images/companies/1.png"
+                 <job-component v-for="(i,index) in jobs_data" :key="index"
+                   :title="i?.name"
+                   :company_name="i?.company?.username"
+                   :time="i?.published"
+                   :id="i?.id"
+                   :skills="i?.skills"
+                   :show_details="i?.status"
+                   :img="i?.company?.image?.name"
                  ></job-component>
                </div>
             </div>
@@ -165,7 +165,7 @@ import {mapActions , mapGetters} from "vuex";
 import ShowSectionsData from "../../../components/profile/ShowSectionsData.vue";
 import Update_dynamic_box from "../../../components/Modals/candidate/update_dynamic_box.vue";
 import Apply_for_job from "~/components/Modals/candidate/apply_for_job.vue";
-
+import AuthorizeControlProfile from "@/mixins/AuthorizeControlProfile";
 export default {
   name: "candidate",
   components: {
@@ -173,12 +173,9 @@ export default {
     Update_dynamic_box,
     ShowSectionsData,
     ProfilePersonalInfoComponent,
-    Display_video, Update_personal_video, Update_personal_data, JobComponent},
-  data(){
-    return{
-      skills:['php','laravel','oop','design pattern','mysql']
-    }
+    Display_video, Update_personal_video, Update_personal_data, JobComponent
   },
+
   methods:{
     ...mapActions({
       'sectionsNamesAction':'sections/sectionsNamesAction',
@@ -186,6 +183,7 @@ export default {
       'get_section_data':'profile/employee/getDataSection',
       'get_profile_statistics_action':'profile/statistics/getStatisticsProfile',
       'get_resumes_action':'profile/resumes/getDataAction',
+      'visit_profile':'profile/visits/visitProfileAction'
     }),
 
   },
@@ -194,13 +192,23 @@ export default {
       'sections_names':'sections/get_sections_names',
       'data_sections':'profile/employee/get_data_sections',
       'statistics_data':'profile/statistics/get_data',
+      'jobs_data':'jobs/get_jobs'
     })
   },
   mounted() {
-    this.sectionsNamesAction();
-    this.get_profile_statistics_action()
+    // you visit external profile
+    if(!this.authorizeControl){
+      this.visit_profile(this.current_id);
+    }
+    if(this.$auth.$state.user.role.name !== 'company'){
+      this.sectionsNamesAction();
+      this.get_profile_statistics_action(this.current_id)
+      this.$store.dispatch('jobs/getJobsAction','?page=1&empty=true');
+    }else{
+      this.$store.dispatch('jobs/getJobsAction','?company_id='+this.$auth.$state.user.id+'&page=1&empty=true')
+    }
   },
-  mixins:[WordsLang,text_editor],
+  mixins:[WordsLang,text_editor,AuthorizeControlProfile],
 }
 </script>
 

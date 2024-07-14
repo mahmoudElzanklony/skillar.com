@@ -503,5 +503,7 @@ export default {
     open:'Open',
     view:'View',
     upload_file_here:'Upload your file here',
+    show_more:'Show more',
+    show_less:'Show less',
   },
 }

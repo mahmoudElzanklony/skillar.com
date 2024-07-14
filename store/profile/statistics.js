@@ -20,8 +20,8 @@ export const mutations = {
 
 export const actions = {
 
-  async getStatisticsProfile({commit}){
-    await this.$axios.get('/profile/statistics')
+  async getStatisticsProfile({commit},payload){
+    await this.$axios.get('/profile/statistics?user_id='+payload)
       .then((e)=>{
          commit('InitializeData',e.data.data)
       })

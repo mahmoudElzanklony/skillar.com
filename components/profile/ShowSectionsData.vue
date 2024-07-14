@@ -8,8 +8,8 @@
             <i :class="'bi '+(get_specific_class(item?.en_name?.toLowerCase()))"></i>
           </span>
           <div class="max-width">
-            <div class="d-flex align-items-center mb-0 max-width flex-row-reverse">
-              <ul class="dots-action cursor-pointer d-inline-block">
+            <div class="d-flex align-items-center mb-0 max-width flex-row-reverse" >
+              <ul class="dots-action cursor-pointer d-inline-block" v-if="$parent.authorizeControl">
                 <li class="dots">
                   <i class="bi gray bi-three-dots-vertical gray"></i>
                   <ul>
@@ -32,7 +32,7 @@
             <p
                :title="val['attribute']['label']"
                v-for="(val,index) in i['items']" :key="index"
-                :class="'mb-0 gray small '+(index == 0 ? 'black  fw-bold top-reverse-20':'')">
+                :class="'mb-0 gray small '+(index == 0 && $parent.authorizeControl ? 'black  fw-bold top-reverse-20':'')">
               <span  v-if="index <= 2" :class="(index > 0) ? 'gray':''">
                 {{ val['answer'] }}
               </span>

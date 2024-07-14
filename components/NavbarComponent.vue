@@ -44,10 +44,10 @@
             <ul class="dots-action cursor-pointer d-inline-block">
               <li class="dots">
                 <image-component v-if="$auth?.user?.image" :src="'/users/'+$auth?.user?.image?.name"></image-component>
-                <img v-else src="/images/users/">
+                <img v-else src="/images/users/default.png">
                 <ul>
                   <li>
-                    <nuxt-link to="/profile/ahmed">
+                    <nuxt-link :to="'/profile/'+$auth?.user?.id">
                       <span class="gray"><i class="bi bi-person-circle"></i></span>
                       <span class="gray">{{ $attrs.words.navbar.profile }}</span>
                     </nuxt-link>

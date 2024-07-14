@@ -44,15 +44,18 @@ export const actions = {
     let page = window.location.pathname;
     this.$axios.post('/employee/save-info-item',data).then((e)=>{
       formValidation(e.data,target,page,true,router);
+      window.location = page
     })
   },
   async getDataSection({ state,commit },payload) {
-     let find_section = payload;
+     let find_section = payload[0];
+     let employee_id = payload[1];
      let section_check = state.data_sections.find((e)=> e['id'] == find_section);
      if(section_check == null){
         let output = {id:find_section};
         let form_data = new FormData();
         form_data.append('section_id',find_section);
+        form_data.append('user_id',employee_id);
         await this.$axios.post('/employee/get-info-data',form_data).then((e)=>{
           output['data'] = []
           for(let item of e?.data?.data){

@@ -9,7 +9,19 @@
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="save_data">
+          <div v-if="inProfile && !authorizeControl">
+            <div v-if="cvs_data?.length > 0">
+              <div :class="'mb-3 checkbox-item flex-wrap box_'+(index)+(control === true ? ' d-flex justify-content-between':'')"
+                   v-for="(i,index) in cvs_data" :key="index">
+                <span class="mrl-half">{{ i?.name }}</span>
+                <p class="mb-0" v-if="control">
+                  <a :href="computedSrc+'/pdfs/'+i?.file" target="_blank" class="mx-2"><i class="bi bi-eye"></i></a>
+                </p>
+              </div>
+            </div>
+            <img v-else class="w-75 d-block m-auto" src="/images/no_data.gif">
+          </div>
+          <form v-else @submit.prevent="save_data">
             <div :class="'mb-3 checkbox-item flex-wrap box_'+(index)+(control === true ? ' d-flex justify-content-between':'')"
                  v-for="(i,index) in cvs_data" :key="index">
               <input type="radio" name="user_resume_id" :value="i?.id" v-if="!control">
@@ -51,10 +63,21 @@
 <script>
 import {mapGetters , mapActions} from "vuex";
 import delete_item from "~/mixins/delete_item.vue";
+import AuthorizeControlProfile from "@/mixins/AuthorizeControlProfile";
 export default {
   name: "apply_for_job",
   props:['control'],
-  mixins:[delete_item],
+  mixins:[delete_item,AuthorizeControlProfile],
+  data(){
+    return {
+      inProfile:false,
+    }
+  },
+  mounted(){
+    if(document.URL.indexOf('profile') >= 0){
+      this.inProfile = true;
+    }
+  },
   computed:{
     ...mapGetters({
       'cvs_data':'profile/resumes/get_data',
@@ -62,9 +85,6 @@ export default {
     computedSrc() {
       return process.env.baseUrl
     }
-  },
-  mounted() {
-
   },
   methods:{
     ...mapActions({

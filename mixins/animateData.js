@@ -41,9 +41,12 @@ export default {
                   data_filters += item[0] + '='+item[1]+'&';
                 }
               }
-              console.log(this.filter_with_user_id)
+              let user_id = this.$auth.$state.user.id
+              if(this?.current_user){
+                user_id = this.current_user;
+              }
               if(this.filter_with_user_id){
-                data_filters += this.filter_with_user_id+'='+this.$auth.state.user.id+'&';
+                data_filters += this.filter_with_user_id+'='+user_id+'&';
               }
               console.log(data_filters)
               data = data_filters+'page='+this.current_page;

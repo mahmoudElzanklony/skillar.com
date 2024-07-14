@@ -47,7 +47,7 @@
             ></job-component>
           </div>
         </div>
-        <div class="col-lg-9 mb-2">
+        <div class="col-lg-9 mb-2" v-if="authorizeControl">
           <div class="job_description" v-if="specific_job">
             <div class="heading d-flex align-items-center justify-content-between mb-3">
                <image-component :src="'/users/'+specific_job?.company?.image?.name"></image-component>
@@ -210,6 +210,7 @@ import $ from "jquery";
 import ShareComponent from "../../../components/ShareComponent";
 import Rate_employee from "../../../components/Modals/rate_employee";
 import animateData from "@/mixins/animateData";
+import AuthorizeControlProfile from "@/mixins/AuthorizeControlProfile";
 import {mapGetters} from "vuex";
 export default {
   name: "published_jobs",
@@ -219,10 +220,10 @@ export default {
     ShareComponent,
     JobComponent
   },
-  async asyncData({store , $auth}){
-    await store.dispatch('jobs/getJobsAction','?company_id='+$auth?.$state?.user?.id+'&page=1')
+  async asyncData({store , $auth , route}){
+    await store.dispatch('jobs/getJobsAction','?company_id='+route.params.id+'&page=1')
   },
-  mixins:[animateData],
+  mixins:[animateData,AuthorizeControlProfile],
   computed:{
     ...mapGetters({
       'jobs_data':'jobs/get_jobs',
@@ -244,22 +245,26 @@ export default {
     },
 
     async select_this_job(job){
-      let data = new FormData();
-      data.append('job_id',job?.id)
-      await this.$store.dispatch('jobs/applicants/getDataAction',data)
-      await this.$store.commit('jobs/InitializeItem',job)
+      if(this.authorizeControl) {
+        let data = new FormData();
+        data.append('job_id', job?.id)
+        await this.$store.dispatch('jobs/applicants/getDataAction', data)
+        await this.$store.commit('jobs/InitializeItem', job)
+      }
     },
   },
   mounted() {
     document.querySelectorAll('.infinite_scroll .el').forEach(tem => {
       this.observer.observe(tem)
     })
+    this.current_user = this.current_id;
   },
   data(){
     return{
       last_item_observed_selector :'.infinite_scroll > div:first-of-type > div:last-of-type',
       filter_with_user_id:'company_id',
       filter_applicants:'pending',
+      current_user:null
     }
   },
 }

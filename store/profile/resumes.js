@@ -31,8 +31,12 @@ export const actions = {
     })
   },
 
-  async getDataAction({ state,commit }) {
-    this.$axios.post('/employee/get-resumes')
+  async getDataAction({ state,commit },payload) {
+    let data = new FormData();
+    if(payload){
+      data.append('user_id',payload);
+    }
+    this.$axios.post('/employee/get-resumes',data)
       .then((e)=>{
         commit('InitializeData',e.data.data);
       })
