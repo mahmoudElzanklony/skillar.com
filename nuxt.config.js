@@ -22,7 +22,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet',  href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css' },
-     // { rel: 'stylesheet',class:'ar_external_style',  href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.rtl.min.css' },
+      // { rel: 'stylesheet',class:'ar_external_style',  href: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.rtl.min.css' },
     ],
     script:[
       {src:'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js'},
@@ -50,7 +50,7 @@ export default {
     //{src:'~/plugins/checkStyle.js',mode:'client'},
     {src:'~/plugins/jquery_plugin',mode:'client'},
     {src:'~/plugins/sweet_alert',mode:'client'},
-   // {src:'~/plugins/text_editor',mode:'client'},
+    // {src:'~/plugins/text_editor',mode:'client'},
     {src:'~/plugins/tooltip_plugin',mode:'client'},
     // {src:'~/plugins/text_editor',mode:'client'},
     {src:'~/plugins/axios'},
@@ -88,8 +88,8 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-   // baseURL: 'https://jd-api.skillar.com/api',
-    baseURL: 'http://localhost:8000/api',
+    // baseURL: 'https://jd-api.skillar.com/api',
+    baseURL: 'http://127.0.0.1:8000/api',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

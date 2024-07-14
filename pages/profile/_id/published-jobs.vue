@@ -76,31 +76,59 @@
               <div class="dynamic_tabs">
                 <div>
                   <ul class="row" :key="$route.fullPath">
-                  <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center active" name="not_viewed_requests">
-                    <span class="mrl-half mrl-reverse-15"><i class="bi bi-card-list"></i></span>
+                  <li class="p-2 d-flex align-items-center active"
+                      @click="add_active"
+                      name="not_viewed_requests" filter="pending">
+                    <span class="mrl-half mrl-reverse-15" filter="pending"><i class="bi bi-card-list" filter="pending"></i></span>
                     <div>
-                      <p class="fw-bold mb-0">50</p>
+                      <p class="fw-bold mb-0">
+                        {{  applicants.filter((e)=> e.status === 'pending').length }}
+                      </p>
                       <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.not_viewed_requests }}</p>
                     </div>
                   </li>
-                  <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center" name="top_best_requests">
-                    <span class="mrl-half"><i class="bi bi-arrow-up"></i></span>
+                  <li class="p-2 d-flex align-items-center"
+                      @click="add_active"
+
+                      name="top_best_requests" filter="top_best">
+                    <span class="mrl-half" filter="top_best"><i class="bi bi-arrow-up" filter="top_best"></i></span>
                     <div>
-                      <p class="fw-bold mb-0">50</p>
+                      <p class="fw-bold mb-0">
+                        {{  applicants.filter((e)=> e.status === 'top_best').length }}
+                      </p>
                       <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.top_best_requests }}</p>
                     </div>
                   </li>
-                  <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center" name="accepted_requests">
-                    <span class="mrl-half"><i class="bi bi-check-lg"></i></span>
+                  <li class="p-2 d-flex align-items-center" name="in_consideration"
+                      @click="add_active"
+                      filter="in_consideration">
+                    <span class="mrl-half" filter="in_consideration"><i filter="in_consideration"  class="bi bi-hand-thumbs-up"></i></span>
                     <div>
-                      <p class="fw-bold mb-0">50</p>
-                      <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.accepted_requests }}</p>
+                      <p class="fw-bold mb-0">
+                        {{  applicants.filter((e)=> e.status === 'in_consideration').length }}
+                      </p>
+                      <p class="mb-0">{{ $parent.$attrs.words.profile.applied_jobs.in_consideration }}</p>
                     </div>
                   </li>
-                  <li class="col-lg-3 col-md-6 p-2 d-flex align-items-center" name="rejected_requests">
-                    <span class="mrl-half"><i class="bi bi-x-square"></i></span>
+                    <li class="p-2 d-flex align-items-center"
+                        @click="add_active"
+                        name="accepted_requests" filter="acceptance">
+                      <span class="mrl-half" filter="top_best"><i filter="top_best" class="bi bi-check-lg"></i></span>
+                      <div>
+                        <p class="fw-bold mb-0">
+                          {{  applicants.filter((e)=> e.status === 'acceptance').length }}
+                        </p>
+                        <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.accepted_requests }}</p>
+                      </div>
+                    </li>
+                  <li class="p-2 d-flex align-items-center"
+                      @click="add_active"
+                      name="rejected_requests" filter="rejected">
+                    <span class="mrl-half" filter="rejected"><i filter="rejected" class="bi bi-x-square"></i></span>
                     <div>
-                      <p class="fw-bold mb-0">50</p>
+                      <p class="fw-bold mb-0">
+                        {{  applicants.filter((e)=> e.status === 'rejected').length }}
+                      </p>
                       <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.rejected_requests }}</p>
                     </div>
                   </li>
@@ -109,13 +137,16 @@
                 <div class="content employees_applied">
                   <div class="job_info info d-flex align-items-center">
                     <div class="data d-block w-100">
-                      <div class="value end-border-bottom p-2"  v-for="i in 6" :key="i">
+                      <div class="value end-border-bottom p-2"
+                           v-for="(i,key) in applicants.filter((e) => e?.status === filter_applicants)" :key="key">
                         <div class="d-flex align-items-center">
-                          <nuxt-link tag="img" to="/profile/ahmed" class="mrl-1 cursor-pointer" src="/images/users/1.webp"></nuxt-link>
+                          <nuxt-link tag="img" to="/profile/ahmed" class="mrl-1 cursor-pointer" :src="computedSrc+'/images/users/'+i?.resume?.user?.image?.name"></nuxt-link>
                           <div>
                             <div class="fw-bold mb-1 d-flex align-items-center justify-content-between">
                               <nuxt-link to="/profile/ahmed">
-                                <span class="blue normal">Ahmed ali</span>
+                                <span class="blue normal">
+                                  {{ i?.resume?.user?.username }}
+                                </span>
                               </nuxt-link>
                               <ul class="dots-action cursor-pointer d-inline-block">
                                 <li class="dots">
@@ -135,14 +166,20 @@
                               </ul>
                             </div>
                             <p class="mb-0">
-                              <span class="fw-bold">Full stack php developer</span>
+                              <span class="fw-bold">{{ i?.resume?.user?.bio }}</span>
                               <span class="gray d-block small">
-                                {{ $parent.$attrs.words.profile.published_jobs.applied_at_date }} {{ new Date().toLocaleString() }}
+                                {{ $parent.$attrs.words.profile.published_jobs.applied_at_date }} {{i?.created_at }}
                               </span>
-                              <nuxt-link to="#">{{ $parent.$attrs.words.profile.published_jobs.show_resume }}</nuxt-link>
+                              <a target="_blank" :href="computedSrc+'/pdfs/'+i?.resume?.file">{{ $parent.$attrs.words.profile.published_jobs.show_resume }}</a>
                             </p>
                             <p class="mb-0 gray small">{{ $parent.$attrs.words.profile.published_jobs.profile_match_skills }}</p>
-                            <div class="progress">
+                            <div class="flex flex-wrap">
+                              <button :class="'btn btn-outline-primary '+(index > 0 ? 'mrl-reverse-10':'')"
+                                      v-for="(s,index) in i?.resume?.user.profile_sections" :key="index">
+                                {{ s?.first_attribute_data?.answer }}
+                              </button>
+                            </div>
+                            <div class="progress" v-if="false">
                               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
                             </div>
                           </div>
@@ -191,7 +228,10 @@ export default {
       'jobs_data':'jobs/get_jobs',
       'specific_job':'jobs/get_item',
       'applicants':'jobs/applicants/get_data'
-    })
+    }),
+    computedSrc() {
+      return process.env.baseUrl
+    }
   },
   methods:{
     resetCurrentPage(){
@@ -199,8 +239,10 @@ export default {
     },
 
     add_active(){
-      $(event.target).addClass('active').siblings().removeClass('active')
+      $(event.currentTarget).addClass('active').siblings().removeClass('active')
+      this.filter_applicants = event.currentTarget.getAttribute('filter')
     },
+
     async select_this_job(job){
       let data = new FormData();
       data.append('job_id',job?.id)
@@ -212,21 +254,12 @@ export default {
     document.querySelectorAll('.infinite_scroll .el').forEach(tem => {
       this.observer.observe(tem)
     })
-
-
-    $('#__nuxt').on('click','.dynamic_tabs ul li',function (){
-      if(event.target.tagName.toLocaleLowerCase() == 'p'){
-        $(event.target).parent().parent().addClass('active').siblings().removeClass('active')
-      }else if(event.target.tagName.toLocaleLowerCase() == 'p'){
-        $(event.target).parent().addClass('active').siblings().removeClass('active')
-      }else{
-        $(event.target).addClass('active').siblings().removeClass('active')
-      }
-    });
   },
   data(){
     return{
       last_item_observed_selector :'.infinite_scroll > div:first-of-type > div:last-of-type',
+      filter_with_user_id:'company_id',
+      filter_applicants:'pending',
     }
   },
 }

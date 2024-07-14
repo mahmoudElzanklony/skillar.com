@@ -41,6 +41,11 @@ export default {
                   data_filters += item[0] + '='+item[1]+'&';
                 }
               }
+              console.log(this.filter_with_user_id)
+              if(this.filter_with_user_id){
+                data_filters += this.filter_with_user_id+'='+this.$auth.state.user.id+'&';
+              }
+              console.log(data_filters)
               data = data_filters+'page='+this.current_page;
             }
             await this.$store.dispatch(action_path, data);
@@ -62,7 +67,6 @@ export default {
       // go to last child to be observed
       if(this.last_item_observed_selector){
         if (document.querySelector(this.last_item_observed_selector)) {
-          console.log('yes..........')
           this.lastObserver.observe(document.querySelector(this.last_item_observed_selector))
         }
       }else {

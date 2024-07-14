@@ -441,7 +441,7 @@ export default {
       top_best_requests:'افضل المرشحين',
       accepted_requests:'طلبات تم الموافقة عليها',
       rejected_requests:'طلبات تم رفضها',
-      profile_match_skills:'نسبة توافق متطلبات الوظيفة مع المتقدم',
+      profile_match_skills:'مهارات المتقدم',
       job_requirement:'متطلبات الوظيفة',
       applied_at_date:'تم التقدم  في تاريخ',
       rate_employee:'تقييم الموظف',
