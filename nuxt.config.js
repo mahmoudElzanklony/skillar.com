@@ -61,6 +61,8 @@ export default {
   ],
 
 
+
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -99,7 +101,7 @@ export default {
     }
   },
   router: {
-    middleware: ['checkStyle'],
+    middleware: ['checkStyle','auth_check'],
   },
   auth: {
     redirect:false,

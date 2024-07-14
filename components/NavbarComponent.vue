@@ -40,10 +40,11 @@
               {{ another_lang }}
             </button>
           </li>
-          <li class="user_profile " v-if="false">
+          <li class="user_profile " v-if="$auth.loggedIn">
             <ul class="dots-action cursor-pointer d-inline-block">
               <li class="dots">
-                <img src="/images/users/2.webp" class="cursor-pointer">
+                <image-component v-if="$auth?.user?.image" :src="'/users/'+$auth?.user?.image?.name"></image-component>
+                <img v-else src="/images/users/">
                 <ul>
                   <li>
                     <nuxt-link to="/profile/ahmed">
@@ -63,7 +64,7 @@
                       <span class="gray">{{ $attrs.words.navbar.chat }}</span>
                     </nuxt-link>
                   </li>
-                  <li>
+                  <li v-if="false">
                     <nuxt-link to="/nearest-jobs">
                       <span><i class="bi bi-geo-alt"></i></span>
                       <span class="gray">{{ $attrs.words.navbar.nearest_jobs }}</span>
