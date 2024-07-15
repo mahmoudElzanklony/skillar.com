@@ -56,14 +56,6 @@ export const actions = {
   },
 
 
-  async getDataAction({ state,commit },payload) {
-    let data = new FormData();
-    data.append('id',payload);
-    this.$axios.post('/profile/get-feedbacks',data)
-      .then((e)=>{
-        commit('InitializeData',e.data.data);
-      })
-  },
 
 
 }

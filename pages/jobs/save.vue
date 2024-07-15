@@ -1,5 +1,5 @@
 <template>
-  <section class="save_job current_page mt-5">
+  <section class="save_job current_page mt-5" @click="saveEl++">
       <div class="container"  v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
         <form :complete_url="id ? '/'+id:''" @submit.prevent="jobAction">
           <div class="row">
@@ -12,7 +12,7 @@
             <div class="col-md-6">
               <div class="mb-3 input-icon flex-wrap">
                  <label>{{ $parent.$attrs.words.jobs.save_job.job_name }}</label>
-                 <input class="form-control" name="name" :value="job_info?.name">
+                 <input class="form-control" name="name" v-model="job_data.name">
                  <span><i class="bi bi-info"></i></span>
               </div>
               <div class="mb-3 input-icon flex-wrap">
@@ -29,7 +29,7 @@
                   <div class="mb-3 input-icon flex-wrap">
                     <label>{{ $parent.$attrs.words.jobs.save_job.min_experience }}</label>
                     <input class="form-control" name="min_experience" type="number" min="0"
-                           :value="job_info?.min_experience"
+                           v-model="job_data.min_experience"
                            required>
                     <span><i class="bi bi-arrow-up-circle"></i></span>
                   </div>
@@ -38,7 +38,7 @@
                   <div class="mb-3 input-icon flex-wrap">
                     <label>{{ $parent.$attrs.words.jobs.save_job.max_experience }}</label>
                     <input class="form-control" name="max_experience" type="number" min="0"
-                           :value="job_info?.max_experience"
+                           v-model="job_data.max_experience"
                            required>
                     <span><i class="bi bi-arrow-down-circle"></i></span>
                   </div>
@@ -57,7 +57,7 @@
             <div class="col-md-6">
               <div class="mb-3 input-icon flex-wrap">
                 <label class="w-100">{{ $parent.$attrs.words.jobs.save_job.short_description }}</label>
-                <textarea name="description" class="editor form-control" :value="job_info?.description">{{ job_info?.description }}</textarea>
+                <textarea name="description" class="editor form-control" v-html="job_data.description"></textarea>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
             <div class="col-md-6">
               <div class="mb-3 input-icon flex-wrap">
                 <label class="w-100">{{ $parent.$attrs.words.jobs.save_job.job_responsibilities }}</label>
-                <textarea name="responsibilities" class="editor form-control" :value="job_info?.responsibilities">{{ job_info?.responsibilities }}</textarea>
+                <textarea name="responsibilities" class="editor form-control" v-html="job_data.responsibilities" ></textarea>
               </div>
             </div>
           </div>
@@ -163,8 +163,8 @@
             </div>
             <div class="col-md-6">
               <div class="mb-3 checkbox-item flex-wrap">
-                <input type="radio" name="work_type" value="from_office"
-                       :checked="job_info?.work_type === 'from_office'"
+                <input type="radio" name="work_type" value="office"
+                       :checked="job_info?.work_type === 'office'"
                        required>
                 <span class="mrl-half">{{ $parent.$attrs.words.jobs.save_job.from_office }}</span>
               </div>
@@ -196,8 +196,7 @@
                   <div class="mb-3 flex-wrap">
                     <label>{{ $parent.$attrs.words.jobs.save_job.min_salary }}</label>
                     <input class="form-control" type="number" name="min_salary"
-                           :value="job_info?.salary !== '' && job_info?.salary?.indexOf(':') > 0 ?
-                            job_info?.salary.slice(0,job_info?.salary?.indexOf(':')):''"
+                           v-model="computedMinSalary"
                            >
                   </div>
                 </div>
@@ -205,16 +204,15 @@
                   <div class="mb-3 flex-wrap">
                     <label>{{ $parent.$attrs.words.jobs.save_job.max_salary }}</label>
                     <input class="form-control" type="number" name="max_salary"
-                           :value="job_info?.salary !== '' && job_info?.salary?.indexOf(':') > 0 ?
-                            job_info?.salary.slice(job_info.salary?.indexOf(':') + 1):''"
+                           v-model="computedMaxSalary"
                            >
                   </div>
                 </div>
               </div>
               <div class="mb-3 checkbox-item flex-wrap">
                 <input type="checkbox" class="salary_box" @change="change_salary_type" name="salary"
-                       :value="job_info?.salary !== '' && job_info?.salary?.indexOf(':') === -1 ?
-                            job_info?.salary:''">
+                       :checked="job_info?.salary === 'negotiable' || job_info.salary == '' || job_info.salary  == ':'"
+                       value="negotiable">
                 <span class="mrl-half">{{ $parent.$attrs.words.jobs.save_job.negotiable }}</span>
               </div>
             </div>
@@ -225,6 +223,7 @@
   </section>
 </template>
 
+
 <script>
 import WordsLang from "../../mixins/WordsLang";
 import text_editor from "../../mixins/text_editor";
@@ -234,30 +233,37 @@ import {mapActions , mapGetters} from "vuex";
 export default {
   name: "job_save",
   mixins:[WordsLang,text_editor,NotForClient],
-  async asyncData({store , route , $auth , redirect}){
-     if(route?.query?.id){
+  async fetch({store , route , $auth , redirect}){
+    if(route?.query?.id){
        // get info of job
-       await store.dispatch('jobs/getJobInfoAction',route.query.id+'?has_not_view=true');
-       // check authorization of job
-       if(!($auth?.$state?.user?.role?.name === 'admin' || $auth?.$state?.id === store.getters['jobs/get_item']['company_id'])){
-         redirect('/');
+       try{
+         await store.dispatch('jobs/getJobInfoAction',route.query.id+'?has_not_view=true');
+         // check authorization of job
+         if(!($auth?.$state?.user?.role?.name === 'admin' || $auth?.$state?.id === store.getters['jobs/get_item']['company_id'])){
+           redirect('/');
+         }
+       }catch (e){
+         redirect('/jobs');
        }
      }
-     await store.dispatch('jobs/categories/getDataAction')
-     await store.dispatch('places/countries/getCountriesAction')
+      await store.dispatch('jobs/categories/getDataAction')
+      await store.dispatch('places/countries/getCountriesAction')
   },
   data(){
     return {
       id:null,
-      job_skills:[]
+      job_skills:[],
+      job_data:{},
     }
   },
   mounted() {
     if(document.URL.split('?id=')[1] !== undefined){
       this.id = document.URL.split('?id=')[1]
     }
+
     if(this?.job_info){
       this.citiesAction(this?.job_info?.city?.country_id);
+      this.job_data = {...this.job_info}
       // show salary negotiable box
       if(this.job_info.salary === 'negotiable'){
         document.querySelector('.salary_box').click()
@@ -287,6 +293,30 @@ export default {
       'cities':'places/cities/getCitiesGetter',
       'job_info':'jobs/get_item'
     }),
+    computedMinSalary:{
+      get() {
+        if (this.job_data?.salary && this.job_data.salary !== '' && this.job_data.salary.indexOf(':') > 0) {
+          return this.job_data.salary.slice(0, this.job_data.salary.indexOf(':'));
+        } else {
+          return '';
+        }
+      },
+      set(newValue) {
+        this.job_data.salary = newValue +':'+ this.job_data.salary.slice(this.job_data.salary.indexOf(':') + 1);
+      }
+    },
+    computedMaxSalary:{
+      get() {
+        if (this.job_data?.salary && this.job_data.salary !== '' && this.job_data.salary.indexOf(':') > 0) {
+          return this.job_data.salary.slice(this.job_data.salary.indexOf(':') +  1);
+        } else {
+          return '';
+        }
+      },
+      set(newValue) {
+        this.job_data.salary = this.computedMinSalary +':'+newValue;
+      }
+    }
   },
   methods:{
     ...mapActions({

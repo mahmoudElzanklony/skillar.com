@@ -32,7 +32,7 @@
 import JobComponent from "../../components/JobComponent";
 import FilterationJobsComponent from "../../components/FilterationJobsComponent";
 import {mapGetters , mapActions} from "vuex";
-import animateData from "@/mixins/animateData";
+import animateData from "../../mixins/animateData";
 export default {
   name: "jobs",
   async asyncData({store}){

@@ -99,13 +99,13 @@
                       <p class="mb-0">{{ $parent.$attrs.words.profile.published_jobs.top_best_requests }}</p>
                     </div>
                   </li>
-                  <li class="p-2 d-flex align-items-center" name="in_consideration"
+                  <li class="p-2 d-flex align-items-center" name="consideration"
                       @click="add_active"
-                      filter="in_consideration">
-                    <span class="mrl-half" filter="in_consideration"><i filter="in_consideration"  class="bi bi-hand-thumbs-up"></i></span>
+                      filter="consideration">
+                    <span class="mrl-half" filter="consideration"><i filter="consideration"  class="bi bi-hand-thumbs-up"></i></span>
                     <div>
                       <p class="fw-bold mb-0">
-                        {{  applicants.filter((e)=> e.status === 'in_consideration').length }}
+                        {{  applicants.filter((e)=> e.status === 'consideration').length }}
                       </p>
                       <p class="mb-0">{{ $parent.$attrs.words.profile.applied_jobs.in_consideration }}</p>
                     </div>
@@ -139,7 +139,7 @@
                     <div class="data d-block w-100">
                       <div class="value end-border-bottom p-2"
                            v-for="(i,key) in applicants.filter((e) => e?.status === filter_applicants)" :key="key">
-                        <div class="d-flex align-items-center">
+                        <div :class="'d-flex align-items-center box_'+key">
                           <nuxt-link tag="img" to="/profile/ahmed" class="mrl-1 cursor-pointer" :src="computedSrc+'/images/users/'+i?.resume?.user?.image?.name"></nuxt-link>
                           <div>
                             <div class="fw-bold mb-1 d-flex align-items-center justify-content-between">
@@ -153,12 +153,13 @@
                                   <i class="bi bi-three-dots-vertical gray"></i>
                                   <ul>
                                     <li data-bs-toggle="modal"
+                                        @click="select_applicant(i)"
                                         data-bs-target="#rate_employee">
                                       <span class="gray"><i class="bi bi-person-vcard"></i></span>
                                       <span>{{ $parent.$attrs.words.profile.published_jobs.rate_employee }}</span>
                                     </li>
                                     <li>
-                                      <span class="red"><i class="bi bi-trash"></i></span>
+                                      <span class="red" @click="delete_item('jobs_offers_applicants',i?.id,'jobs_offers_applicants','.box_'+key); select_this_job(i?.job);"><i class="bi bi-trash"></i></span>
                                       <span>{{ $parent.$attrs.words.profile.published_jobs.delete_request }}</span>
                                     </li>
                                   </ul>
@@ -204,17 +205,16 @@
 </template>
 
 <script>
-import WordsLang from "../../../mixins/WordsLang";
+import delete_item from "../../../mixins/delete_item.vue";
 import JobComponent from "../../../components/JobComponent";
 import $ from "jquery";
 import ShareComponent from "../../../components/ShareComponent";
 import Rate_employee from "../../../components/Modals/rate_employee";
-import animateData from "@/mixins/animateData";
-import AuthorizeControlProfile from "@/mixins/AuthorizeControlProfile";
-import {mapGetters} from "vuex";
+import animateData from "../../../mixins/animateData";
+import AuthorizeControlProfile from "../../../mixins/AuthorizeControlProfile";
+import {mapGetters , mapMutations} from "vuex";
 export default {
   name: "published_jobs",
-
   components: {
     Rate_employee,
     ShareComponent,
@@ -223,7 +223,7 @@ export default {
   async asyncData({store , $auth , route}){
     await store.dispatch('jobs/getJobsAction','?company_id='+route.params.id+'&page=1')
   },
-  mixins:[animateData,AuthorizeControlProfile],
+  mixins:[animateData,AuthorizeControlProfile,delete_item],
   computed:{
     ...mapGetters({
       'jobs_data':'jobs/get_jobs',
@@ -235,10 +235,12 @@ export default {
     }
   },
   methods:{
+    ...mapMutations({
+      'select_applicant':'jobs/applicants/InitializeApplicant'
+    }),
     resetCurrentPage(){
       this.current_page = 2;
     },
-
     add_active(){
       $(event.currentTarget).addClass('active').siblings().removeClass('active')
       this.filter_applicants = event.currentTarget.getAttribute('filter')

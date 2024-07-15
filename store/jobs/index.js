@@ -57,6 +57,10 @@ export const actions = {
     let target = event.target;
     let data = new FormData(target)
     if(target.getAttribute('complete_url').length > 0){
+      let editors = document.querySelectorAll('.ck-editor__editable');
+      console.log(editors)
+      data.append('description',editors[0].innerHTML)
+      data.append('responsibilities',editors[1].innerHTML)
       data.append('_method','PUT');
       data.append('id',target.getAttribute('complete_url').replace('/',''));
     }

@@ -63,7 +63,7 @@
 <script>
 import {mapGetters , mapActions} from "vuex";
 import delete_item from "~/mixins/delete_item.vue";
-import AuthorizeControlProfile from "@/mixins/AuthorizeControlProfile";
+import AuthorizeControlProfile from "../../../mixins/AuthorizeControlProfile";
 export default {
   name: "apply_for_job",
   props:['control'],

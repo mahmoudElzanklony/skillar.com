@@ -20,30 +20,34 @@
                     <div class="d-flex align-items-center justify-content-between">
                       <image-component
                         :src="'/users/'+i?.sender?.image?.name"></image-component>
-                      <div>
+                      <div class="mrl-reverse-10">
                         <div class="mb-0 fw-bold d-flex align-items-center justify-content-between">
                           <span>{{ i?.sender?.username }}</span>
-                          <ul class="dots-action cursor-pointer d-inline-block">
+                          <ul v-if="authorizeControl" class="dots-action cursor-pointer d-inline-block">
                             <li class="dots">
                               <i class="bi bi-three-dots-vertical gray"></i>
                               <ul>
                                 <li
                                   @click="update_status(i?.id)"
-                                  v-tooltip="$parent.$attrs.words.profile.feedbacks.accept_apperance_feedback"
+                                  v-tooltip="$parent.$attrs.words?.profile?.feedbacks?.accept_apperance_feedback"
                                 v-if="i?.status === 'pending'">
                                   <span class="gray"><i class="bi bi-check-lg"></i></span>
-                                  <span>{{ $parent.$attrs.words.profile.feedbacks.accept }}</span>
+                                  <span>{{ $parent.$attrs.words?.profile?.feedbacks?.accept }}</span>
                                 </li>
                                 <li>
                                   <span class="red"
                                         @click="delete_item('employee_feedbacks',i?.id,'employee_feedbacks','box_'+index)"><i class="bi bi-trash"></i></span>
-                                  <span>{{ $parent.$parent.$attrs.words.profile.feedbacks.delete }}</span>
+                                  <span>{{ $parent.$attrs.words.general.delete }}</span>
                                 </li>
                               </ul>
                             </li>
                           </ul>
                         </div>
                         <p class="mb-0 line-height-22">{{ i['info'] }}</p>
+                        <p class="mb-0">
+                          <span  class="gray">{{ $parent.$attrs.words.general.created_at }}</span>
+                          <span class="gray">{{ i?.created_at }}</span>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -61,14 +65,14 @@
         <div class="col-lg-3 mb-2">
           <div class="nearest_jobs">
             <h2 class="fw-bold mb-3">{{ $parent.$attrs.words.profile.feedbacks.popular_jobs }}</h2>
-            <job-component v-for="i in 6" class="mb-3"
-                           title="Full stack"
-                           company_name="Algorithma"
-                           time="30M ago"
-                           id="1"
-                           :skills="skills"
-                           :show_details="$parent.$attrs.words.profile.feedbacks.open"
-                           img="/images/companies/1.png"
+            <job-component v-for="(i,index) in jobs_data" :key="index"
+                           :title="i?.name"
+                           :company_name="i?.company?.username"
+                           :time="i?.published"
+                           :id="i?.id"
+                           :skills="i?.skills"
+                           :show_details="i?.status"
+                           :img="i?.company?.image?.name"
             ></job-component>
           </div>
         </div>
@@ -92,20 +96,15 @@ import {mapGetters , mapActions} from "vuex";
 import ImageComponent from "../../../components/ImageComponent.vue";
 import delete_item from "../../../mixins/delete_item.vue";
 import Save_feedback from "../../../components/Modals/candidate/save_feedback_box.vue";
+import AuthorizeControlProfile from "../../../mixins/AuthorizeControlProfile";
 export default {
   name: "feedbacks",
-
   components: {
     Save_feedback,
     ImageComponent,
     ProfilePersonalInfoComponent,
     Update_personal_data,
     JobComponent},
-  data(){
-    return{
-      skills:['php','laravel','oop','design pattern','mysql']
-    }
-  },
   methods:{
     ...mapActions({
       'update_status':'profile/feedbacks/updateStatusAction',
@@ -115,9 +114,10 @@ export default {
     ...mapGetters({
       'feedbacks':'profile/feedbacks/get_data',
       'get_profile_id':'profile/employee/get_profile_id',
+      'jobs_data':'jobs/get_jobs'
     })
   },
-  mixins:[WordsLang,delete_item],
+  mixins:[WordsLang,delete_item,AuthorizeControlProfile],
 }
 </script>
 
