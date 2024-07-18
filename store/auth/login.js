@@ -26,6 +26,7 @@ export const actions = {
   async loginAction({ state,commit }) {
     let router = this.$router;
     var target = event.target;
+    document.cookie = 'skillar_name='+window.location.origin+";domain=.skillar.com; path=/";
     // Clear the redirect path
     this.$auth.$storage.setUniversal('redirect', null)
     // commit('loader/updateLoaderMutation',true,{root:true});
@@ -39,8 +40,6 @@ export const actions = {
             title:dataresponse.data.errors
           });
         }
-        console.log(dataresponse)
-        console.log(this.state.auth)
         if(this.state.auth.loggedIn){
           let data = {
             user:this.state.auth.user,
