@@ -213,7 +213,7 @@ import JobComponent from "../components/JobComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import DotsScrollComponent from "../components/DotsScrollComponent";
 export default {
-  name: 'IndexPage',
+  name: 'home',
   mixins:[CurrentLang],
   data(){
     return {

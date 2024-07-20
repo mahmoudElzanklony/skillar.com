@@ -3,8 +3,8 @@
     <div class="info">
       <div class="bk">
         <div>
-          <image-component v-if="$auth?.$state?.user?.image"
-                           :src="'/users/'+$auth?.$state?.user?.image"></image-component>
+          <img v-if="$auth?.$state?.user?.image"
+                           :src="cvApiUrl+'/users/'+$auth?.$state?.user?.image"></img>
           <img v-else src="/images/users/default.png">
           <button class="btn btn-primary" data-bs-toggle="modal"
                   v-if="authorizeControl"
@@ -47,6 +47,9 @@ export default {
     ...mapGetters({
       'feedbacks':'profile/feedbacks/get_data'
     }),
+    cvApiUrl(){
+      return 'https://cvapi.skillar.com/images'
+    }
   },
   methods:{
     ...mapActions({

@@ -14,13 +14,16 @@ export default function ({ redirect, route , $auth}) {
   }else if ($auth.loggedIn != true) {
 
     let check_unauth_page = false;
-    for (let page of unauth) {
-      if (route.path.indexOf(page) >= 0) {
-        check_unauth_page = true;
-        break;
+    if(route.path === '/'){
+      check_unauth_page = true;
+    }else{
+      for (let page of unauth) {
+        if (route.path.indexOf(page) >= 0) {
+          check_unauth_page = true;
+          break;
+        }
       }
     }
-    console.log('prepend to go')
     if (check_unauth_page == false && (!(route.path.indexOf('login') >= 0 || route.path.indexOf('register') >= 0) )) {
       return redirect('/auth/login')
     }
