@@ -1,5 +1,5 @@
 import {mapActions} from "vuex";
-import animateData from "@/mixins/animateData";
+import animateData from "./animateData";
 export default {
   name:'FilterJobs',
   data(){

@@ -8,17 +8,21 @@
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form method="post" @submit.prevent="rate">
             <div class="mb-3 checkbox-item flex-wrap">
-              <input type="radio" name="request_status">
+              <input type="radio" name="status" value="acceptance">
               <span class="mrl-half">{{ $parent.$parent.$attrs.words.profile.published_jobs.accepted_request }}</span>
             </div>
             <div class="mb-3 checkbox-item flex-wrap">
-              <input type="radio" name="request_status">
+              <input type="radio" name="status" value="top_best">
               <span class="mrl-half">{{ $parent.$parent.$attrs.words.profile.published_jobs.top_best_request }}</span>
             </div>
             <div class="mb-3 checkbox-item flex-wrap">
-              <input type="radio" name="request_status">
+              <input type="radio" name="status" value="consideration">
+              <span class="mrl-half">{{ $parent.$parent.$attrs.words.profile.applied_jobs.consideration }}</span>
+            </div>
+            <div class="mb-3 checkbox-item flex-wrap">
+              <input type="radio" name="status" value="rejected">
               <span class="mrl-half">{{ $parent.$parent.$attrs.words.profile.published_jobs.rejected_request }}</span>
             </div>
             <div class="form-group position-relative input-icon flex-wrap">
@@ -36,8 +40,26 @@
 </template>
 
 <script>
-export default {
+import {mapGetters , mapActions} from "vuex";
 
+export default {
+  name:'rate_employee',
+  methods:{
+    async rate(){
+      let data = new FormData(event.target);
+      data.append('id',this.selected_applicant?.id);
+      await this.$store.dispatch('jobs/applicants/rateApplicantAction',data);
+      data.append('job_id',this.specific_job?.id);
+      await this.$store.dispatch('jobs/applicants/getDataAction', data)
+
+    },
+  },
+  computed:{
+    ...mapGetters({
+      'specific_job':'jobs/get_item',
+      'selected_applicant':'jobs/applicants/get_applicant'
+    })
+  },
 }
 </script>
 

@@ -387,6 +387,7 @@ export default {
       display_video:'عرض الفديو',
     },
     applied_jobs:{
+      name:'الوظائف المتقدم عليها',
       edit_info:'تعديل البيانات',
       update:'تحديث',
       update_data:'تحديث البيانات',
@@ -404,9 +405,12 @@ export default {
       in_consideration_requests:'الطلبات التي تم وضعها في عين الاعتبار',
       accepted_requests:'الطلبات التي  تم الموافقة عليها',
       rejected_requests:'الطلبات التي  تمت رفضها',
-
+      top_best:'أفضل المتقدمين',
+      acceptance:'تمت الموافقة عليك',
       in_consideration:'تم وضعه في عين الاعتبار',
+      consideration:'تم وضعه في عين الاعتبار',
       accepted:'تمت الموافقة',
+      pending:'معلق',
       rejected:'تم الرفض',
       applied_at_date:'تم التقدم في تاريخ ',
     },
@@ -702,6 +706,6 @@ export default {
     upload_file_here:'ارفع الملف هنا',
     show_more:'عرض المزيد',
     show_less:'عرض اقل',
-
+    created_at:'تم النشر في تاريخ ',
   },
 }

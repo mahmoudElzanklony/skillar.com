@@ -197,6 +197,7 @@ export default {
       display_video:'Display video',
     },
     applied_jobs:{
+      name:'Applied jobs',
       edit_info:'Edit info',
       update:'Update',
       update_data:'Update data',
@@ -213,6 +214,10 @@ export default {
       accepted_requests:'Accepted requests',
       rejected_requests:'Rejected requests',
       in_consideration:'In consideration',
+      consideration:'In consideration',
+      pending:'Pending',
+      acceptance:'Accepted',
+      top_best:'Top best',
       accepted:'Accepted',
       rejected:'Rejected',
       save:'Save',
@@ -505,5 +510,6 @@ export default {
     upload_file_here:'Upload your file here',
     show_more:'Show more',
     show_less:'Show less',
+    created_at:'Created at ',
   },
 }

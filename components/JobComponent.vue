@@ -36,7 +36,10 @@
 
         </div>
         <div class="job-body">
-          <p class="fw-bold mb-1">{{ title }}</p>
+          <p class="fw-bold mb-1">
+            <a target="_blank" class="black normal"
+               :href="'/jobs/'+id">{{ title }}</a>
+          </p>
           <ul class="d-flex flex-wrap">
             <li class="mrl-1" v-for="(skill,index) in skills" :key="index">{{ skill?.title }}</li>
           </ul>
@@ -99,6 +102,9 @@ export default {
       margin-bottom: 0px;
     }
   }
+}
+a.black.normal{
+  font-size: $normal !important;
 }
 
 </style>

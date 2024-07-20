@@ -165,7 +165,7 @@ import {mapActions , mapGetters} from "vuex";
 import ShowSectionsData from "../../../components/profile/ShowSectionsData.vue";
 import Update_dynamic_box from "../../../components/Modals/candidate/update_dynamic_box.vue";
 import Apply_for_job from "~/components/Modals/candidate/apply_for_job.vue";
-import AuthorizeControlProfile from "@/mixins/AuthorizeControlProfile";
+import AuthorizeControlProfile from "../../../mixins/AuthorizeControlProfile";
 export default {
   name: "candidate",
   components: {
