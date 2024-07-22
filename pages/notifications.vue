@@ -1,62 +1,67 @@
 <template>
   <div class="notifications current_page">
     <div class="container mt-4 mb-4">
-      <div class="outer">
-        <div class="notification unread d-flex align-items-center" >
-          <nuxt-link tag="img" src="/images/users/1.webp" to="#" class="mrl-1 cursor-pointer"></nuxt-link>
-          <div class="max-width">
-            <nuxt-link to="#" class="d-flex align-items-center justify-content-between">
-              <span class="black fw-bold">Ahmed ali see your profile</span>
-              <span class="dot-unread"></span>
-            </nuxt-link>
-            <ul class="d-flex mb-2 mt-1">
-              <li class="gray mrl-1">21M ago</li>
-              <li class="gray">full stack developer</li>
+      <div class="outer infinite_scroll" action_path="notifications/notificationsAction" method="get">
+        <div class="notification unread d-flex align-items-center" v-for="(i,key) in data" :key="key">
+          <nuxt-link tag="img" :src="'https://cvapi.skillar.com/images/users/'+i?.data?.sender?.image?.name"
+                     :to="'/profile/'+i?.data?.sender?.id" class="mrl-1 cursor-pointer"></nuxt-link>
+          <div class="noti-info position-relative top-6">
+            <a :href="'/profile/'+i?.data?.sender?.id" target="_blank" class="d-flex align-items-center justify-content-between">
+              <span class="black fw-bold">{{ i?.data?.info }}</span>
+              <span v-if="i?.read_at == null" class="dot-unread"></span>
+            </a>
+            <ul class="d-flex justify-content-between mb-2 mt-1">
+              <li class="gray" :title="i?.data?.sender?.bio">
+                <span><i class="bi bi-info"></i></span>
+                {{ i?.data?.sender?.bio.slice(0,50) }}...
+              </li>
+              <li class="gray mrl-1">
+                <span><i class="bi bi-calendar"></i></span>
+                {{ i?.created_at }}
+              </li>
             </ul>
-            <div class="tags d-flex">
-              <p class="mrl-1">working at algorithma</p>
-              <p class="mrl-1">cairo city</p>
-              <p class="mrl-1">team leader</p>
-            </div>
           </div>
         </div>
-        <div class="notification d-flex align-items-center" v-for="i in 8" :key="i">
-          <nuxt-link tag="img" src="/images/companies/1.png" to="#" class="mrl-1 cursor-pointer"></nuxt-link>
-           <div class="max-width">
-             <nuxt-link to="#" class="d-block">
-               <span class="black fw-bold">Algorithma published new job that match your profile skills</span>
-             </nuxt-link>
-             <ul class="d-flex mb-2 mt-1">
-               <li class="gray mrl-1">21M ago</li>
-               <li class="gray">Social media</li>
-             </ul>
-             <div class="tags d-flex">
-                 <p class="mrl-1">Front end</p>
-                 <p class="mrl-1">vue js</p>
-                 <p class="mrl-1">Api</p>
-             </div>
-           </div>
-        </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import WordsLang from "../mixins/WordsLang";
+import {mapActions , mapGetters} from "vuex";
+import animateData from "@/mixins/animateData";
 export default {
-  name: 'best_companies',
-  mixins:[WordsLang],
-  data(){
-    return {
-      data: [],
-      skills:['php','mysql','laravel'],
-    }
+  name: 'notifications',
+  mixins:[animateData],
+  async asyncData({store}){
+
+    await store.commit('notifications/EmptyData');
+    await store.commit('notifications/ChangeStatus',true);
+    await store.commit('notifications/InitializeData',[]);
+    await store.dispatch('notifications/notificationsAction','?page=1')
+  },
+  computed:{
+    ...mapGetters({
+      'data':'notifications/get_data',
+    })
+  },
+  methods:{
+    ...mapActions({
+      'notificationsAction':'notifications/notificationsAction',
+    }),
+  },
+  mounted() {
+    document.querySelectorAll('.infinite_scroll .el').forEach(tem => {
+      this.observer.observe(tem)
+    })
   },
 }
 </script>
 
 <style lang="scss">
 @import "~style/variables";
-
+.noti-info{
+  width:calc(100% - 100px)
+}
 </style>

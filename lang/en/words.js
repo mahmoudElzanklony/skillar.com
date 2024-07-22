@@ -60,7 +60,7 @@ export default {
     be_member_of_our_community:'Be member of our community to get best jobs in the world',
     username:'Username',
     name:'Name',
-
+    role:'Role',
     email:'Email',
     address:'Address',
     password:'Password',
@@ -156,6 +156,7 @@ export default {
     },
     see_profile:'See profile',
     select_best_choice:'Select best choice',
+    skill:'Skill',
 
   },
   profile:{
@@ -195,6 +196,11 @@ export default {
       show_more:'Show more',
       show_less:'Show less',
       display_video:'Display video',
+      please_activate_your_acc:'Please activate your profile account',
+      resend_activation:'Resend activation email',
+      not_founded_video_to_display:'Not founded video to display',
+      image:'Image',
+
     },
     applied_jobs:{
       name:'Applied jobs',
@@ -511,5 +517,11 @@ export default {
     show_more:'Show more',
     show_less:'Show less',
     created_at:'Created at ',
+    employee: 'Employee',
+    company:'Company',
+    company_name:'Company name',
+    profile_watching:'Profile visiting number',
+    jobs_number:'Published jobs number',
+    applicants_number:'Jobs Applicants number',
   },
 }

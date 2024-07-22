@@ -4,7 +4,7 @@
       <div class="bk">
         <div>
           <img v-if="$auth?.$state?.user?.image"
-                           :src="cvApiUrl+'/users/'+$auth?.$state?.user?.image"></img>
+                           :src="cvApiUrl+'/users/'+$auth?.$state?.user?.image?.name">
           <img v-else src="/images/users/default.png">
           <button class="btn btn-primary" data-bs-toggle="modal"
                   v-if="authorizeControl"
@@ -60,6 +60,7 @@ export default {
     })
   },
   mounted() {
+    console.log(this.$auth.$state.user)
     this.setProfileId(this.current_id);
     if(this.feedbacks.length == 0 && document.URL.indexOf('feedback') >= 0){
        this.feedbackGetDataAction(this.current_id);

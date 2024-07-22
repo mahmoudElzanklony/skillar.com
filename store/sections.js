@@ -27,7 +27,7 @@ export const mutations = {
 
 export const actions = {
   async sectionsNamesAction({ state,commit }) {
-     this.$axios.get('https://cvapi.skillar.com/api/sections/names').then((e)=>{
+     return this.$axios.get('https://cvapi.skillar.com/api/sections/names').then((e)=>{
        commit('InitializeSectionsNames',e.data.data)
      })
   },

@@ -5,6 +5,14 @@
             <div class="col-lg-9 mb-2">
               <div class="inner_profile pb-3">
                 <profile-personal-info-component :edit_info="$parent.$attrs.words.profile.main.edit_info"></profile-personal-info-component>
+                <p
+                  class="alert alert-info m-3 d-flex align-items-center justify-content-between" v-if="$auth.$state.user?.email_verified_at === null && authorizeControl">
+                  <span>
+                    <i class="bi bi-info"></i>
+                    {{ $parent.$attrs.words.profile.main.please_activate_your_acc }}
+                  </span>
+                  <span class="blue cursor-pointer" @click="resend_activation_email">{{ $parent.$attrs.words.profile.main.resend_activation }}</span>
+                </p>
                 <div class="quick_statistics mb-3 p-3">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 mb-2">
@@ -91,6 +99,7 @@
                   <div class="main-heading d-flex align-items-center justify-content-between mb-2">
                     <span class="fw-bold normal">{{ $parent.$attrs.words.profile.main.quick_description }}</span>
                     <span data-bs-toggle="modal"
+                          v-if="$auth.$state.user?.role?.name !== 'company'"
                           @click="get_resumes_action(current_id)"
                           class="blue cursor-pointer"
                           data-bs-target="#apply_for_job">
@@ -99,7 +108,7 @@
                   </div>
                   <p>{{ $auth?.user?.bio }}</p>
                 </div>
-                <div class="variety_data" v-if="sections_names.length > 0 && $auth?.$state?.user.role?.name == 'admin'">
+                <div class="variety_data" v-if="sections_names.length > 0 && $auth?.$state?.user.role?.name != 'company'">
                   <div class="one_variety"
                        v-for="(i,index) in sections_names" :key="index"
                        :name="i.name">
@@ -183,7 +192,9 @@ export default {
       'get_section_data':'profile/employee/getDataSection',
       'get_profile_statistics_action':'profile/statistics/getStatisticsProfile',
       'get_resumes_action':'profile/resumes/getDataAction',
-      'visit_profile':'profile/visits/visitProfileAction'
+      'visit_profile':'profile/visits/visitProfileAction',
+      'resend_activation_email':'profile/activationAccount/resend_activation_email',
+      'activate':'profile/activationAccount/activation'
     }),
 
   },
@@ -195,17 +206,30 @@ export default {
       'jobs_data':'jobs/get_jobs'
     })
   },
-  mounted() {
+  async mounted() {
     // you visit external profile
     if(!this.authorizeControl){
       this.visit_profile(this.current_id);
     }
+    // get statistics of my account
+    this.get_profile_statistics_action(this.current_id)
+    // get jobs for my account
     if(this.$auth.$state.user.role.name !== 'company'){
       this.sectionsNamesAction();
-      this.get_profile_statistics_action(this.current_id)
+      // latest jobs
       this.$store.dispatch('jobs/getJobsAction','?page=1&empty=true');
     }else{
+      // my jobs
       this.$store.dispatch('jobs/getJobsAction','?company_id='+this.$auth.$state.user.id+'&page=1&empty=true')
+    }
+
+    if(this.$route.query?.activation){
+      // activate account
+      await  this.activate(this.$route.query?.activation)
+      console.log(this.$auth.$state.user)
+      window.location = '/profile/'+this.$auth.user.id
+
+
     }
   },
   mixins:[WordsLang,text_editor,AuthorizeControlProfile],

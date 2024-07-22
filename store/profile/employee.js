@@ -71,11 +71,17 @@ export const actions = {
   async saveProfileInfoDataAction({ state,commit }) {
     let target = event.target;
     let data = new FormData(target)
+    let UserObj = this.$auth;
     await this.$axios.post('https://cvapi.skillar.com/api/user/update-personal-info',data)
       .then((e)=>{
+        if(e.data.status === 200){
+          let user = e.data.data;
+          user['image'] = {name:user?.image}
+          UserObj.setUser(user)
+        }
         formValidation(e.data,target,'',true);
       })
-    setTimeout(()=>this.$router.go(0),2000);
+    // setTimeout(()=>this.$router.go(0),2000);
   },
 
 

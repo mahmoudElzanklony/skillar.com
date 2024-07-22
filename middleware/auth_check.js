@@ -29,6 +29,12 @@ export default function ({ redirect, route , $auth}) {
     }
 
 
+  }else{
+    for (let page of auth) {
+      if (route.path.indexOf(page) >= 0) {
+        return redirect('/')
+      }
+    }
   }
 
 

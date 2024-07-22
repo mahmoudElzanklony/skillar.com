@@ -68,7 +68,7 @@
                   </div>
                   <div class="col-12 mb-2">
                     <div class="form-group position-relative input-icon flex-wrap">
-                      <label>{{ $parent.$parent.$attrs.words.register.image }}</label>
+                      <label>{{ $parent.$parent.$attrs.words.profile.main.image }}</label>
                       <span><i class="bi bi-image"></i></span>
                       <input class="form-control" name="image" type="file">
                     </div>

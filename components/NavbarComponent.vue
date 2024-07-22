@@ -20,7 +20,7 @@
           <li class="nav-item link mrl-1">
             <nuxt-link class="nav-link line-hover" to="/best-companies">{{ $attrs.words.navbar.companies_rank }}</nuxt-link>
           </li>
-          <li class="nav-item link mrl-1">
+          <li class="nav-item link mrl-1" v-if="$auth?.state?.user?.role?.name === 'company'">
             <nuxt-link class="nav-link line-hover" to="/jobs/save">{{ $attrs.words.navbar.add_job }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
@@ -43,23 +43,25 @@
           <li class="user_profile " v-if="$auth.loggedIn">
             <ul class="dots-action cursor-pointer d-inline-block">
               <li class="dots">
-                <image-component v-if="$auth?.user?.image" :src="'/users/'+$auth?.user?.image?.name"></image-component>
+                <img v-if="$auth?.$state?.user?.image"
+                     :src="cvApiUrl+'/users/'+$auth?.$state?.user?.image?.name">
                 <img v-else src="/images/users/default.png">
+
                 <ul>
                   <li>
-                    <nuxt-link :to="'/profile/'+$auth?.user?.id">
+                    <nuxt-link class="w-100 d-block" :to="'/profile/'+$auth?.user?.id">
                       <span class="gray"><i class="bi bi-person-circle"></i></span>
                       <span class="gray">{{ $attrs.words.navbar.profile }}</span>
                     </nuxt-link>
                   </li>
                   <li>
-                    <nuxt-link to="/notifications">
+                    <nuxt-link class="w-100 d-block" to="/notifications">
                       <span><i class="bi bi-bell"></i></span>
                       <span class="gray">{{ $attrs.words.navbar.notifications }}</span>
                     </nuxt-link>
                   </li>
                   <li>
-                    <nuxt-link to="/chat">
+                    <nuxt-link class="w-100 d-block" to="/chat">
                       <span><i class="bi bi-chat-dots"></i></span>
                       <span class="gray">{{ $attrs.words.navbar.chat }}</span>
                     </nuxt-link>
@@ -70,8 +72,8 @@
                       <span class="gray">{{ $attrs.words.navbar.nearest_jobs }}</span>
                     </nuxt-link>
                   </li>
-                  <li style="border-top: 1px solid #dddddd">
-                    <nuxt-link to="/logout">
+                  <li style="border-top: 1px solid #dddddd" @click="logout">
+                    <nuxt-link class="w-100 d-block" to="#">
                       <span><i class="bi bi-box-arrow-in-left"></i></span>
                       <span class="gray">{{ $attrs.words.navbar.logout }}</span>
                     </nuxt-link>
@@ -90,6 +92,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "NavbarComponent",
   data(){
@@ -98,7 +102,15 @@ export default {
       another_lang:'',
     }
   },
+  computed:{
+    cvApiUrl(){
+      return 'https://cvapi.skillar.com/images'
+    }
+  },
   methods:{
+    ...mapActions({
+      'logout':'auth/login/logoutAction'
+    }),
     changeLang(){
       if(localStorage.getItem('lang') == null || localStorage.getItem('lang') == 'ar'){
           localStorage.setItem('lang','en');

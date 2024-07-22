@@ -66,6 +66,16 @@
                   <span><i class="bi bi-arrow-down-short"></i></span>
                 </div>
                 <div class="form-group mb-3 input-icon flex-wrap">
+                  <label>{{ $parent.$attrs.words.register.role }}</label>
+                  <select class="form-control" name="type"
+                          required>
+                    <option value="">{{ $parent.$attrs.words.register.select_best_choice }}</option>
+                    <option value="client">{{ $parent.$attrs.words.general.employee }}</option>
+                    <option value="company">{{ $parent.$attrs.words.general.company }}</option>
+                  </select>
+                  <span><i class="bi bi-arrow-down-short"></i></span>
+                </div>
+                <div class="form-group mb-3 input-icon flex-wrap">
                   <input class="mrl-half" type="checkbox">
                   <p class="mb-0">
                     <span>{{ $parent.$attrs.words.register.agree_conditions }}</span>
@@ -152,8 +162,7 @@ export default {
     display: none;
     width: 100%;
     text-align: inherit !important;
-    font-size: $small;
-    font-weight: bold;
+    font-size: $normal;
     margin-top: 5px;
   }
   input[type="submit"]{

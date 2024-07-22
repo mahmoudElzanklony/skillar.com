@@ -8,10 +8,12 @@
           <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-           <video class="w-100"
+           <video class="w-100" v-if="get_video?.file"
                   style="max-height: 400px;"
                   controls loop autoplay
                   :src="computedUrl+'/videos/users/'+get_video?.file"></video>
+          <img class="w-75 d-block m-auto" v-else src="/images/no_data.gif">
+          <p v-if="!get_video?.file" class="text-center gray">{{ $parent.$parent.$attrs.words.profile.main.not_founded_video_to_display }}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $parent.$parent.$attrs.words.general.close }}</button>

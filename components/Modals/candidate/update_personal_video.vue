@@ -10,12 +10,10 @@
         </div>
         <div class="modal-body">
           <form method="post" @submit.prevent="saveVideoAction">
-            <div class="file_upload mb-2">
-               <div>
-                  <span class="mrl-1">{{ $parent.$parent.$attrs.words.general.upload_file_here }}</span>
-                  <span class="gray"><i class="bi bi-cloud-arrow-up"></i></span>
-               </div>
-               <input type="file" name="video" required>
+            <div class="form-group position-relative input-icon flex-wrap mb-3">
+              <label>{{ $parent.$parent.$attrs.words.general.upload_file_here }}</label>
+              <span><i class="bi bi-cloud-arrow-up"></i></span>
+              <input class="form-control" name="video" type="file">
             </div>
             <div class="form-group position-relative input-icon flex-wrap">
               <input class="btn btn-primary" type="submit" :value="$parent.$parent.$attrs.words.general.save">

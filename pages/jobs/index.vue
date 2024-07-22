@@ -37,6 +37,7 @@ export default {
   name: "jobs",
   async asyncData({store}){
     // empty store
+    store.commit('jobs/ChangeStatus',true)
     await store.commit('jobs/EmptyData');
     await store.dispatch('jobs/categories/getDataAction')
     await store.dispatch('places/countries/getCountriesAction')

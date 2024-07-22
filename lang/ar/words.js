@@ -68,6 +68,7 @@ export default {
     phone:'رقم الهاتف',
     country:'الدولة',
     city:'المدينة',
+    role:'نوع المستخدم',
     login:'تسجيل دخول',
     you_have_already_account:'لديك حساب بالفعل',
     register:'تسجيل مستخدم جديد',
@@ -304,6 +305,7 @@ export default {
     },
     see_profile:'رؤية الملف الشخصي',
     select_best_choice:'اختر ما يناسبك',
+    skill:'مهارة'
   },
   templates:{
     main_title:'اخر التصميم المناسب لك',
@@ -385,6 +387,10 @@ export default {
       show_more:'عرض المزيد',
       show_less:'عرض اقل',
       display_video:'عرض الفديو',
+      please_activate_your_acc:'من فضلك قم بتفعيل الحساب الخاص بك',
+      resend_activation:'اعاده ارسال رابط التفعيل',
+      not_founded_video_to_display:'لم يتم العثور علي فديو للعرض',
+      image:'الصورة',
     },
     applied_jobs:{
       name:'الوظائف المتقدم عليها',
@@ -707,5 +713,11 @@ export default {
     show_more:'عرض المزيد',
     show_less:'عرض اقل',
     created_at:'تم النشر في تاريخ ',
+    employee: 'موظف',
+    company:'شركة',
+    company_name:'اسم الشركة',
+    profile_watching:'عدد الزيارات',
+    jobs_number:'عدد الوظائف المنشورة',
+    applicants_number:'عدد المتقدمين للوظائف',
   },
 }

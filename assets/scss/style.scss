@@ -511,6 +511,7 @@ label{
       height: 90px;
       border: 1px solid #eeeeee;
       border-radius: 50%;
+      background-color: white;
     }
   }
   .user-body{
@@ -550,7 +551,6 @@ label{
         border-radius: 4px;
       }
       ul{
-        list-style: disc;
         list-style-position: inside;
       }
       .tags{
@@ -603,16 +603,24 @@ label{
       }
     }
     .video{
-      background-image: url("/images/video.jpg");
+      background-image: url("/images/upload_video.avif");
       height: 300px;
       background-size: cover;
+      background-position: center;
       position: relative;
       border-radius: 8px;
       div{
         position: relative;
         height: 100%;
-        background-color: #0a58ca70;
+        background-color: rgb(10 88 202 / 20%);
         border-radius: 8px;
+        >span{
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         span{
           color:white;
           cursor: pointer;
