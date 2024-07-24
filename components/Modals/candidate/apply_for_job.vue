@@ -34,7 +34,7 @@
 
               </p>
             </div>
-<!--            <div class="form-group position-relative input-icon flex-wrap mb-2" v-if="control">
+            <div class="form-group position-relative input-icon flex-wrap mb-2" v-if="control">
               <label>{{ $parent.$parent.$attrs.words.register.name }}</label>
               <span><i class="bi bi-info-circle"></i></span>
               <input class="form-control" name="name">
@@ -48,7 +48,7 @@
             </div>
             <div class="form-group position-relative input-icon flex-wrap">
               <input class="btn btn-primary" type="submit" :value="$parent.$parent.$attrs.words.general.save">
-            </div>-->
+            </div>
           </form>
         </div>
         <div class="modal-footer">

@@ -4,7 +4,7 @@
       <div class="container" >
         <div class="row">
           <div class="col-lg-8 col-md-6 mb-3">
-            <div class="description box-shadow">
+            <div class="description box-shadow" v-if="false">
               <div class="image">
                 <image-component :src="'/users/'+job_info?.company?.image?.name"></image-component>
               </div>
