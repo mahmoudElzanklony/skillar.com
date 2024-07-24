@@ -8,7 +8,7 @@
             <div class="form-group input-icon flex-wrap">
               <label>{{ $parent.$attrs.words.colleagues.username }}</label>
               <span><i class="bi bi-person"></i></span>
-              <input class="form-control" name="username" required>
+              <input class="form-control" name="username">
             </div>
           </div>
           <div class="col-md-3" v-if="false">
