@@ -109,7 +109,7 @@
                       <span class="normal fw-bold">{{ i?.profile_name }}</span>
                       <p class="mb-0">
                         <span class="blue mrl-half" data-bs-toggle="modal" v-if="authorizeControl"
-                              @click="get_section_properties(i['id'])"
+                              @click="get_section_properties(i['id']);"
                               data-bs-target="#update_dynamic_box"><i class="bi bi-plus"></i></span>
                         <span @click="get_section_data([i['id'],current_id])"><i class="bi bi-caret-down-fill"></i></span>
                       </p>
@@ -190,6 +190,8 @@ export default {
       'visit_profile':'profile/visits/visitProfileAction',
       'activate':'profile/activationAccount/activation'
     }),
+    confirm_open_model(){
+    }
 
   },
   computed:{

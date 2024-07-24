@@ -81,7 +81,7 @@ export const actions = {
         }
         formValidation(e.data,target,'',true);
       })
-    // setTimeout(()=>this.$router.go(0),2000);
+     setTimeout(()=>this.$router.go(0),2000);
   },
 
 
