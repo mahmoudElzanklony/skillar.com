@@ -21,7 +21,7 @@
             </div>
             <img v-else class="w-75 d-block m-auto" src="/images/no_data.gif">
           </div>
-          <form v-else-if="cvs_data.length > 0" @submit.prevent="save_data">
+          <form v-else @submit.prevent="save_data">
             <div :class="'mb-3 checkbox-item flex-wrap box_'+(index)+(control === true ? ' d-flex justify-content-between':'')"
                  v-for="(i,index) in cvs_data" :key="index">
               <input type="radio" name="user_resume_id" :value="i?.id" v-if="!control">
@@ -46,12 +46,10 @@
               </div>
               <input type="file" name="file" required>
             </div>
-            -->
             <div class="form-group position-relative input-icon flex-wrap">
               <input class="btn btn-primary" type="submit" :value="$parent.$parent.$attrs.words.general.save">
-            </div>
+            </div>-->
           </form>
-          <img class="w-75 m-auto" src="/images/no_data.gif">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $parent.$parent.$attrs.words.general.close }}</button>
