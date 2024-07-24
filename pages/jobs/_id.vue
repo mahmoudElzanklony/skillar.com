@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import apply_for_job from "@/components/Modals/candidate/apply_for_job.vue";
+import apply_for_job from "../../components/Modals/candidate/apply_for_job.vue";
 import {mapActions , mapGetters} from "vuex";
 import filterJobs from "@/mixins/FilterJobs";
 import ResendActivation from "../../components/ResendActivation.vue";
