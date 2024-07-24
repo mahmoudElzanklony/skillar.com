@@ -1,7 +1,10 @@
 <template>
   <section class="save_job current_page mt-5" @click="saveEl++">
       <div class="container"  v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
-        <form :complete_url="id ? '/'+id:''" @submit.prevent="jobAction">
+        <ResendActivation></ResendActivation>
+        <form
+          v-if="$auth.$state.user?.email_verified_at != null"
+          :complete_url="id ? '/'+id:''" @submit.prevent="jobAction">
           <div class="row">
             <div class="col-md-6">
               <div>
@@ -229,9 +232,11 @@ import WordsLang from "../../mixins/WordsLang";
 import text_editor from "../../mixins/text_editor";
 import NotForClient from "@/mixins/NotForClient";
 import {mapActions , mapGetters} from "vuex";
+import ResendActivation from "../../components/ResendActivation.vue";
 
 export default {
   name: "job_save",
+  components: {ResendActivation},
   mixins:[WordsLang,text_editor,NotForClient],
   async fetch({store , route , $auth , redirect}){
     if(route?.query?.id){

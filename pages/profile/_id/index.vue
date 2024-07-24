@@ -5,14 +5,7 @@
             <div class="col-lg-9 mb-2">
               <div class="inner_profile pb-3">
                 <profile-personal-info-component :edit_info="$parent.$attrs.words.profile.main.edit_info"></profile-personal-info-component>
-                <p
-                  class="alert alert-info m-3 d-flex align-items-center justify-content-between" v-if="$auth.$state.user?.email_verified_at === null && authorizeControl">
-                  <span>
-                    <i class="bi bi-info"></i>
-                    {{ $parent.$attrs.words.profile.main.please_activate_your_acc }}
-                  </span>
-                  <span class="blue cursor-pointer" @click="resend_activation_email">{{ $parent.$attrs.words.profile.main.resend_activation }}</span>
-                </p>
+                <ResendActivation v-if="authorizeControl"></ResendActivation>
                 <div class="quick_statistics mb-3 p-3">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 mb-2">
@@ -175,9 +168,11 @@ import ShowSectionsData from "../../../components/profile/ShowSectionsData.vue";
 import Update_dynamic_box from "../../../components/Modals/candidate/update_dynamic_box.vue";
 import Apply_for_job from "~/components/Modals/candidate/apply_for_job.vue";
 import AuthorizeControlProfile from "../../../mixins/AuthorizeControlProfile";
+import ResendActivation from "../../../components/ResendActivation.vue";
 export default {
   name: "candidate",
   components: {
+    ResendActivation,
     Apply_for_job,
     Update_dynamic_box,
     ShowSectionsData,
@@ -193,7 +188,6 @@ export default {
       'get_profile_statistics_action':'profile/statistics/getStatisticsProfile',
       'get_resumes_action':'profile/resumes/getDataAction',
       'visit_profile':'profile/visits/visitProfileAction',
-      'resend_activation_email':'profile/activationAccount/resend_activation_email',
       'activate':'profile/activationAccount/activation'
     }),
 
