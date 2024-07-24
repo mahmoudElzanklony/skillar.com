@@ -53,7 +53,7 @@
                 <div class="form-group mb-3 input-icon flex-wrap">
                   <label>{{ $parent.$attrs.words.register.phone }}</label>
                   <span><i class="bi bi-phone"></i></span>
-                  <input class="form-control" name="phone" type="number" >
+                  <input class="form-control" name="phone" type="number" min="0">
                   <p class="alert alert-danger"></p>
                 </div>
                 <div class="form-group mb-3 input-icon flex-wrap">

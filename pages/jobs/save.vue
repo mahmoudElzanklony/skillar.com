@@ -244,7 +244,7 @@ export default {
        try{
          await store.dispatch('jobs/getJobInfoAction',route.query.id+'?has_not_view=true');
          // check authorization of job
-         if(!($auth?.$state?.user?.role?.name === 'admin' || $auth?.$state?.id === store.getters['jobs/get_item']['company_id'])){
+         if(!($auth?.$state?.user?.role?.name === 'admin' || route?.query?.id === store.getters['jobs/get_item']['company_id'])){
            redirect('/');
          }
        }catch (e){

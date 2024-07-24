@@ -16,7 +16,7 @@
                          $auth.$state.user?.email_verified_at !== null &&
                          application_info === null"
                         data-bs-toggle="modal"
-                        @click="get_my_cvs_action"
+                        @click="get_my_cvs_action($auth?.$state?.user?.id)"
                         data-bs-target="#apply_for_job">{{ $parent?.$attrs?.words?.jobs?.details.apply_job }}</button>
                 <span v-if="job_info?.status !== 'open'" :class="'badge bg-'+(job_info?.status === 'hired' ? 'success':'dark')">{{ job_info?.status }}</span>
 
