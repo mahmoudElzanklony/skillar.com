@@ -4,7 +4,7 @@
       <div class="container" >
         <div class="row">
           <div class="col-lg-8 col-md-6 mb-3">
-            <div class="description box-shadow" v-if="false">
+            <div class="description box-shadow">
               <div class="image">
                 <image-component :src="'/users/'+job_info?.company?.image?.name"></image-component>
               </div>
@@ -22,7 +22,7 @@
 
               </div>
               <ResendActivation></ResendActivation>
-              <p>
+              <p v-if="false">
                 <span class="gray" v-html="job_info.description"></span>
               </p>
 
@@ -68,7 +68,9 @@
                 </p>
               </div>
               <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.save_job.job_responsibilities }}</p>
-              <p class="gray end-border-bottom" v-html="job_info.responsibilities"></p>
+              <p class="gray end-border-bottom"
+                 v-if="false"
+                 v-html="job_info.responsibilities"></p>
               <div class="skills">
                 <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.required_skills }}</p>
                 <ul class="d-flex align-items-center flex-wrap">
