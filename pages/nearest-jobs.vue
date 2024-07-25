@@ -95,6 +95,10 @@ export default {
   right: 0;
   margin-top: 200px;
 }
+.test_test{
+  color:red;
+  background-color: black;
+}
 .distances{
 
   div{
