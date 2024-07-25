@@ -42,7 +42,7 @@
                    </select>
                 </div>
                 <div class="mb-2">
-                    <input type="submit" class="btn btn-primary w-100" :value="$parent.$parent.$attrs.words.header.register">
+                    <input type="submit" class="btn btn-primary w-100" :value="$parent.$parent.$attrs.words.header.search">
                 </div>
              </form>
           </div>
