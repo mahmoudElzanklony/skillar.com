@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse mrl-reverse-15" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center position-relative">
           <li class="nav-item link mrl-1">
-            <nuxt-link to="/" class="nav-link line-hover" aria-current="page" href="#">
+            <nuxt-link to="/" class="nav-link line-hover" aria-current="page" href="/">
               {{ $attrs.words.navbar.home }}
             </nuxt-link>
           </li>
