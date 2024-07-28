@@ -5,18 +5,11 @@
             <div class="col-lg-9 mb-2">
               <div class="inner_profile pb-3">
                 <profile-personal-info-component :edit_info="$parent.$attrs.words.profile.main.edit_info"></profile-personal-info-component>
-                <p
-                  class="alert alert-info m-3 d-flex align-items-center justify-content-between" v-if="$auth.$state.user?.email_verified_at === null && authorizeControl">
-                  <span>
-                    <i class="bi bi-info"></i>
-                    {{ $parent.$attrs.words.profile.main.please_activate_your_acc }}
-                  </span>
-                  <span class="blue cursor-pointer" @click="resend_activation_email">{{ $parent.$attrs.words.profile.main.resend_activation }}</span>
-                </p>
+                <ResendActivation v-if="authorizeControl"></ResendActivation>
                 <div class="quick_statistics mb-3 p-3">
                   <div class="row">
                     <div class="col-lg-6 col-md-6 mb-2">
-                      <nuxt-link :to="$auth?.$state?.user?.role?.name === 'company' ? '/profile/'+current_id+'/published-jobs':'/profile/'+current_id+'/applied-jobs'">
+                      <nuxt-link :to="authorizeControl ? ($auth?.$state?.user?.role?.name === 'company' ? '/profile/'+current_id+'/published-jobs':'/profile/'+current_id+'/applied-jobs'):'#'">
                         <div class="statistics d-flex align-items-center justify-content-between">
                           <div>
                             <p class="fw-bold" v-if="$auth?.$state?.user?.role?.name !== 'company'">{{ $parent.$attrs.words.profile.main.number_of_applied_jobs }}</p>
@@ -106,7 +99,7 @@
                       {{ $parent.$attrs.words.profile.published_jobs.show_resume }}
                     </span>
                   </div>
-                  <p>{{ $auth?.user?.bio }}</p>
+                  <p>{{ visitor_obj?.bio }}</p>
                 </div>
                 <div class="variety_data" v-if="sections_names.length > 0 && $auth?.$state?.user.role?.name != 'company'">
                   <div class="one_variety"
@@ -116,7 +109,7 @@
                       <span class="normal fw-bold">{{ i?.profile_name }}</span>
                       <p class="mb-0">
                         <span class="blue mrl-half" data-bs-toggle="modal" v-if="authorizeControl"
-                              @click="get_section_properties(i['id'])"
+                              @click="get_section_properties(i['id']);"
                               data-bs-target="#update_dynamic_box"><i class="bi bi-plus"></i></span>
                         <span @click="get_section_data([i['id'],current_id])"><i class="bi bi-caret-down-fill"></i></span>
                       </p>
@@ -175,9 +168,11 @@ import ShowSectionsData from "../../../components/profile/ShowSectionsData.vue";
 import Update_dynamic_box from "../../../components/Modals/candidate/update_dynamic_box.vue";
 import Apply_for_job from "~/components/Modals/candidate/apply_for_job.vue";
 import AuthorizeControlProfile from "../../../mixins/AuthorizeControlProfile";
+import ResendActivation from "../../../components/ResendActivation.vue";
 export default {
   name: "candidate",
   components: {
+    ResendActivation,
     Apply_for_job,
     Update_dynamic_box,
     ShowSectionsData,
@@ -193,9 +188,10 @@ export default {
       'get_profile_statistics_action':'profile/statistics/getStatisticsProfile',
       'get_resumes_action':'profile/resumes/getDataAction',
       'visit_profile':'profile/visits/visitProfileAction',
-      'resend_activation_email':'profile/activationAccount/resend_activation_email',
       'activate':'profile/activationAccount/activation'
     }),
+    confirm_open_model(){
+    }
 
   },
   computed:{
@@ -203,7 +199,8 @@ export default {
       'sections_names':'sections/get_sections_names',
       'data_sections':'profile/employee/get_data_sections',
       'statistics_data':'profile/statistics/get_data',
-      'jobs_data':'jobs/get_jobs'
+      'jobs_data':'jobs/get_jobs',
+      'visitor_obj':'profile/visits/get_visited_user'
     })
   },
   async mounted() {

@@ -52,7 +52,7 @@
                     </div>
                   </div>
                 </div>
-                <img v-else class="d-block m-auto" src="/images/No_data.gif">
+                <img v-else class="d-block m-auto" src="/images/no_data.gif">
                 <button class="btn btn-primary m-2"
                         data-bs-toggle="modal"
                         data-bs-target="#save_feedback"

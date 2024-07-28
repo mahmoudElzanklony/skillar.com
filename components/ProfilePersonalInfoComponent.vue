@@ -3,8 +3,8 @@
     <div class="info">
       <div class="bk">
         <div>
-          <img v-if="$auth?.$state?.user?.image"
-                           :src="cvApiUrl+'/users/'+$auth?.$state?.user?.image?.name">
+          <img v-if="visitor_obj?.image"
+                           :src="cvApiUrl+'/users/'+visitor_obj?.image?.name">
           <img v-else src="/images/users/default.png">
           <button class="btn btn-primary" data-bs-toggle="modal"
                   v-if="authorizeControl"
@@ -15,19 +15,19 @@
         <div class="col-lg-6">
           <p class="d-flex align-items-center">
             <span class="mrl-half"><i class="bi bi-person-circle"></i></span>
-            <span>{{ $auth?.$state?.user?.username }}</span>
+            <span>{{ visitor_obj?.username }}</span>
           </p>
         </div>
         <div class="col-lg-6">
           <p class="d-flex align-items-center">
             <span class="mrl-half"><i class="bi bi-envelope"></i></span>
-            <span>{{ $auth?.$state?.user?.email }}</span>
+            <span>{{ visitor_obj?.email }}</span>
           </p>
         </div>
         <div class="col-lg-6">
           <p class="d-flex align-items-center">
             <span><i class="bi bi-geo-alt"></i></span>
-            <span>{{ $auth?.$state?.user?.address }}</span>
+            <span>{{ visitor_obj?.address }}</span>
           </p>
         </div>
       </div>
@@ -38,14 +38,15 @@
 <script>
 import ImageComponent from "./ImageComponent.vue";
 import {mapGetters , mapActions ,mapMutations} from "vuex";
-import AuthorizeControlProfile from "@/mixins/AuthorizeControlProfile";
+import AuthorizeControlProfile from "../mixins/AuthorizeControlProfile";
 export default {
   name: "ProfilePersonalInfoComponent",
   props:['edit_info'],
   mixins:[AuthorizeControlProfile],
   computed:{
     ...mapGetters({
-      'feedbacks':'profile/feedbacks/get_data'
+      'feedbacks':'profile/feedbacks/get_data',
+      'visitor_obj':'profile/visits/get_visited_user'
     }),
     cvApiUrl(){
       return 'https://cvapi.skillar.com/images'
@@ -56,7 +57,7 @@ export default {
       'feedbackGetDataAction':'profile/feedbacks/getDataAction'
     }),
     ...mapMutations({
-      'setProfileId':'profile/employee/SetProfileId'
+      'setProfileId':'profile/employee/SetProfileId',
     })
   },
   mounted() {
@@ -65,6 +66,7 @@ export default {
     if(this.feedbacks.length == 0 && document.URL.indexOf('feedback') >= 0){
        this.feedbackGetDataAction(this.current_id);
     }
+    console.log(this.vistor_obj)
   },
   components:{ImageComponent}
 }

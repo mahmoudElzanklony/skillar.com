@@ -33,9 +33,10 @@ export const actions = {
   },
   async sectionPropertiesAction({state,commit},payload){
     commit('InitializeSectionProperties',null)
-    this.$axios.get('https://cvapi.skillar.com/api/sections/properties?id='+payload).then((e)=>{
+    await this.$axios.get('https://cvapi.skillar.com/api/sections/properties?id='+payload).then((e)=>{
       commit('InitializeSectionProperties',e.data.data)
     })
+    document.querySelector('#update_dynamic_box').className = 'modal fade show'
   }
 
 }

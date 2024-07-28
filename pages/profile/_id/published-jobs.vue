@@ -221,6 +221,7 @@ export default {
     JobComponent
   },
   async asyncData({store , $auth , route}){
+    await store.commit('jobs/EmptyData')
     await store.dispatch('jobs/getJobsAction','?company_id='+route.params.id+'&page=1')
   },
   mixins:[animateData,AuthorizeControlProfile,delete_item],

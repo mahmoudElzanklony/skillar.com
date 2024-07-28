@@ -11,14 +11,19 @@
               <div class="d-flex align-items-center justify-content-between">
                 <p class="fw-bold">{{ job_info?.name }}</p>
                 <button class="btn btn-primary"
-                        v-if="job_info?.status === 'open' && $auth.$state.user && $auth.$state.user?.role.name !== 'company' && application_info === null"
+                        v-if="job_info?.status === 'open' && $auth.$state.user && $auth.$state.user?.role.name !== 'company'
+                         && application_info === null &&
+                         $auth.$state.user.role.name !== 'company' &&
+                         $auth.$state.user?.email_verified_at !== null &&
+                         application_info === null"
                         data-bs-toggle="modal"
-                        @click="get_my_cvs_action"
+                        @click="get_my_cvs_action($auth?.$state?.user?.id)"
                         data-bs-target="#apply_for_job">{{ $parent?.$attrs?.words?.jobs?.details.apply_job }}</button>
                 <span v-if="job_info?.status !== 'open'" :class="'badge bg-'+(job_info?.status === 'hired' ? 'success':'dark')">{{ job_info?.status }}</span>
 
               </div>
-              <p>
+              <ResendActivation></ResendActivation>
+              <p v-if="false">
                 <span class="gray" v-html="job_info.description"></span>
               </p>
 
@@ -64,7 +69,9 @@
                 </p>
               </div>
               <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.save_job.job_responsibilities }}</p>
-              <p class="gray end-border-bottom" v-html="job_info.responsibilities"></p>
+              <p class="gray end-border-bottom"
+                 v-if="false"
+                 v-html="job_info.responsibilities"></p>
               <div class="skills">
                 <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.required_skills }}</p>
                 <ul class="d-flex align-items-center flex-wrap">
@@ -95,7 +102,9 @@
                   <p :style="(job_info?.applicants.length <= 1000 ? 'width: '+(job_info.applicants.length * 10 / 100)+'%':'width:100%')" class="progress-bar progress-bar-animated progress-bar-striped"></p>
                 </div>
               </div>
-              <div class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
+              <div
+                v-if="false"
+                class="mb-3 d-flex statistics_type align-items-center flex-wrap justify-content-between end-border-bottom">
                 <p class="mb-1">
                   <span class="top-3 position-relative gray"><i class="bi bi-person-check"></i></span>
                   <span>{{ $parent?.$attrs?.words?.jobs?.details.matching_job_profile }}</span>
@@ -129,9 +138,10 @@
 </template>
 
 <script>
-import apply_for_job from "@/components/Modals/candidate/apply_for_job.vue";
+import apply_for_job from "../../components/Modals/candidate/apply_for_job.vue";
 import {mapActions , mapGetters} from "vuex";
 import filterJobs from "@/mixins/FilterJobs";
+import ResendActivation from "../../components/ResendActivation.vue";
 export default {
   name: "job_id",
   async asyncData({store , route , $auth}){
@@ -164,7 +174,7 @@ export default {
       'get_my_cvs_action':'profile/resumes/getDataAction'
     })
   },
-  components:{apply_for_job},
+  components:{ResendActivation, apply_for_job},
 }
 </script>
 

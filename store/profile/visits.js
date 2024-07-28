@@ -36,7 +36,6 @@ export const actions = {
   },
   async getVisitedUserAction({ state,commit },payload) {
     this.$axios.get('/user?user_id='+payload).then((e)=>{
-        console.log(e.data);
         commit('InitializeVisitedUser',e.data);
     }).catch((e)=>{
       commit('InitializeError',1);
