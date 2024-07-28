@@ -145,6 +145,7 @@ import ResendActivation from "../../components/ResendActivation.vue";
 export default {
   name: "job_id",
   async asyncData({store , route , $auth}){
+    console.log(route.params)
     await store.dispatch('jobs/getJobInfoAction',route.params.id);
     let filters = '?name='+store.getters['jobs/get_item'].name+'&nid='+store.getters['jobs/get_item'].id+'&page=1';
     await store.dispatch('jobs/getJobsAction',filters);
