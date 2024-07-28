@@ -23,11 +23,11 @@
 
               </div>
               <ResendActivation></ResendActivation>
-              <p v-if="false">
+              <p>
                 <span class="gray" v-html="job_info.description"></span>
               </p>
 
-              <p v-if="false">
+              <p>
                 <span class="gray d-none toggle-show" v-html="job_info.description"></span>
               </p>
               <p class=" toggle_p_show" v-if="false">
@@ -70,7 +70,6 @@
               </div>
               <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.save_job.job_responsibilities }}</p>
               <p class="gray end-border-bottom"
-                 v-if="false"
                  v-html="job_info.responsibilities"></p>
               <div class="skills">
                 <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.required_skills }}</p>

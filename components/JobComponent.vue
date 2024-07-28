@@ -28,7 +28,7 @@
       </ul>
 
        <div class="job-header d-flex justify-content-between align-items-center position-relative">
-          <image-component :src="'/users/'+img"></image-component>
+         <img :src="'https://cvapi.skillar.com/images/users/'+img">
           <a v-if="full_url == undefined && admin != 'yes'" target="_blank"
                      :href="'/jobs/'+id" class="btn btn-outline-primary">{{ show_details }}</a>
           <a v-else target="_blank"
