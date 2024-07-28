@@ -41,35 +41,12 @@
               <h2 class="fw-bold mb-3 text-center-mobile">{{ $parent.$attrs.words.home.explore_by_category }}</h2>
               <p class="gray text-center-mobile">{{ $parent.$attrs.words.home.we_provide_many_categories }}</p>
               <div class="row">
-                <div class="col-lg-6 mb-3">
-                  <nuxt-link to="#">
+                <div class="col-lg-6 mb-3" v-for="(i,index) in categories" :key="index" v-if="index < 4">
+                  <nuxt-link :to="'/jobs?category_id='+i?.id">
                     <div class="category d-flex align-items-center justify-content-between bk-white p-3 rounded">
-                      <img src="/images/icons/Wallet.png" class="mrl-1">
-                      <p>Financial Accounting</p>
-                    </div>
-                  </nuxt-link>
-                </div>
-                <div class="col-lg-6 mb-3">
-                  <nuxt-link to="#">
-                    <div class="category d-flex align-items-center justify-content-between bk-white p-3 rounded">
-                      <img src="/images/icons/Profile.png" class="mrl-1">
-                      <p>Human Resource</p>
-                    </div>
-                  </nuxt-link>
-                </div>
-                <div class="col-lg-6 mb-3">
-                  <nuxt-link to="#">
-                    <div class="category d-flex align-items-center justify-content-between bk-white p-3 rounded">
-                      <img src="/images/icons/Gallery.png" class="mrl-1">
-                      <p>Art , Media or communication</p>
-                    </div>
-                  </nuxt-link>
-                </div>
-                <div class="col-lg-6 mb-3">
-                  <nuxt-link to="#">
-                    <div class="category d-flex align-items-center justify-content-between bk-white p-3 rounded">
-                      <img src="/images/icons/Tick.png" class="mrl-1">
-                      <p>Business Development</p>
+                      <img v-if="i?.image == null" :src="'/images/icons/'+icons[index]" class="mrl-1">
+                      <image-component v-else :src="'/categories/'+i?.image?.name"></image-component>
+                      <p>{{ i?.name }}</p>
                     </div>
                   </nuxt-link>
                 </div>
@@ -80,16 +57,16 @@
                 <div class="popular-cats p-3 rounded bk-white">
                   <h3 class="fw-bold mb-3">{{ $parent.$attrs.words.home.popular_categories }}</h3>
                   <ul>
-                    <li  v-for="i in 4" :key="i">
-                      <nuxt-link class="d-flex justify-content-between p-2 w-100" to="#">
-                        <span class="fw-bold">Front end</span>
-                        <span>{{ 6 * i }}</span>
+                    <li  v-for="(i,index) in categories" :key="index" v-if="index < 4">
+                      <nuxt-link class="d-flex justify-content-between p-2 w-100" :to="'/jobs?category_id='+i?.id">
+                        <span class="fw-bold">{{ i?.name }}</span>
+                        <span>{{ i?.jobs_count }}</span>
                       </nuxt-link>
                     </li>
                   </ul>
                 </div>
                 <div class="rounded bk-white all_cats mt-3 p-3">
-                  <nuxt-link to="#" class="d-flex align-items-center justify-content-between">
+                  <nuxt-link to="/jobs" class="d-flex align-items-center justify-content-between">
                     <div>
                       <img src="/images/icons/Paper_Plus.png" class="mrl-1">
                       <span>{{ $parent.$attrs.words.home.see_all_categories }}</span>
@@ -129,7 +106,7 @@
                           <div class="line"></div>
                         </div>
                       </div>
-                      <div class="box-footer d-flex align-items-center justify-content-between">
+                      <div class="box-footer d-flex align-items-center justify-content-between" v-if="false">
                         <nuxt-link to="#">{{ $parent.$attrs.words.home.open_profile }}</nuxt-link>
                         <div class="line"></div>
                       </div>
@@ -142,7 +119,7 @@
               <div class="info_about_expand text-center-mobile">
                 <h1 class="mb-3 fw-bold">{{ $parent.$attrs.words.home.expand_your_connections }}</h1>
                 <p class="gray mb-3">{{$parent.$attrs.words.home.connection_note}}</p>
-                <nuxt-link to="#" class="btn btn-primary d-inline-flex align-items-center">
+                <nuxt-link to="/colleagues" class="btn btn-primary d-inline-flex align-items-center">
                   <span class="p-relative white mrl-1">{{ $parent.$attrs.words.home.increase_my_connections }}</span>
                   <span class="white" v-if="current_lang == null || current_lang == 'ar'"><i class="bi bi-arrow-left position-relative top-1"></i></span>
                   <span class="white" v-else><i class="bi bi-arrow-right position-relative top-1"></i></span>
@@ -158,20 +135,20 @@
           <h2 class="fw-bold black text-center">{{ $parent.$attrs.words.home.newest_jobs_for_you }}</h2>
           <p class="gray text-center">{{ $parent.$attrs.words.home.get_the_fastest_jobs }}</p>
           <ul class="d-flex align-items-center justify-content-center mb-3 flex-wrap">
-            <li class="text-center mx-3" v-for="i in 5" :key="i">
-              <nuxt-link to="#" class="gray line-hover position-relative">Front end</nuxt-link>
+            <li class="text-center mx-3" v-for="(i,index) in categories" :key="index">
+              <span @click="get_jobs(i?.id)" class="gray cursor-pointer line-hover position-relative">{{ i?.name }}</span>
             </li>
           </ul>
           <div class="row">
-            <div class="col-lg-4 col-md-6 mb-2" v-for="i in 10" :key="i">
+            <div class="col-lg-4 col-md-6 mb-2" v-for="(i,index) in jobs_data" :key="index">
               <job-component
-                id="1"
-                img="/images/companies/1.png"
-                title="Back end"
-                :skills=skills
-                company_name="ShutterStock"
-                time="30M ago"
-                :show_details="$parent.$attrs.words.home.open"
+                :title="i?.name"
+                :company_name="i?.company?.username"
+                :time="i?.published"
+                :id="i?.id"
+                :skills="i?.skills"
+                :show_details="i?.status"
+                :img="i?.company?.image?.name"
               ></job-component>
             </div>
           </div>
@@ -212,15 +189,41 @@ import CurrentLang from "../mixins/CurrentLang";
 import JobComponent from "../components/JobComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import DotsScrollComponent from "../components/DotsScrollComponent";
+import {mapGetters , mapActions} from "vuex";
+
 export default {
   name: 'home',
   mixins:[CurrentLang],
   data(){
     return {
-      data: [],
+      icons:['Wallet.png','Profile.png','Gallery.png','Tick.png'],
       skills:['php','mysql','laravel'],
       dots:['header','number_of_users','explore_categories','expand_connections','lastest_jobs','get_last_information'],
     }
+  },
+  computed:{
+    ...mapGetters({
+      'categories':'jobs/categories/get_data',
+      'jobs_data':'jobs/get_jobs'
+    })
+  },
+  methods:{
+    ...mapActions({
+      'categoriesAction':'jobs/categories/getDataAction',
+      'jobsAction':'jobs/getJobsAction'
+    }),
+    clear_jobs(){
+      this.$store.commit('jobs/ChangeStatus',true)
+      this.$store.commit('jobs/EmptyData');
+    },
+    get_jobs(id){
+      this.clear_jobs()
+      this.jobsAction('?category_id='+id+'&page=1')
+    }
+  },
+  mounted() {
+    this.clear_jobs()
+    this.jobsAction('?page=1')
   },
   components:{HeaderComponent,DotsScrollComponent, JobComponent},
 }

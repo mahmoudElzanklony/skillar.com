@@ -11,6 +11,7 @@ export default {
     apply_to_job:'وتقدم لها من خلال سكلير',
     current_job:'الوظيفة الحالية',
     select_your_country:'أختر الدولة',
+    select_your_category:'أختر القسم',
     register:'تسجيل مستخدم جديد',
     search:'أبحث',
   },

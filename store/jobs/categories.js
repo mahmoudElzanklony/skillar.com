@@ -33,6 +33,13 @@ export const actions = {
     })
   },
 
+  getStatisticsDataAction({ commit }) {
+    return this.$axios.get('/statistics/categories')
+      .then((e)=>{
+        commit('InitializeData',e.data.data);
+      })
+  },
+
 
   getDataAction({ commit }) {
     return this.$axios.get('/categories-jobs')

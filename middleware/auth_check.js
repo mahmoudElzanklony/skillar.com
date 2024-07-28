@@ -3,7 +3,7 @@
 
 export default function ({ redirect, route , $auth}) {
   var auth = ['login','register','forget'];
-  let unauth = ['privacy','terms','conditions','reset','new_password','about','home','index'];
+  let unauth = ['privacy','terms','conditions','reset','new_password','about','home','index','jobs'];
 
   if (route.path.indexOf('dashboard') >= 0) {
     if ($auth.loggedIn != true) {

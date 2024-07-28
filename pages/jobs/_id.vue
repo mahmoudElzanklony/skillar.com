@@ -11,7 +11,7 @@
               <div class="d-flex align-items-center justify-content-between">
                 <p class="fw-bold">{{ job_info?.name }}</p>
                 <button class="btn btn-primary"
-                        v-if="job_info?.status === 'open' && $auth.$state.user.role.name !== 'company' && application_info === null"
+                        v-if="job_info?.status === 'open' && $auth.$state.user && $auth.$state.user?.role.name !== 'company' && application_info === null"
                         data-bs-toggle="modal"
                         @click="get_my_cvs_action"
                         data-bs-target="#apply_for_job">{{ $parent?.$attrs?.words?.jobs?.details.apply_job }}</button>
@@ -134,12 +134,14 @@ import {mapActions , mapGetters} from "vuex";
 import filterJobs from "@/mixins/FilterJobs";
 export default {
   name: "job_id",
-  async asyncData({store , route}){
-    console.log(route)
+  async asyncData({store , route , $auth}){
     await store.dispatch('jobs/getJobInfoAction',route.params.id);
     let filters = '?name='+store.getters['jobs/get_item'].name+'&nid='+store.getters['jobs/get_item'].id+'&page=1';
     await store.dispatch('jobs/getJobsAction',filters);
-    await store.dispatch('profile/applications/getSpecificOneAction',store.getters['jobs/get_item'].id);
+    if($auth.$state.user){
+      await store.dispatch('profile/applications/getSpecificOneAction',store.getters['jobs/get_item'].id);
+    }
+
   },
   mixins:[filterJobs],
   data(){

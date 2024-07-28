@@ -11,6 +11,7 @@ export default {
     apply_to_job:'find it and apply to it',
     current_job:'Current job',
     select_your_country:'select your country',
+    select_your_category:'select your category',
     register:'Register',
     search:'Search',
   },
