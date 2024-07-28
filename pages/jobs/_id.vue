@@ -6,7 +6,7 @@
           <div class="col-lg-8 col-md-6 mb-3">
             <div class="description box-shadow">
               <div class="image">
-                <image-component :src="'/users/'+job_info?.company?.image?.name"></image-component>
+                <img :src="'https://cvapi.skillar.com/images/users/'+job_info?.company?.image?.name">
               </div>
               <div class="d-flex align-items-center justify-content-between">
                 <p class="fw-bold">{{ job_info?.name }}</p>

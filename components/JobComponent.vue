@@ -37,8 +37,8 @@
         </div>
         <div class="job-body">
           <p class="fw-bold mb-1">
-            <nuxt-link  class="black normal"
-               :to="'/jobs/'+id">{{ title }}</nuxt-link>
+            <a target="_blank" class="black normal"
+               :href="'/jobs/'+id">{{ title }}</a>
           </p>
           <ul class="d-flex flex-wrap">
             <li class="mrl-1" v-for="(skill,index) in skills" :key="index">{{ skill?.title }}</li>
