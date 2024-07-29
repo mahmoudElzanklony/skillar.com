@@ -11,6 +11,7 @@ export default {
     apply_to_job:'وتقدم لها من خلال سكلير',
     current_job:'الوظيفة الحالية',
     select_your_country:'أختر الدولة',
+    select_your_category:'أختر القسم',
     register:'تسجيل مستخدم جديد',
     search:'أبحث',
   },
@@ -557,8 +558,10 @@ export default {
     employees:'الموظفين',
     reports:'التقارير',
     jobs:'الوظائف',
+    applied_jobs:'المتقدمين للوظائف',
     countries:'الدول',
     cities:'المدن',
+    statistics:'احصائيات',
 
     links:[
       {
@@ -572,9 +575,14 @@ export default {
         icon:'bi bi-people',
       },
       {
-        name:'الطلبات',
-        path:'/orders',
-        icon:'bi bi-file-text',
+        name:'الاقسام',
+        icon:'bi bi-tags',
+        path:'/categories',
+      },
+      {
+        name:'الوظائف',
+        icon:'bi bi-briefcase',
+        path:'/jobs',
       },
       {
         name:'الاعدادت',
@@ -608,7 +616,7 @@ export default {
       },
     ],
     users:{
-      users_statistics:'احصائيات المستخدمين',
+      title:'احصائيات المستخدمين',
       update_data:'تحديث البيانات',
       search:'بحث',
       delete:'مسح',
@@ -617,12 +625,16 @@ export default {
       password:'كلمة المرور',
       leave_password:'اترك كلمة المرور فارغة في حالة عدم تغييرها',
       control:'التحكم',
+      actionPath:'users/getDataAction',
+      emptyPath:'users/InitializeData',
+      getterPath:'users/get_data',
 
       filters:[
         {
           name:'اسم المستخدم',
           input:'username',
           type:'text',
+          icon:'bi bi-user',
         },
         {
           name:'بداية التاريخ',
@@ -641,12 +653,85 @@ export default {
         email:'البريد الالكتروني',
         country_id:'الدولة',
         phone:'رقم الهاتف',
-        owner_cvs:'تصميماتي',
-        form_cvs:'طلباتي',
+        jobs_count:'عدد الوظائف',
+        applicants_count:'عدد مرات التقديم للوظائف',
+        role_id:'دور المستخدم',
       },
+      model:[
+        {
+          name:'username',
+          label:'اسم المستخدم',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-user',
+        },
+        {
+          name:'email',
+          label:'البريد الالكتروني',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-envelope',
+        },
+        {
+          name:'password',
+          label:'كلمة المرور',
+          placeholder:'اترك كلمة المرور فارغه في حاله عدم الرغبه في التعديل عليها',
+          type:'text',
+          icon:'fa fa-lock',
+        },
+        {
+          name:'phone',
+          label:'رقم الهاتف',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-phone',
+        },
+        {
+          name:'image',
+          label:'الصورة',
+          placeholder:'',
+          type:'file',
+          icon:'fa fa-image',
+        },
+      ],
+
     },
 
 
+    categories:{
+      title:'الاقسام',
+      update_data:'تحديث البيانات',
+      actionPath:'jobs/categories/getStatisticsDataAction',
+      emptyPath:'jobs/categories/InitializeData',
+      getterPath:'jobs/categories/get_data',
+      savePath:'jobs/categories/saveCategoryAction',
+      image:'الصورة الشخصية',
+      name:'الاسم',
+      model:[
+        {
+          name:'ar_name',
+          label:'الاسم بالعربي',
+          type:'text',
+        },
+        {
+          name:'en_name',
+          label:'الاسم بالانجليزي',
+          type:'text',
+        },
+        {
+          name:'image',
+          label:'صورة للقسم',
+          type:'file',
+        },
+      ],
+      table:{
+        ar_name:'الاسم بالعربي',
+        en_name:'الاسم بالانجليزي',
+        image:'الصوره',
+        jobs_count:'عدد الوظائف',
+        created_at:'التاريخ',
+      },
+    },
 
 
     orders:{
@@ -719,5 +804,7 @@ export default {
     profile_watching:'عدد الزيارات',
     jobs_number:'عدد الوظائف المنشورة',
     applicants_number:'عدد المتقدمين للوظائف',
+    save_info:'حفظ البيانات',
+    add_item:'اضافة عنصر',
   },
 }

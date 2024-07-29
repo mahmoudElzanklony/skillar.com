@@ -19,7 +19,7 @@ export default function (data,target,url = '',reset = false,router = null){
         }
         var input = $(target).find('input[name="' + error + '"],select[name="' + error + '"],textarea[name="' + error + '"]');
         if (input.length > 0) {
-          input.next().html(err).fadeIn();
+          input.nextAll('p').first().html(err).fadeIn();
         } else {
           // not found
           Toast.fire({

@@ -35,13 +35,22 @@ import {mapGetters , mapActions} from "vuex";
 import animateData from "../../mixins/animateData";
 export default {
   name: "jobs",
-  async asyncData({store}){
+  async asyncData({store , route}){
+    let output = '?';
+    if(Object.keys(route.query).length > 0){
+       for(let key of Object.keys(route.query)){
+          if(route.query[key] != null){
+             output+= key+'='+route.query[key]+'&';
+          }
+       }
+    }
+    output +='page=1';
     // empty store
     store.commit('jobs/ChangeStatus',true)
     await store.commit('jobs/EmptyData');
     await store.dispatch('jobs/categories/getDataAction')
     await store.dispatch('places/countries/getCountriesAction')
-    await store.dispatch('jobs/getJobsAction','?page=1')
+    await store.dispatch('jobs/getJobsAction',output)
   },
   mixins:[animateData],
   components: {FilterationJobsComponent, JobComponent},

@@ -1,5 +1,5 @@
 <template>
-  <section class="save_job current_page mt-5" @click="saveEl++">
+  <section class="save_job current_page mt-5" >
       <div class="container"  v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
         <ResendActivation></ResendActivation>
         <form
@@ -17,6 +17,7 @@
                  <label>{{ $parent.$attrs.words.jobs.save_job.job_name }}</label>
                  <input class="form-control" name="name" v-model="job_data.name">
                  <span><i class="bi bi-info"></i></span>
+                 <p class="alert alert-danger"></p>
               </div>
               <div class="mb-3 input-icon flex-wrap">
                 <label>{{ $parent.$attrs.words.jobs.save_job.job_category }}</label>
@@ -26,6 +27,8 @@
                           :selected="job_info?.category?.id === i?.id">{{ i?.name }}</option>
                 </select>
                 <span><i class="bi bi-arrow-down"></i></span>
+                <p class="alert alert-danger"></p>
+
               </div>
               <div class="row">
                 <div class="col-6">
@@ -35,6 +38,8 @@
                            v-model="job_data.min_experience"
                            required>
                     <span><i class="bi bi-arrow-up-circle"></i></span>
+                    <p class="alert alert-danger"></p>
+
                   </div>
                 </div>
                 <div class="col-6 ">
@@ -44,6 +49,8 @@
                            v-model="job_data.max_experience"
                            required>
                     <span><i class="bi bi-arrow-down-circle"></i></span>
+                    <p class="alert alert-danger"></p>
+
                   </div>
                 </div>
               </div>
@@ -61,6 +68,7 @@
               <div class="mb-3 input-icon flex-wrap">
                 <label class="w-100">{{ $parent.$attrs.words.jobs.save_job.short_description }}</label>
                 <textarea name="description" class="editor form-control" v-html="job_data.description"></textarea>
+                <p class="alert alert-danger"></p>
               </div>
             </div>
           </div>
@@ -76,6 +84,7 @@
               <div class="mb-3 input-icon flex-wrap">
                 <label class="w-100">{{ $parent.$attrs.words.jobs.save_job.job_responsibilities }}</label>
                 <textarea name="responsibilities" class="editor form-control" v-html="job_data.responsibilities" ></textarea>
+                <p class="alert alert-danger"></p>
               </div>
             </div>
           </div>
@@ -348,6 +357,9 @@ export default {
 <style lang="scss" scoped>
 @import "~/assets/scss/variables";
 form{
+  .alert-danger{
+    display: none;
+  }
   >div.row{
     border-bottom: 1px solid #dddddd;
   }

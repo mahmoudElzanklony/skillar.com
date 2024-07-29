@@ -7,7 +7,7 @@ export default {
 
   computed:{
     authorizeControl(){
-      return this.current_id == this.$auth.$state.user.id;
+      return this.current_id == this.$auth.$state?.user?.id;
     }
   },
   async created() {

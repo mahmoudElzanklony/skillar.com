@@ -1,26 +1,27 @@
 <template>
   <div class="dashboard">
-     <h1 class="text-center fw-bold blue mb-3 mt-3">{{ words.statistics }}</h1>
+    <div v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
+     <h1 class="text-center fw-bold blue mb-3 mt-3">{{ $parent?.$attrs?.words?.admin.statistics }}</h1>
      <div class="container">
        <div class="row mb-3">
-         <p class="fw-bold">{{ words.jobs }}</p>
+         <p class="fw-bold">{{ $parent?.$attrs?.words?.admin.jobs }}</p>
          <div id="chart"></div>
        </div>
        <div class="row mb-3">
          <div class="col-lg-6">
-           <p class="fw-bold">{{ words.applied_jobs }}</p>
+           <p class="fw-bold">{{ $parent?.$attrs?.words?.admin.applied_jobs }}</p>
            <div id="jobs_chart"></div>
          </div>
          <div class="col-lg-6">
-           <p class="fw-bold">{{ words.users }}</p>
+           <p class="fw-bold">{{ $parent?.$attrs?.words?.admin.users }}</p>
            <div id="users_chart"></div>
          </div>
        </div>
-       <div class="row mb-3">
+       <div v-if="false" class="row mb-3">
          <div class="col-lg-6">
            <p class="d-flex align-items-center justify-content-between">
-             <span class="fw-bold">{{ words.daily_report }}</span>
-             <nuxt-link to="/dashboard/reports">{{ words.show_all }} {{ words.reports }}</nuxt-link>
+             <span class="fw-bold">{{ $parent?.$attrs?.words?.admin?.daily_report }}</span>
+             <nuxt-link to="/dashboard/reports">{{ $parent?.$attrs?.words?.admin?.show_all }} {{ $parent?.$attrs?.words?.admin.reports }}</nuxt-link>
            </p>
            <div class="reports overflow-auto mx-500">
              <div class="report d-flex align-items-center justify-content-between" v-for="i in 6" :key="i">
@@ -37,10 +38,10 @@
          </div>
          <div class="col-lg-6" >
            <p class="d-flex align-items-center justify-content-between">
-             <span class="fw-bold">{{ words.last_jobs }}</span>
-             <nuxt-link to="/dashboard/jobs">{{ words.show_all }} {{ words.jobs }}</nuxt-link>
+             <span class="fw-bold">{{ $parent?.$attrs?.words?.admin?.last_jobs }}</span>
+             <nuxt-link to="/dashboard/jobs">{{ $parent?.$attrs?.words?.admin?.show_all }} {{ $parent?.$attrs?.words?.admin?.jobs }}</nuxt-link>
            </p>
-           <div class="table-data mx-500 overflow-auto">
+           <div class="table-data mx-500 overflow-auto" v-if="false">
 
               <table class="table table-hover table-bordered table-stripped table-responsive text-center">
                 <thead>
@@ -72,16 +73,15 @@
          </div>
        </div>
      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import WordsLang from "../../mixins/WordsLang";
 import Vue from "vue";
 export default {
   name: "index",
   layout:"admin",
-  mixins:[WordsLang],
   data(){
     return {
       options:{

@@ -14,23 +14,61 @@ export const getters = {
 }
 
 export const mutations = {
-  InitializeData(state,payload){
-    console.log('mutation')
+  InitializeData(state,payload = []){
     state.categories = payload;
+  },
+  PushNewItem(state,payload ){
+    state.categories.push(payload)
+  },
+  UpdateItem(state,payload ){
+    let id = state.categories.findIndex((item)=>{
+      return item.id ==  payload.id;
+    });
+    if(id >= 0){
+      if(state.categories[id]) {
+        this._vm.$set(state.categories,id,payload);
+      }
+    }
   },
 
 }
 
 
 export const actions = {
-  async saveDataAction({ state,commit,rootGetters }) {
+  async saveCategoryAction({ state,commit,rootGetters }) {
     let target = event.target;
     let data = new FormData(target)
-    data.append('receiver_id',rootGetters["profile/employee/get_profile_id"])
+    if(target.getAttribute('complete_url').length > 0){
+      data.append('_method','PUT');
+      data.append('id',target.getAttribute('complete_url').replace('/',''));
+    }
 
-    this.$axios.post('/profile/make-feedback',data).then((e)=>{
-      formValidation(e.data,target,'',true,'');
+    this.$axios.post('/categories-jobs'+(target.getAttribute('complete_url').length > 0 ? target.getAttribute('complete_url'):''),data, {
+      headers: {
+        'AllLangs': true
+      }
     })
+      .then((e)=>{
+      formValidation(e.data,target,'',true,'');
+        if(target.getAttribute('complete_url').length > 0){
+          commit('UpdateItem',e.data.data)
+        }else{
+          commit('PushNewItem',e.data.data)
+        }
+        console.log(e.data.data)
+        console.log(state.categories)
+    })
+  },
+
+  getStatisticsDataAction({ commit } , payload = '') {
+    return this.$axios.get('/statistics/categories',payload != '' ? {
+      headers: {
+        'AllLangs': true
+      }
+    }:'')
+      .then((e)=>{
+        commit('InitializeData',e.data.data);
+      })
   },
 
 
