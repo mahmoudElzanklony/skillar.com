@@ -74,7 +74,7 @@ export default {
   methods:{
     ...mapActions({
       'countriesAction':'places/countries/getCountriesAction',
-      'categoriesAction':'jobs/categories/getStatisticsDataAction'
+      'categoriesAction':'jobs/categories/getStatisticsDataAction',
     })
   },
   mounted() {

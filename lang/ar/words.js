@@ -558,8 +558,10 @@ export default {
     employees:'الموظفين',
     reports:'التقارير',
     jobs:'الوظائف',
+    applied_jobs:'المتقدمين للوظائف',
     countries:'الدول',
     cities:'المدن',
+    statistics:'احصائيات',
 
     links:[
       {
@@ -573,9 +575,14 @@ export default {
         icon:'bi bi-people',
       },
       {
-        name:'الطلبات',
-        path:'/orders',
-        icon:'bi bi-file-text',
+        name:'الاقسام',
+        icon:'bi bi-tags',
+        path:'/categories',
+      },
+      {
+        name:'الوظائف',
+        icon:'bi bi-briefcase',
+        path:'/jobs',
       },
       {
         name:'الاعدادت',
@@ -648,6 +655,40 @@ export default {
     },
 
 
+    categories:{
+      title:'الاقسام',
+      update_data:'تحديث البيانات',
+      actionPath:'jobs/categories/getStatisticsDataAction',
+      emptyPath:'jobs/categories/InitializeData',
+      getterPath:'jobs/categories/get_data',
+      savePath:'jobs/categories/saveCategoryAction',
+      image:'الصورة الشخصية',
+      name:'الاسم',
+      model:[
+        {
+          name:'ar_name',
+          label:'الاسم بالعربي',
+          type:'text',
+        },
+        {
+          name:'en_name',
+          label:'الاسم بالانجليزي',
+          type:'text',
+        },
+        {
+          name:'image',
+          label:'صورة للقسم',
+          type:'file',
+        },
+      ],
+      table:{
+        ar_name:'الاسم بالعربي',
+        en_name:'الاسم بالانجليزي',
+        image:'الصوره',
+        jobs_count:'عدد الوظائف',
+        created_at:'التاريخ',
+      },
+    },
 
 
     orders:{
@@ -720,5 +761,7 @@ export default {
     profile_watching:'عدد الزيارات',
     jobs_number:'عدد الوظائف المنشورة',
     applicants_number:'عدد المتقدمين للوظائف',
+    save_info:'حفظ البيانات',
+    add_item:'اضافة عنصر',
   },
 }

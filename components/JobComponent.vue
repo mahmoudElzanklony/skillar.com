@@ -3,25 +3,26 @@
 
     <div class="job position-relative">
 
-      <ul v-if="admin == 'yes'" class="dots-action cursor-pointer position-absolute d-inline-block">
+      <ul v-if="admin == 'yes'"
+          class="dots-action cursor-pointer d-flex flex-row-reverse">
         <li class="dots">
           <i class="bi bi-three-dots-vertical gray"></i>
           <ul>
             <li>
-              <a href="/jobs/1" target="_blank">
+              <a :href="'/jobs/'+id" target="_blank">
                 <span class="gray"><i class="bi bi-eye"></i></span>
-                <span class="gray">{{ controls.view }}</span>
+                <span class="gray">{{ $parent.$parent.$attrs.words.general.view }}</span>
               </a>
             </li>
             <li>
-              <a href="/jobs/save?id=1" target="_blank">
+              <a :href="'/jobs/save?id='+id" target="_blank">
                 <span class="gray"><i class="bi bi-pencil-square"></i></span>
-                <span class="gray">{{ controls.edit }}</span>
+                <span class="gray">{{ $parent.$parent.$attrs.words.general.edit }}</span>
               </a>
             </li>
-            <li>
+            <li @click="$emit('delete_job',id)">
               <span class="red"><i class="bi bi-trash delete red remove-element"></i></span>
-              <span class="gray">{{ controls.delete }}</span>
+              <span class="gray">{{ $parent.$parent.$attrs.words.general.delete }}</span>
             </li>
           </ul>
         </li>

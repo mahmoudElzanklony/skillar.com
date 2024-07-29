@@ -354,35 +354,42 @@ export default {
     }
   },
   admin:{
-    home:'الرئيسية',
-    admins:'المشرفين',
-    notifications:'الاشعارات',
-    settings:'الاعدادت',
-    companies:'الشركات',
-    employees:'الموظفين',
-    reports:'التقارير',
-    jobs:'الوظائف',
-    countries:'الدول',
-    cities:'المدن',
+    home:'Home',
+    admins:'Admins',
+    notifications:'Notifications',
+    settings:'Settings',
+    companies:'Companies',
+    employees:'Employees',
+    reports:'Reports',
+    jobs:'Jobs',
+    applied_jobs:'Jobs appliers',
+    countries:'Countries',
+    cities:'Cities',
+    statistics:'Statistics',
 
     links:[
       {
-        name:'الرئيسية',
+        name:'Home',
         path:'/',
         icon:'bi bi-house',
       },
       {
-        name:'المستخدمين',
+        name:'Users',
         path:'/users',
         icon:'bi bi-people',
       },
       {
-        name:'الطلبات',
-        path:'/orders',
-        icon:'bi bi-file-text',
+        name:'Categories',
+        icon:'bi bi-tags',
+        path:'/categories',
       },
       {
-        name:'الاعدادت',
+        name:'Jobs',
+        icon:'bi bi-briefcase',
+        path:'/jobs',
+      },
+      {
+        name:'Settings',
         path:'/settings',
         icon:'bi bi-file-text',
       },
@@ -390,21 +397,28 @@ export default {
     ],
     home_data:[
       {
-        name:'المستخدمين',
+        name:'Users',
         icon:'bi bi-people',
         actionPath:'dashboard/users/allDataAction',
         getterPath:'dashboard/users/getTotal',
         url:'/dashboard/users',
       },
       {
-        name:'الطلبات',
-        icon:'bi bi-file-text',
+        name:'Categories',
+        icon:'bi bi-tags',
+        actionPath:'jobs/categories/getStatisticsDataAction',
+        getterPath:'jobs/categories/get_data',
+        url:'/dashboard/categories',
+      },
+      {
+        name:'Jobs',
+        icon:'bi bi-briefcase',
         actionPath:'orders/allDataAdminAction',
         getterPath:'orders/getTotal',
         url:'/dashboard/orders',
       },
       {
-        name:'نسبة تكلفة الخدمة',
+        name:'Service Cost',
         icon:'bi bi-file-text',
         actionPath:'percentages/allData',
         getterPath:'percentages/getItem',
@@ -413,45 +427,78 @@ export default {
       },
     ],
     users:{
-      users_statistics:'احصائيات المستخدمين',
-      update_data:'تحديث البيانات',
-      search:'بحث',
-      delete:'مسح',
-      edit:'تعديل',
-      image:'الصورة الشخصية',
-      password:'كلمة المرور',
-      leave_password:'اترك كلمة المرور فارغة في حالة عدم تغييرها',
-      control:'التحكم',
+      users_statistics:'Users Statistics',
+      update_data:'Update data',
+      search:'Search',
+      delete:'Delete',
+      edit:'Edit',
+      image:'Image',
+      password:'Password',
+      leave_password:'Leave password empty in case you dont want to edit it',
+      control:'Control',
 
       filters:[
         {
-          name:'اسم المستخدم',
+          name:'Username',
           input:'username',
           type:'text',
         },
         {
-          name:'بداية التاريخ',
+          name:'Start date',
           input:'start_date',
           type:'date',
         },
         {
-          name:'نهاية التاريخ',
+          name:'End date',
           input:'end_date',
           type:'date',
         },
       ],
 
       table:{
-        username:'اسم المستخدم',
-        email:'البريد الالكتروني',
-        country_id:'الدولة',
-        phone:'رقم الهاتف',
-        owner_cvs:'تصميماتي',
-        form_cvs:'طلباتي',
+        username:'Username',
+        email:'Email',
+        country_id:'Country',
+        phone:'Phone',
+        owner_cvs:'Owners cvs',
+        form_cvs:'Orders',
       },
     },
 
-
+    categories:{
+      title:'Categories',
+      update_data:'update data',
+      emptyPath:'jobs/categories/InitializeData',
+      actionPath:'jobs/categories/getStatisticsDataAction',
+      getterPath:'jobs/categories/get_data',
+      savePath:'jobs/categories/saveCategoryAction',
+      image:'image',
+      name:'name',
+      table:{
+        ar_name:'Arabic name',
+        en_name:'English name',
+        jobs_count:'Jobs count',
+        image:'Image',
+        created_at:'Date',
+      },
+      model:[
+        {
+          name:'ar_name',
+          label:'Arabic name',
+          type:'text',
+        },
+        {
+          name:'en_name',
+          label:'English name',
+          type:'text',
+        },
+        {
+          name:'image',
+          label:'Image',
+          type:'file',
+        },
+      ]
+    },
 
 
     orders:{
@@ -524,5 +571,8 @@ export default {
     profile_watching:'Profile visiting number',
     jobs_number:'Published jobs number',
     applicants_number:'Jobs Applicants number',
+    save_info:'Save info',
+    add_item:'Add item',
+
   },
 }
