@@ -36,10 +36,12 @@ export const actions = {
     if(payload){
       data.append('user_id',payload);
     }
-    this.$axios.post('/employee/get-resumes',data)
+    await this.$axios.post('/employee/get-resumes',data)
       .then((e)=>{
         commit('InitializeData',e.data.data);
       })
+    document.querySelector('.modal').className = 'modal fade show'
+
   },
 
 
