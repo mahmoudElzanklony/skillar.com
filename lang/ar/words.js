@@ -619,7 +619,7 @@ export default {
       },
     ],
     users:{
-      users_statistics:'احصائيات المستخدمين',
+      title:'احصائيات المستخدمين',
       update_data:'تحديث البيانات',
       search:'بحث',
       delete:'مسح',
@@ -628,12 +628,16 @@ export default {
       password:'كلمة المرور',
       leave_password:'اترك كلمة المرور فارغة في حالة عدم تغييرها',
       control:'التحكم',
+      actionPath:'users/getDataAction',
+      emptyPath:'users/InitializeData',
+      getterPath:'users/get_data',
 
       filters:[
         {
           name:'اسم المستخدم',
           input:'username',
           type:'text',
+          icon:'bi bi-user',
         },
         {
           name:'بداية التاريخ',
@@ -652,9 +656,48 @@ export default {
         email:'البريد الالكتروني',
         country_id:'الدولة',
         phone:'رقم الهاتف',
-        owner_cvs:'تصميماتي',
-        form_cvs:'طلباتي',
+        jobs_count:'عدد الوظائف',
+        applicants_count:'عدد مرات التقديم للوظائف',
+        role_id:'دور المستخدم',
       },
+      model:[
+        {
+          name:'username',
+          label:'اسم المستخدم',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-user',
+        },
+        {
+          name:'email',
+          label:'البريد الالكتروني',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-envelope',
+        },
+        {
+          name:'password',
+          label:'كلمة المرور',
+          placeholder:'اترك كلمة المرور فارغه في حاله عدم الرغبه في التعديل عليها',
+          type:'text',
+          icon:'fa fa-lock',
+        },
+        {
+          name:'phone',
+          label:'رقم الهاتف',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-phone',
+        },
+        {
+          name:'image',
+          label:'الصورة',
+          placeholder:'',
+          type:'file',
+          icon:'fa fa-image',
+        },
+      ],
+
     },
 
 

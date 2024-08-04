@@ -25,7 +25,8 @@
             :key="index">
           <td v-for="(val,key) in Object.keys($parent.$attrs.words?.admin?.categories?.table)"
               :key="key">
-            <span>{{ item[val] }}</span>
+            <image-component v-if="item[val]?.name" :src="'/categories/'+item[val]?.name"></image-component>
+            <span v-else>{{ item[val] }}</span>
           </td>
           <td>
               <span v-tooltip="$parent.$attrs.words?.general.control['edit']"
@@ -66,7 +67,9 @@
                   <span><i class="bi bi-info-circle"></i></span>
                   <input class="form-control"
                          :type="$parent.$attrs.words?.admin?.categories?.model[c]['type']"
-                         :name="$parent.$attrs.words?.admin?.categories?.model[c]['name']" >
+                         :name="$parent.$attrs.words?.admin?.categories?.model[c]['name']"
+                         :value="item != null && $parent.$attrs.words?.admin?.categories?.model[c]['type'] === 'text' ? item[$parent.$attrs.words?.admin?.categories?.model[c]['name']]:'' "
+                  >
                 </div>
                 <div class="form-group position-relative input-icon flex-wrap mb-2">
                   <input class="btn btn-primary" type="submit" :value="$parent.$attrs.words?.general.save">
@@ -89,9 +92,12 @@
 <script>
 import delete_item from "@/mixins/delete_item.vue";
 import UpdateItem from "../../mixins/UpdateItem";
+import ImageComponent from "../../components/ImageComponent.vue";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "categories",
+  components: {ImageComponent},
   layout:"admin",
   mixins:[delete_item,UpdateItem],
   mounted() {

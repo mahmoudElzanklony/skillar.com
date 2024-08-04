@@ -74,6 +74,7 @@ export const actions = {
     let UserObj = this.$auth;
     await this.$axios.post('https://cvapi.skillar.com/api/user/update-personal-info',data)
       .then((e)=>{
+        console.log(e.data)
         if(e.data.status === 200){
           let user = e.data.data;
           user['image'] = {name:user?.image}

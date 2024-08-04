@@ -7,6 +7,7 @@ export default{
   },
   methods:{
     update_item(item){
+      console.log(item)
       this.item = item;
     },
   }

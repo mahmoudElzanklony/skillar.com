@@ -43,7 +43,12 @@ export const actions = {
       data.append('id',target.getAttribute('complete_url').replace('/',''));
     }
 
-    this.$axios.post('/categories-jobs'+(target.getAttribute('complete_url').length > 0 ? target.getAttribute('complete_url').replace('/',''):''),data).then((e)=>{
+    this.$axios.post('/categories-jobs'+(target.getAttribute('complete_url').length > 0 ? target.getAttribute('complete_url'):''),data, {
+      headers: {
+        'AllLangs': true
+      }
+    })
+      .then((e)=>{
       formValidation(e.data,target,'',true,'');
         if(target.getAttribute('complete_url').length > 0){
           commit('UpdateItem',e.data.data)

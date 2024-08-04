@@ -84,7 +84,7 @@
 
 <script>
 import {mapActions , mapGetters} from "vuex";
-import FilterJobs from "@/mixins/FilterJobs";
+import FilterJobs from "../mixins/FilterJobs";
 export default {
   name: "FilterationJobsComponent",
   mixins:[FilterJobs],

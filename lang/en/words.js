@@ -430,7 +430,7 @@ export default {
       },
     ],
     users:{
-      users_statistics:'Users Statistics',
+      title:'Users Statistics',
       update_data:'Update data',
       search:'Search',
       delete:'Delete',
@@ -439,12 +439,16 @@ export default {
       password:'Password',
       leave_password:'Leave password empty in case you dont want to edit it',
       control:'Control',
+      actionPath:'users/getDataAction',
+      emptyPath:'users/InitializeData',
+      getterPath:'users/get_data',
 
       filters:[
         {
           name:'Username',
           input:'username',
           type:'text',
+          icon:'bi bi-user',
         },
         {
           name:'Start date',
@@ -463,9 +467,49 @@ export default {
         email:'Email',
         country_id:'Country',
         phone:'Phone',
-        owner_cvs:'Owners cvs',
-        form_cvs:'Orders',
+        jobs_count:'Published Jobs',
+        applicants_count:'Times number for applying jobs',
+        role_id:'Role',
       },
+      model:[
+        {
+          name:'username',
+          label:'Username',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-user',
+        },
+        {
+          name:'email',
+          label:'Email',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-envelope',
+        },
+        {
+          name:'password',
+          label:'Password',
+          placeholder:'Leave password empty in case you dont want edit it',
+          type:'text',
+          icon:'fa fa-lock',
+        },
+        {
+          name:'phone',
+          label:'Phone',
+          placeholder:'',
+          type:'text',
+          icon:'fa fa-phone',
+        },
+        {
+          name:'image',
+          label:'Image',
+          placeholder:'',
+          type:'file',
+          icon:'fa fa-image',
+        },
+      ],
+
+
     },
 
     categories:{
