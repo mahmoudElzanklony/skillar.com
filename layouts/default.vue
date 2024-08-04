@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
       <navbar-component :words="words_data"></navbar-component>
       <nuxt :words="words_data" />
       <loader v-if="loader_status" :color="'#0a58ca'" size="60px"></loader>
@@ -17,6 +17,14 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "default",
+  data: () => ({
+    loading: true
+  }),
+  created() {
+    this.$nextTick(function() {
+      this.loading = false
+    })
+  },
   components: {NavbarComponent,FooterComponent},
   computed:{
     ...mapGetters({

@@ -1,5 +1,6 @@
 <template>
-  <div class="modal fade" id="update_dynamic_box" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade"
+       id="update_dynamic_box" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog"
          v-if="Object.keys($parent.$parent.$attrs).length > 0  &&  Object.keys($parent.$parent.$attrs.words).length > 0">
       <div class="modal-content">
@@ -28,7 +29,7 @@
               <input type="hidden" :name="'attribute_id[]'" :value="i['id']">
               <label>{{ i['label'] }}</label>
               <span
-                v-if="!(i['type'] == 'date' || i['type'] == 'textarea' || i['type'] == 'select')"><i class="bi bi-info-circle"></i></span>
+                v-if="!(i['type'] == 'date' || i['type'] == 'textarea' || i['type'] == 'select' || index === 0)"><i class="bi bi-info-circle"></i></span>
               <textarea class="form-control editor"
                         v-if="i['type'] == 'textarea'"
                         name="answer[]"
@@ -43,13 +44,20 @@
                       name="answer[]" :type="i['type']"
                       :placeholder="i['placeholder']"></select>
               <input v-else class="form-control" name="answer[]"
+                     v-model="inputs.find((e) => e['id'] === i['id']).val"
                      :type="i['type'] == 'image' ? 'file':i['type']"
-                     :value="get_answers_section != null ?
-                     get_answers_section.find((e)=> e?.attribute?.id == i['id'])?.answer:''"
+                     @blur="blurInput"
+                     @keyup="auto_complete(index)"
+
                      :placeholder="i['placeholder']">
               <input type="hidden" name="type[]"
                      :value="i['type'] == 'image' ? 'image':
                      i['type'] == 'file' ? 'file':'text'">
+              <ul v-if="index === 0 && tags.length > 0" class="auto_complete">
+                 <li v-for="(tag,ind) in tags"
+                     @click="selectThisOption(tag?.value)"
+                     :key="ind" >{{ tag?.value }}</li>
+              </ul>
             </div>
 
             <div class="form-group position-relative input-icon flex-wrap mb-2">
@@ -70,20 +78,66 @@
 
 <script>
 import {mapActions ,  mapGetters} from "vuex";
+import $ from "jquery";
 
 export default {
   name:'update_dynamic_box',
+  data(){
+    return {
+      inputs:[],
+      auto_complete_types:['skills','educations','abilities']
+    }
+  },
+  watch:{
+    section_attributes(val){
+      this.inputs = [];
+      if(val != null) {
+        this.inputs = this?.section_attributes?.attributes?.map(function (e) {
+          return {id: e.id, val: ''}
+        })
+      }
+      if(this.get_answers_section) {
+        for (let input of this.inputs) {
+          input.val = this.get_answers_section.find((e) => e?.attribute?.id == input['id'])?.answer
+        }
+      }
+    },
+  },
   methods:{
     ...mapActions({
-      'save_data':'profile/employee/saveSectionInfoDataAction'
-    })
+      'save_data':'profile/employee/saveSectionInfoDataAction',
+      'tags_input':'tags_input/getTags'
+    }),
+    blurInput(){
+      $('.auto_complete').slideUp();
+    },
+    async auto_complete(index){
+       if(index === 0){
+         let table_name = this.section_attributes?.profile_name?.toLowerCase();
+         if(this.auto_complete_types.includes(table_name)){
+           await this.tags_input({table:table_name,search:event.target.value})
+         }
+         if(this.tags.length > 0){
+           $('.auto_complete').slideDown();
+         }
+       }else{
+         $('.auto_complete').slideUp();
+       }
+    },
+    selectThisOption(val){
+      $(event.target).parent().parent().find('.form-control').val(val);
+      $('.auto_complete').slideUp();
+    }
   },
   computed:{
      ...mapGetters({
        'section_attributes':'sections/get_section_properties',
-       'get_answers_section':'profile/employee/get_selected_section_box_info'
-
+       'get_answers_section':'profile/employee/get_selected_section_box_info',
+       'tags':'tags_input/getData'
      })
+  },
+  mounted() {
+
   }
 }
 </script>
@@ -91,5 +145,22 @@ export default {
 
 
 <style scoped lang="scss">
-
+.auto_complete{
+  width: 100%;
+  max-height: 120px;
+  overflow: auto;
+  background-color: #58585821;
+  margin: 10px 0px;
+  border-radius: 5px;
+  li{
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+    transition: 0.5s all;
+    cursor: pointer;
+    &:hover{
+      padding-right: 30px;
+      padding-left: 40px;
+    }
+  }
+}
 </style>

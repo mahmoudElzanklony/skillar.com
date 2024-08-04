@@ -41,10 +41,14 @@ export default {
                   data_filters += item[0] + '='+item[1]+'&';
                 }
               }
-              let user_id = this.$auth.$state.user.id
-              if(this?.current_user){
-                user_id = this.current_user;
+              let user_id = null;
+              if(this.$auth?.$state?.user) {
+                user_id = this.$auth.$state.user.id
+                if (this?.current_user) {
+                  user_id = this.current_user;
+                }
               }
+              console.log('user id ' , user_id)
               if(this.filter_with_user_id){
                 data_filters += this.filter_with_user_id+'='+user_id+'&';
               }

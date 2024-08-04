@@ -11,6 +11,13 @@
   export default {
     name:'RecaptchaComponent',
     methods:{
+      loadRecaptcha() {
+        const script = document.createElement('script');
+        script.src = 'https://www.google.com/recaptcha/api.js';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      },
       verify_recaptha() {
         document.querySelector('input[type="submit"]').removeAttribute('disabled');
         grecaptcha.ready(function() {
@@ -22,6 +29,7 @@
       },
     },
     mounted() {
+      this.loadRecaptcha()
       document.querySelector('input[type="submit"]').setAttribute('disabled',true);
       var com = this;
       window.verify_recaptha = function (){

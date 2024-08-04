@@ -21,6 +21,7 @@ export default {
     posts:'Posts',
     jobs:'Jobs',
     register:'Register',
+    login:'Login',
     profile:'Profile',
     companies_rank:'Companies rank',
     colleagues:'Colleagues',
@@ -29,6 +30,8 @@ export default {
     add_job:'Add job',
     notifications:'Notifications',
     logout:'Logout',
+    jd:'Job definition',
+    cv:'CV builder',
   },
   footer:{
     quick_links:'Quick Links',

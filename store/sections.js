@@ -36,6 +36,7 @@ export const actions = {
     await this.$axios.get('https://cvapi.skillar.com/api/sections/properties?id='+payload).then((e)=>{
       commit('InitializeSectionProperties',e.data.data)
     })
+    commit('tags_input/InitializeData',[],{root:true});
     document.querySelector('#update_dynamic_box').className = 'modal fade show'
   }
 

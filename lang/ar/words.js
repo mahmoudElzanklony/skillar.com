@@ -21,6 +21,7 @@ export default {
     posts:'المنشورات',
     jobs:'الوظائف',
     register:'تسجيل مستخدم جديد',
+    login:'تسجيل الدخول',
     profile:'الملف الشخصي',
     companies_rank:'ترتيب  الشركات',
     colleagues:'زملائي',
@@ -29,6 +30,8 @@ export default {
     notifications:'الاشعارات',
     add_job:'أضافة وظيفة',
     logout:'تسجيل الخروج',
+    jd:'الوصف التوظيفي',
+    cv:'بناء السيرة الذاتيه',
   },
   footer:{
     quick_links:'روابط سريعة',

@@ -15,7 +15,10 @@
             </nuxt-link>
           </li>
           <li class="nav-item link mrl-1">
-            <nuxt-link to="#" class="nav-link line-hover" href="#">{{ $attrs.words.navbar.about }}</nuxt-link>
+            <a href="https://jd.skillar.com" target="_blank" class="nav-link line-hover">{{ $attrs.words.navbar.jd }}</a>
+          </li>
+          <li class="nav-item link mrl-1">
+            <a href="https://cv.skillar.com" target="_blank" class="nav-link line-hover">{{ $attrs.words.navbar.cv }}</a>
           </li>
           <li class="nav-item link mrl-1">
             <nuxt-link class="nav-link line-hover" to="/best-companies">{{ $attrs.words.navbar.companies_rank }}</nuxt-link>
@@ -34,6 +37,9 @@
         <ul class="navbar-nav mb-2 mb-lg-0 align-items-md-center">
           <li class="nav-item mrl-1" v-if="!($auth.loggedIn)">
             <nuxt-link to="/auth/register" class="nav-link btn-bk-primary">{{ $attrs.words.navbar.register }}</nuxt-link>
+          </li>
+          <li class="nav-item mrl-1" v-if="!($auth.loggedIn)">
+            <nuxt-link to="/auth/login" class="nav-link btn btn-outline-primary">{{ $attrs.words.navbar.login }}</nuxt-link>
           </li>
           <li class="nav-item mrl-1">
             <button class="nav-link btn btn-outline-primary" @click="changeLang">
@@ -112,10 +118,14 @@ export default {
       'logout':'auth/login/logoutAction'
     }),
     changeLang(){
+      document.cookie = "lang=; expires=Thu, 01 Jan 1990 00:00:00 UTC; path=/;";
       if(localStorage.getItem('lang') == null || localStorage.getItem('lang') == 'ar'){
-          localStorage.setItem('lang','en');
+        localStorage.setItem('lang','en');
+        document.cookie = "lang=en; expires=Thu, 01 Jan 3970 00:00:00 UTC; path=/;";
+
       }else{
         localStorage.setItem('lang','ar');
+        document.cookie = "lang=ar; expires=Thu, 01 Jan 3970 00:00:00 UTC; path=/;";
       }
       window.location = document.URL;
     },
