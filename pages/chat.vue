@@ -1,91 +1,84 @@
 <template>
   <div class="chat current_page">
-    <div class="container mt-4 mb-4">
+    <div class="container mt-4 mb-4" v-if="Object.keys($parent?.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
       <div class="outer">
          <div class="outer-heading">
-            <h2 class="mb-0">{{ words.messager }}</h2>
+            <h2 class="mb-0">{{ $parent.$attrs.words.chat.messager }}</h2>
             <div class="d-flex justify-content-between">
               <p class="mb-0">
-                <nuxt-link to="/chat?type=all" class="gray">{{ words.total_messages }}</nuxt-link>
+                <nuxt-link to="/chat?type=all" class="gray">{{ $parent.$attrs.words.chat.total_messages }}</nuxt-link>
                 <nuxt-link to="/chat?type=all">420</nuxt-link> ,
-                <nuxt-link to="/chat?type=unseen" class="gray">{{ words.unseen_messages }}</nuxt-link>
+                <nuxt-link to="/chat?type=unseen" class="gray">{{ $parent.$attrs.words.chat.unseen_messages }}</nuxt-link>
                 <nuxt-link to="/chat?type=unseen">10</nuxt-link>
               </p>
-              <nuxt-link to="#">{{ words.contact_support }}</nuxt-link>
+              <nuxt-link to="#">{{ $parent.$attrs.words.chat.contact_support }}</nuxt-link>
             </div>
          </div>
          <div class="outer-body">
             <div class="col-lg-4">
               <div class="friends">
                 <div class="form-group input-icon">
-                  <input class="form-control" :placeholder="words.search_friend">
+                  <input class="form-control" :placeholder="$parent.$attrs.words.chat.search_friend">
                   <span><i class="bi bi-search"></i></span>
                 </div>
                 <ul>
-                  <li class="d-flex flex-wrap align-items-center cursor-pointer p-1" v-for="i in 5" :key="i">
-                    <img src="/images/companies/1.png" class="mrl-1">
+                  <li class="d-flex flex-wrap align-items-center cursor-pointer p-1"
+                      v-for="(i,index) in friends"
+                      @click="get_messages(i)"
+                      :key="index">
+                    <image-component :src="'https://cvapi.skillar.com/images/users/'+(i[i?.receiver?.id == $auth.state?.user?.id ? 'sender':'receiver']?.image?.name)"></image-component>
                     <div class="message_info">
-                      <p class="mb-0 fw-bold">Algorithma</p>
-                      <p class="gray">we want to make with you meeting to discuss some important things</p>
+                      <p class="mb-0 fw-bold">{{ (i?.receiver?.id == $auth.state?.user?.id) ? i?.sender?.username : i?.receiver?.username }}</p>
+                      <p class="gray">{{ i?.message }}</p>
                     </div>
-                    <span>3</span>
-                    <strong>40M ago</strong>
+                    <strong>{{ i?.published_at }}</strong>
                   </li>
                 </ul>
               </div>
             </div>
             <div class="col-lg-8">
-               <div class="chat-info">
-                 <div class="chat-header p-1 d-flex align-items-center">
-                    <img src="/images/companies/1.png" class="mrl-half">
+               <div class="chat-info" v-if="messages?.receiver">
+                 <div class="chat-header p-1 d-flex align-items-center" >
+                   <image-component :src="'https://cvapi.skillar.com/images/users/'+messages?.receiver?.image?.name"></image-component>
                     <div>
-                       <p class="fw-bold mb-0">Algorithma</p>
-                       <p class="gray mb-0">last seen 12:40pm</p>
+                       <p class="fw-bold mb-0">{{ messages?.receiver?.username }}</p>
+                       <p class="gray mb-0" :title="messages?.receiver?.bio">{{ (messages?.receiver?.bio?.slice(0,40) ?? '') + (messages?.receiver?.bio?.length > 40 ? '......':'') }}</p>
                     </div>
                  </div>
                  <div class="chat-body">
-                    <div class="receiver d-flex align-items-center">
-                       <img class="mrl-1" src="/images/companies/1.png">
-                       <p class="mb-0 flex-auto">
-                         <span v-tooltip="'12:40pm'">This is text from receiver put here any text you want</span>
+                    <div :class="'d-flex align-items-center '+(i?.sender_id === $auth?.state?.user?.id ? 'sender':'receiver')"
+                         v-for="(i,index) in messages?.messages" :key="index"
+                         v-if="messages?.messages">
+                      <image-component
+                        v-if="i?.sender_id !== $auth?.state?.user?.id"
+                        :src="'https://cvapi.skillar.com/images/users/'+messages?.receiver?.image?.name"></image-component>
+                       <p :class="'flex-auto '+(i?.sender_id !== $auth?.state?.user?.id ? 'mb-0':'mb-1')">
+                         <span :v-tooltip="i?.created_at">{{ i?.message }}</span>
                        </p>
                     </div>
-                     <div class="receiver d-flex align-items-center">
-                       <img class="mrl-1" src="/images/companies/1.png">
-                       <p class="mb-0 flex-auto">
-                         <span v-tooltip="'12:40pm'">This is text from receiver put here any text you want</span>
-                       </p>
-                     </div>
-                    <div class="sender d-flex align-items-center">
-                     <p class="mb-0 flex-auto">
-                       <span v-tooltip="'12:40pm'">This is text from me put here any text you want</span>
-                     </p>
-                   </div>
-                   <div class="receiver d-flex align-items-center">
-                     <img class="mrl-1" src="/images/companies/1.png">
-                     <p class="mb-0 flex-auto">
-                       <span v-tooltip="'12:40pm'">This is text from receiver put here any text you want</span>
-                     </p>
-                   </div>
-                   <div class="receiver d-flex align-items-center">
-                     <img class="mrl-1" src="/images/companies/1.png">
-                     <p class="mb-0 flex-auto">
-                       <span v-tooltip="'12:40pm'">This is text from receiver put here any text you want</span>
-                     </p>
-                   </div>
-                   <div class="sender d-flex align-items-center">
-                     <p class="mb-0 flex-auto">
-                       <span v-tooltip="'12:40pm'">This is text from me put here any text you want</span>
-                     </p>
-                   </div>
                  </div>
                  <div class="chat-footer">
-                   <form class="position-relative form-has-submit-absolute">
-                     <input class="form-control" :placeholder="words.your_message">
-                     <input type="submit" class="btn btn-primary absolute-submit" :value="words.send">
+                   <form
+                      @submit.prevent="send_message"
+                     class="position-relative form-has-submit-absolute">
+                     <input type="hidden" name="conversation_id"
+                            :value="messages?.messages[0]?.conversation_id"
+                            v-if="messages?.messages.length > 0">
+                     <input type="hidden" name="receiver_id"
+                            :value="messages?.receiver?.id"
+                            v-if="messages?.receiver">
+                     <input class="form-control"
+                            style="padding: 10px"
+                            name="message"
+                            :placeholder="$parent.$attrs.words.chat.your_message">
+                     <input type="submit" class="btn btn-primary absolute-submit" :value="$parent.$attrs.words.chat.send">
                    </form>
                  </div>
                </div>
+              <div v-else class="text-center d-flex flex-wrap align-items-center justify-content-center">
+                <img class="d-block m-auto mb-2 mt-2" style="height: 350px" src="/images/start_chat.gif">
+                <h2 class="text-center">{{ $parent.$attrs.words.chat.start_send_receive_messages }}</h2>
+              </div>
             </div>
          </div>
       </div>
@@ -95,14 +88,26 @@
 
 <script>
 import WordsLang from "../mixins/WordsLang";
+import {mapActions , mapGetters} from "vuex";
+
 export default {
-  name: 'best_companies',
+  name: 'chat',
   mixins:[WordsLang],
-  data(){
-    return {
-      data: [],
-      skills:['php','mysql','laravel'],
-    }
+  computed:{
+    ...mapGetters({
+      'friends':'chat/get_data',
+      'messages':'chat/get_messages'
+    })
+  },
+  methods:{
+    ...mapActions({
+      'get_friends':'chat/getFriendsAction',
+      'get_messages':'chat/getMessagesAction',
+      'send_message':'chat/sendMessageAction'
+    })
+  },
+  mounted() {
+    this.get_friends()
   },
 }
 </script>
@@ -126,6 +131,7 @@ export default {
         padding: 5px;
         max-height: 500px;
         overflow: auto;
+        height: 100%;
         ul{
           li{
             position: relative;

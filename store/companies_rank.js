@@ -33,6 +33,7 @@ export const mutations = {
     }
   },
   EmptyData(state){
+    state.status = true;
     state.data = [];
   },
 }

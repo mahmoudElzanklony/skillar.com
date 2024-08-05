@@ -85,7 +85,7 @@ export default {
   data(){
     return {
       inputs:[],
-      auto_complete_types:['skills','educations','abilities']
+      auto_complete_types:['skills','interests','knowledge','abilities']
     }
   },
   watch:{

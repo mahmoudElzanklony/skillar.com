@@ -144,6 +144,8 @@ export default {
     search_friend:'Search about any one',
     contact_support:'contact support',
     your_message:'Your message',
+    start_send_receive_messages:'Start sending and receiving messages now'
+
   },
   colleagues:{
     colleagues_at_skillar:'Colleagues at skillar',
@@ -340,6 +342,8 @@ export default {
     },
     apply_box:{
       my_cvs:'My cvs ',
+      no_cvs:'You do not have a CV to choose from, please upload one through your profile.',
+      add_new_cv:'Add new cv',
     },
     details:{
       read_more:'Read more',
@@ -354,6 +358,8 @@ export default {
       matching_job_profile:'Matching job with your profile',
       similar_jobs:'Similar jobs',
       your_applied_this_job:'You applied for this job before',
+      no_job_found:'This job is no longer available. You can search for other jobs through the jobs page.',
+
     }
   },
   admin:{

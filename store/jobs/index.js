@@ -71,6 +71,8 @@ export const actions = {
   getJobInfoAction({ state,commit,rootGetters },payload) {
     return this.$axios.get('/jobs-offers/'+payload).then((e)=>{
       commit('InitializeItem',e.data.data);
+    }).catch((e)=>{
+      commit('InitializeItem',null);
     })
   },
 

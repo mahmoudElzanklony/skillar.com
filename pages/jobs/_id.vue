@@ -1,7 +1,8 @@
 <template>
   <section class="job_details current_page">
-    <div v-if="Object.keys($parent.$attrs).length > 0  &&  Object.keys($parent.$attrs.words).length > 0">
-      <div class="container" >
+    <div v-if="Object.keys($parent.$attrs).length > 0  &&
+     Object.keys($parent.$attrs.words).length > 0">
+      <div class="container" v-if="job_info != null">
         <div class="row">
           <div class="col-lg-8 col-md-6 mb-3">
             <div class="description box-shadow">
@@ -131,6 +132,12 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <div class="container">
+          <img src="/images/no_data.gif" class="d-block m-auto">
+          <h2 class="text-center">{{  $parent?.$attrs?.words?.jobs?.details.no_job_found }}</h2>
+        </div>
+      </div>
       <apply_for_job></apply_for_job>
     </div>
   </section>
@@ -146,10 +153,12 @@ export default {
   async asyncData({store , route , $auth}){
     console.log(route.params)
     await store.dispatch('jobs/getJobInfoAction',route.params.id);
-    let filters = '?name='+store.getters['jobs/get_item'].name+'&nid='+store.getters['jobs/get_item'].id+'&page=1';
-    await store.dispatch('jobs/getJobsAction',filters);
-    if($auth.$state.user){
-      await store.dispatch('profile/applications/getSpecificOneAction',store.getters['jobs/get_item'].id);
+    if(store.getters['jobs/get_item']) {
+      let filters = '?name=' + store.getters['jobs/get_item'].name + '&nid=' + store.getters['jobs/get_item'].id + '&page=1';
+      await store.dispatch('jobs/getJobsAction', filters);
+      if ($auth.$state.user) {
+        await store.dispatch('profile/applications/getSpecificOneAction', store.getters['jobs/get_item'].id);
+      }
     }
 
   },

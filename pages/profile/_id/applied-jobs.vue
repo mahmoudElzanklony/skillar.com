@@ -74,12 +74,12 @@
                                    <div :class="'value end-border-bottom p-2 job_'+key" :key="key"
                                         v-for="(i,key) in applied_jobs.filter((e) => e.status.indexOf(this.filter_applicants) >= 0)" >
                                      <div class="d-flex align-items-center">
-                                       <image-component v-if="i?.job?.company?.image" :src="'/users/'+i?.job?.company?.image?.name"></image-component>
-                                       <img v-else src="/images/users/default.png" class="mrl-1">
+                                       <image-component :src="'https://cvapi.skillar.com/images/users/'+i?.job?.company?.image?.name"></image-component>
+                                       
                                        <div class="mrl-reverse-10">
                                          <p class="fw-bold w-100 mb-1 d-flex align-items-center justify-content-between">
                                            <span>
-                                             <a :href="'/jobs/'+i?.job?.id"  target="_blank">{{ i?.job?.name }}</a>
+                                             <nuxt-link :to="'/jobs/'+i?.job?.id"  >{{ i?.job?.name }}</nuxt-link>
                                            </span>
                                            <span class="red cursor-pointer"
                                                  v-if="authorizeControl"

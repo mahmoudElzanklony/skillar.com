@@ -293,6 +293,7 @@ export default {
     search_friend:'أبحث عن اي احد تريدة',
     contact_support:'التواصل مع الدعم  الفني',
     your_message:'اكتب رسالتك',
+    start_send_receive_messages:'أبدا في ارسال و استقبال رسائلك'
   },
   colleagues:{
     colleagues_at_skillar:'زملائك المتواجدين علي سكلير',
@@ -486,6 +487,8 @@ export default {
     },
     apply_box:{
       my_cvs:'السير الذاتية الخاصة بي',
+      no_cvs:'لا يوجد لك سير ذاتيه للاختتيار منها برجاء رفع واحده من خلال ملفك الشخصي',
+      add_new_cv:'اضافه سيرة ذاتية جديدة',
     },
     save_job:{
       job_info:'تفاصيل الوظيفة',
@@ -540,6 +543,7 @@ export default {
       matching_job_profile:'مطابقة الوظيفه لملفك الشخصي',
       similar_jobs:'وظائف مشابهه',
       your_applied_this_job:'لقد قمت بالتقديم علي هذه الوظيفة من قبل',
+      no_job_found:'هذه الوظيفة لم تعد موجوده بالفعل يمكنك البحث عن وظائف اخري من خلال صفحة الوظائف',
     }
   },
   orders_data:{

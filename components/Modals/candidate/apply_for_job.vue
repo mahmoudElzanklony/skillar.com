@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
           <div v-if="inProfile && !authorizeControl">
-            <div v-if="cvs_data?.length > 0">
+            <div v-if="cvs_data">
               <div :class="'mb-3 checkbox-item flex-wrap box_'+(index)+(control === true ? ' d-flex justify-content-between':'')"
                    v-for="(i,index) in cvs_data" :key="index">
                 <span class="mrl-half">{{ i?.name }}</span>
@@ -34,10 +34,13 @@
 
               </p>
             </div>
-            <div class="form-group position-relative input-icon flex-wrap mb-2" v-if="control">
-              <label>{{ $parent.$parent.$attrs.words.register.name }}</label>
-              <span><i class="bi bi-info-circle"></i></span>
-              <input class="form-control" name="name">
+            <div v-if="control">
+              <p class="mb-1"><strong class="blue">{{ $parent.$parent.$attrs.words.jobs.apply_box.add_new_cv }}</strong></p>
+              <div class="form-group position-relative input-icon flex-wrap mb-2" >
+                <label>{{ $parent.$parent.$attrs.words.register.name }}</label>
+                <span><i class="bi bi-info-circle"></i></span>
+                <input class="form-control" name="name">
+              </div>
             </div>
             <div class="file_upload mb-2" v-if="control">
               <div>
@@ -46,7 +49,12 @@
               </div>
               <input type="file" name="file" required>
             </div>
-            <div class="form-group position-relative input-icon flex-wrap">
+            <div v-if="(!inProfile && cvs_data?.length === 0)">
+              <img class="w-100" src="/images/no_data.gif">
+              <p class="text-center">{{ $parent.$parent.$attrs.words.jobs.apply_box.no_cvs }}</p>
+            </div>
+            <div class="form-group position-relative input-icon flex-wrap"
+            v-show="(!inProfile && cvs_data) || (inProfile && authorizeControl)">
               <input class="btn btn-primary" type="submit" :value="$parent.$parent.$attrs.words.general.save">
             </div>
           </form>

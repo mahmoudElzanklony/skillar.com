@@ -86,6 +86,7 @@ export default {
   mixins:[sections_profile_classes,animateData],
   async asyncData({store}){
     await store.commit('companies_rank/InitializeData',[]);
+    await store.commit('companies_rank/EmptyData');
     await store.dispatch('companies_rank/companiesAction','?page=1')
   },
   computed:{
