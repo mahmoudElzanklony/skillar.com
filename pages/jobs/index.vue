@@ -35,7 +35,7 @@ import {mapGetters , mapActions} from "vuex";
 import animateData from "../../mixins/animateData";
 export default {
   name: "jobs",
-  async asyncData({store , route}){
+  async fetch({store , route}){
     let output = '?';
     if(Object.keys(route.query).length > 0){
        for(let key of Object.keys(route.query)){

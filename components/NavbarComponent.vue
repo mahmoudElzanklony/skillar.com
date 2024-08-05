@@ -46,7 +46,7 @@
               {{ another_lang }}
             </button>
           </li>
-          <li class="user_profile " v-show="$auth.loggedIn">
+          <li class="user_profile " v-if="$auth.loggedIn">
             <ul class="dots-action cursor-pointer d-inline-block">
               <li class="dots">
                 <img v-if="$auth?.$state?.user?.image"
@@ -136,8 +136,6 @@ export default {
       }else{
         this.another_lang = 'اللغة العربية';
       }
-      console.log('----------lang---------')
-      console.log(this.another_lang)
   }
 }
 </script>
