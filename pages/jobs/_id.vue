@@ -24,13 +24,13 @@
 
               </div>
               <ResendActivation></ResendActivation>
-              <p>
-                <span class="gray" v-html="job_info.description"></span>
-              </p>
+              <div>
+                <div class="gray" v-html="job_info.description"></div>
+              </div>
 
-              <p>
-                <span class="gray d-none toggle-show" v-html="job_info.description"></span>
-              </p>
+              <div>
+                <div class="gray d-none toggle-show" v-html="job_info.description"></div>
+              </div>
               <p class=" toggle_p_show" v-if="false">
                     <span class="blue cursor-pointer small"
                           :show="$parent.$attrs.words.profile.main.show_more"
@@ -70,8 +70,8 @@
                 </p>
               </div>
               <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.save_job.job_responsibilities }}</p>
-              <p class="gray end-border-bottom"
-                 v-html="job_info.responsibilities"></p>
+              <div class="gray end-border-bottom"
+                 v-html="job_info.responsibilities"></div>
               <div class="skills">
                 <p class="fw-bold">{{ $parent?.$attrs?.words?.jobs?.details.required_skills }}</p>
                 <ul class="d-flex align-items-center flex-wrap">
