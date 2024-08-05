@@ -4,7 +4,7 @@
       <div class="outer">
          <div class="outer-heading">
             <h2 class="mb-0">{{ $parent.$attrs.words.chat.messager }}</h2>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between" v-if="false">
               <p class="mb-0">
                 <nuxt-link to="/chat?type=all" class="gray">{{ $parent.$attrs.words.chat.total_messages }}</nuxt-link>
                 <nuxt-link to="/chat?type=all">420</nuxt-link> ,
@@ -18,18 +18,23 @@
             <div class="col-lg-4">
               <div class="friends">
                 <div class="form-group input-icon">
-                  <input class="form-control" :placeholder="$parent.$attrs.words.chat.search_friend">
+                  <input class="form-control"
+                         @keyup="searchUserAction"
+                         :placeholder="$parent.$attrs.words.chat.search_friend">
                   <span><i class="bi bi-search"></i></span>
                 </div>
                 <ul>
                   <li class="d-flex flex-wrap align-items-center cursor-pointer p-1"
                       v-for="(i,index) in friends"
-                      @click="get_messages(i)"
+                      @click="get_messages(i?.hasOwnProperty('receiver') ? i : {receiver_id:i.id,conversation_id:null})"
                       :key="index">
-                    <image-component :src="'https://cvapi.skillar.com/images/users/'+(i[i?.receiver?.id == $auth.state?.user?.id ? 'sender':'receiver']?.image?.name)"></image-component>
+                    <image-component v-if="i?.receiver" :src="'https://cvapi.skillar.com/images/users/'+(i[i?.receiver?.id == $auth.state?.user?.id ? 'sender':'receiver']?.image?.name)"></image-component>
+                    <image-component v-else :src="'https://cvapi.skillar.com/images/users/'+i.image?.name"></image-component>
                     <div class="message_info">
-                      <p class="mb-0 fw-bold">{{ (i?.receiver?.id == $auth.state?.user?.id) ? i?.sender?.username : i?.receiver?.username }}</p>
-                      <p class="gray">{{ i?.message }}</p>
+                      <p class="mb-0 fw-bold" v-if="i?.hasOwnProperty('receiver')">{{ (i?.receiver?.id == $auth.state?.user?.id) ? i?.sender?.username : i?.receiver?.username }}</p>
+                      <p class="mb-0 fw-bold" v-else>{{ i?.username }}</p>
+                      <p class="gray" v-if="i?.hasOwnProperty('receiver')">{{ i?.message }}</p>
+                      <p class="gray" :title="i?.bio" v-else>{{ i?.bio?.slice(0,15) }}</p>
                     </div>
                     <strong>{{ i?.published_at }}</strong>
                   </li>
@@ -103,7 +108,8 @@ export default {
     ...mapActions({
       'get_friends':'chat/getFriendsAction',
       'get_messages':'chat/getMessagesAction',
-      'send_message':'chat/sendMessageAction'
+      'send_message':'chat/sendMessageAction',
+      'searchUserAction':'chat/searchUserAction'
     })
   },
   mounted() {

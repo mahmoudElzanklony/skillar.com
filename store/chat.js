@@ -71,6 +71,19 @@ export const actions = {
     });
   },
 
+
+  async searchUserAction({ state,commit,rootGetters }) {
+    let data = event.target.value;
+    if(data.length === 0){
+      return this.$axios.post('/chat/get-friends').then((e) => {
+        commit('InitializeData', e.data.data);
+      })
+    }
+    return this.$axios.post('/all/users',{username:data}).then((e) => {
+      commit('InitializeData', e.data.data);
+    })
+  },
+
   async sendMessageAction({ state,commit,rootGetters }) {
     let data = new FormData(event.target);
     let obj = {};
