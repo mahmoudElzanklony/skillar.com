@@ -56,6 +56,8 @@ export const actions = {
   async saveDataAction({ state,commit,rootGetters }) {
     let target = event.target;
     let data = new FormData(target)
+    let router = this.$router;
+
     let editors = document.querySelectorAll('.ck-editor__editable');
     data.append('description',editors[0].innerHTML)
     data.append('responsibilities',editors[1].innerHTML)
@@ -64,7 +66,7 @@ export const actions = {
       data.append('id',target.getAttribute('complete_url').replace('/',''));
     }
     this.$axios.post('/jobs-offers'+target.getAttribute('complete_url'),data).then((e)=>{
-      formValidation(e.data,target,'',true,'');
+      formValidation(e.data,target,'/jobs',true,router);
     })
   },
 
