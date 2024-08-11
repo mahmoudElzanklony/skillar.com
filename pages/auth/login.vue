@@ -23,6 +23,7 @@
                   </p>
                 </div>
                 <form class="p-3" method="post" @submit.prevent="login">
+                  <input type="hidden" class="redirect" name="redirect" :value="redirect">
                   <h2>{{ $parent.$attrs.words.login.login }}</h2>
                   <div class="form-group mb-2 input-icon flex-wrap">
                     <label>{{ $parent.$attrs.words.login.email }}</label>
@@ -70,6 +71,16 @@ import RecaptchaComponent from "@/components/RecaptchaComponent";
 import {mapActions} from 'vuex';
 export default {
   name: "login",
+  data(){
+    return {
+      redirect:'/'
+    }
+  },
+  mounted() {
+    if(this.$route.query.hasOwnProperty('type')){
+      this.redirect = this.$route.query.type;
+    }
+  },
   components:{
     RecaptchaComponent
   },

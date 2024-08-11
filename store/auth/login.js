@@ -54,7 +54,7 @@ export const actions = {
             }
           }
 
-          window.location = '/';
+          window.location = document.querySelector('.redirect').value;
         }
       }).catch((error)=>{
         console.log(error)
