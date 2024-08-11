@@ -94,6 +94,17 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    optimization: {
+      minimize: true,
+      splitChunks: {
+        chunks: 'all'
+      }
+    },
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true
+    },
     loaders:  {
       vue: {
         prettify: false
