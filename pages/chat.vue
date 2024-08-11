@@ -26,9 +26,9 @@
                 <ul>
                   <li class="d-flex flex-wrap align-items-center cursor-pointer p-1"
                       v-for="(i,index) in friends"
-                      @click="get_messages(i?.hasOwnProperty('receiver') ? i : {receiver_id:i.id,conversation_id:null})"
+                      @click="get_messages(i?.hasOwnProperty('receiver') ? i : {receiver_id:i.id,conversation_id:null}); getImageName(i)"
                       :key="index">
-                    <image-component v-if="i?.receiver" :src="'https://cvapi.skillar.com/images/users/'+(i[i?.receiver?.id == $auth.state?.user?.id ? 'sender':'receiver']?.image?.name)"></image-component>
+                    <image-component v-if="i?.receiver" :src="'https://cvapi.skillar.com/images/users/'+current_image"></image-component>
                     <image-component v-else :src="'https://cvapi.skillar.com/images/users/'+i.image?.name"></image-component>
                     <div class="message_info">
                       <p class="mb-0 fw-bold" v-if="i?.hasOwnProperty('receiver')">{{ (i?.receiver?.id == $auth.state?.user?.id) ? i?.sender?.username : i?.receiver?.username }}</p>
@@ -44,7 +44,7 @@
             <div class="col-lg-8">
                <div class="chat-info" v-if="messages?.receiver">
                  <div class="chat-header p-1 d-flex align-items-center" >
-                   <image-component :src="'https://cvapi.skillar.com/images/users/'+messages?.receiver?.image?.name"></image-component>
+                   <image-component :src="'https://cvapi.skillar.com/images/users/'+current_image"></image-component>
                     <div>
                        <p class="fw-bold mb-0">{{ messages?.receiver?.username }}</p>
                        <p class="gray mb-0" :title="messages?.receiver?.bio">{{ (messages?.receiver?.bio?.slice(0,40) ?? '') + (messages?.receiver?.bio?.length > 40 ? '......':'') }}</p>
@@ -58,7 +58,7 @@
                         v-if="i?.sender_id !== $auth?.state?.user?.id"
                         :src="'https://cvapi.skillar.com/images/users/'+messages?.receiver?.image?.name"></image-component>
                        <p :class="'flex-auto '+(i?.sender_id !== $auth?.state?.user?.id ? 'mb-0':'mb-1')">
-                         <span :v-tooltip="i?.created_at">{{ i?.message }}</span>
+                         <span v-tooltip="i?.created_at">{{ i?.message }}</span>
                        </p>
                     </div>
                  </div>
@@ -98,6 +98,11 @@ import {mapActions , mapGetters} from "vuex";
 export default {
   name: 'chat',
   mixins:[WordsLang],
+  data:function (){
+    return {
+       current_image:null
+    }
+  },
   computed:{
     ...mapGetters({
       'friends':'chat/get_data',
@@ -110,7 +115,15 @@ export default {
       'get_messages':'chat/getMessagesAction',
       'send_message':'chat/sendMessageAction',
       'searchUserAction':'chat/searchUserAction'
-    })
+    }),
+    getImageName(i){
+      if(i.hasOwnProperty('image')){
+        this.current_image = i?.image?.name;
+      }else {
+        this.current_image = i[i?.receiver?.id === this.$auth.state?.user?.id ? 'sender' : 'receiver']?.image?.name;
+      }
+      return this.current_image
+    }
   },
   mounted() {
     this.get_friends()
