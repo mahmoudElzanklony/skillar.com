@@ -1,7 +1,9 @@
 <template>
   <div class="notifications current_page">
     <div class="container mt-4 mb-4">
-      <div class="outer infinite_scroll" action_path="notifications/notificationsAction" method="get">
+      <h2>{{ $parent.$attrs.words.general.admin.notifications }}</h2>
+      <div class="outer infinite_scroll"
+           action_path="notifications/notificationsAction" method="get">
         <div class="notification unread d-flex align-items-center" v-for="(i,key) in data" :key="key">
           <nuxt-link tag="img" :src="'https://cvapi.skillar.com/images/users/'+i?.data?.sender?.image?.name"
                      :to="'/profile/'+i?.data?.sender?.id" class="mrl-1 cursor-pointer"></nuxt-link>
@@ -24,6 +26,7 @@
         </div>
 
       </div>
+      <img v-if="data.length == 0" class="w-100" src="/images/no_data.gif">
     </div>
   </div>
 </template>
