@@ -14,6 +14,8 @@ export default {
     select_your_category:'select your category',
     register:'Register',
     search:'Search',
+    ready_class:'bi bi-chevron-right',
+
   },
   navbar:{
     home:'Home',
@@ -130,10 +132,35 @@ export default {
     all_jobs:'See all jobs',
 
     // get last information
-    get_last_information:'Get the lastest jobs in skillar',
+    get_last_information:'Get the latest jobs in skillar',
     join_our_daily:'Join us now to get more opportunities and jobs, as you will have the freedom to choose what you would like to apply for',
     your_email:'Your email',
     subscribe:'Subscribe',
+
+    services:{
+      title:'Services',
+      boxes:[
+        {
+          title:'build cv & resume ',
+          content:'The resume creation service is designed to assist individuals in creating a professional and appealing resume. This service allows individuals to organize and design their personal, educational, professional, and skills information in a professional and effective manner. It includes a variety of diverse and cohesive resume templates that facilitate the process of entering and formatting information professionally.',
+          image:'cv.png',
+          link:{
+            name:'Build now',
+            url:'/cvs'
+          },
+        },
+        {
+          title:'know job description ',
+          content:'Job Description Service provides detailed and comprehensive information about the responsibilities, tasks, and qualifications of a specific job in the job market. This service aims to assist individuals in understanding the requirements of a particular role in the field of work and what skills and experiences are necessary to successfully perform that job.',
+          image:'bag.png',
+          link:{
+            name:'search for des',
+            url:'https://jd.skillar.com'
+          },
+        }
+      ]
+    },
+
   },
   /*===============================end of home page==========================================*/
 

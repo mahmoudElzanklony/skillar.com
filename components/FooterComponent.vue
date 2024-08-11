@@ -9,10 +9,10 @@
           <div class="links">
             <p>{{ $attrs.words.footer.quick_links }}</p>
             <ul>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.jobs }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.companies }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.posts }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.plans }}</nuxt-link></li>
+              <li><nuxt-link to="/jobs" class="line-hover position-relative">{{ $attrs.words.footer.jobs }}</nuxt-link></li>
+              <li><nuxt-link to="/best-companies" class="line-hover position-relative">{{ $attrs.words.footer.companies }}</nuxt-link></li>
+              <li><nuxt-link to="/colleagues" class="line-hover position-relative">{{ $attrs.words.navbar.colleagues }}</nuxt-link></li>
+              <li v-if="false"><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.plans }}</nuxt-link></li>
             </ul>
           </div>
         </div>
@@ -20,9 +20,9 @@
           <div class="links">
             <p>{{ $attrs.words.footer.resources }}</p>
             <ul>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.privacy }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.terms_of_service }}</nuxt-link></li>
-              <li><nuxt-link to="#" class="line-hover position-relative">{{ $attrs.words.footer.user_condition }}</nuxt-link></li>
+              <li><nuxt-link to="/privacy" class="line-hover position-relative">{{ $attrs.words.footer.privacy }}</nuxt-link></li>
+              <li><nuxt-link to="/terms" class="line-hover position-relative">{{ $attrs.words.footer.terms_of_service }}</nuxt-link></li>
+              <li><nuxt-link to="/conditions" class="line-hover position-relative">{{ $attrs.words.footer.user_condition }}</nuxt-link></li>
             </ul>
           </div>
         </div>
@@ -31,10 +31,10 @@
             <p>{{ $attrs.words.footer.contact }}</p>
             <ul>
               <li>
-                <nuxt-link to="#" class="position-relative">
+                <a href="mailto:info@mkena.com" class="position-relative">
                   <span class="mrl-1"><i class="bi bi-envelope"></i></span>
                   <span>info@skillar.com</span>
-                </nuxt-link>
+                </a>
               </li>
               <li>
                 <nuxt-link to="#" class="position-relative">

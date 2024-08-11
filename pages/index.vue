@@ -156,7 +156,9 @@
         </div>
       </section>
 
-      <section id="get_last_information" class="get_last_information mt-5">
+      <section id="get_last_information"
+               v-if="false"
+               class="get_last_information mt-5">
         <div class="container">
           <div class="box">
             <div class="row align-items-center">
@@ -177,6 +179,32 @@
           </div>
         </div>
       </section>
+
+      <section class="services pt-4 pb-4">
+        <div class="container">
+          <div class="text-center mb-5">
+            <img src="/images/home/line1.png">
+            <h2 class="d-inline fw-bold black text-center">{{ $parent.$attrs.words.home.services.title }}</h2>
+            <img src="/images/home/line2.png">
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-12 mb-2" v-for="(i,index) in $parent.$attrs.words.home.services.boxes" :key="index">
+              <div class="box d-flex align-items-center justify-content-between">
+                <img :src="'/images/home/'+i['image']">
+                <div>
+                  <h2 class="semi_big fw-bold">{{ i['title'] }}</h2>
+                  <p class="small gray">{{ i['content'] }}</p>
+                  <a target="_blank"  :href="i['link']['url']">
+                    <span class="blue">{{ i['link']['name'] }}</span>
+                    <span class="position-relative blue top-1"><i :class="$parent.$attrs.words.header.ready_class"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <dots-scroll-component :dots="dots"></dots-scroll-component>
     </div>
@@ -379,5 +407,15 @@ export default {
 }
 /*----------------end of get_last_information------------------------*/
 
-
+.services{
+  .box{
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    img{
+      height: 150px;
+    }
+  }
+}
 </style>
