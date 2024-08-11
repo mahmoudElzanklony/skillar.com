@@ -39,7 +39,7 @@
       <div class="row infinite_scroll" action_path="colleagues/colleaguesAction" method="get">
          <div class="col-md-4" v-for="(i,index) in data" :key="index">
            <div class="user-card mb-3 position-relative">
-             <div class="user-header">
+             <div class="user-header" :style="{ backgroundColor: generateRandomColor() }">
                <a target="_blank" class="cursor-pointer" :href="'/profile/'+i?.id">
                  <image-component v-if="i?.image?.name" :src="'https://cvapi.skillar.com/images/users/'+i?.image?.name"></image-component>
                  <img v-else src="/images/users/default.png">
@@ -95,6 +95,14 @@ export default {
       'sectionsNamesAction':'sections/sectionsNamesAction',
       'countriesAction':'places/countries/getCountriesAction'
     }),
+    generateRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    },
     async filterData(){
       let data = new FormData(event.target);
       let dataTxt = '?';

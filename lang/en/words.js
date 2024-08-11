@@ -357,7 +357,7 @@ export default {
       no_people_applied:'Participants number',
       matching_job_profile:'Matching job with your profile',
       similar_jobs:'Similar jobs',
-      your_applied_this_job:'You applied for this job before',
+      your_applied_this_job:'You applied for this job',
       no_job_found:'This job is no longer available. You can search for other jobs through the jobs page.',
 
     }

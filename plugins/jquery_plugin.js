@@ -86,6 +86,25 @@ $(document).ready(function (){
   });
 
 
+  // show file name when uploaded
+  $('#__nuxt').on('change','.file_upload input',function (){
+    if(event.target?.files?.length > 0) {
+      $(event.target.previousElementSibling).find('p').html(event.target.files[0]?.name);
+    }else{
+      $(event.target.previousElementSibling).find('p').html('')
+    }
+  });
+
+  /*$('#__nuxt').on('click','*[data-bootstrap]',function (){
+    let target = event.target.getAttribute('target')
+    setTimeout(()=>{
+      console.log(bootstrap.Modal.getOrCreateInstance(target))
+      bootstrap.Modal.getOrCreateInstance(target).show()
+
+    },600)
+  })*/
+
+
   // toggle dots action slide up and down
   // start
   $('#__nuxt').on('click',function (){

@@ -224,7 +224,9 @@ export default {
       // activate account
       await  this.activate(this.$route.query?.activation)
       console.log(this.$auth.$state.user)
-      window.location = '/profile/'+this.$auth.user.id
+      setTimeout(()=>{
+        window.location = '/profile/'+this.$auth.user.id
+      },2000)
 
 
     }

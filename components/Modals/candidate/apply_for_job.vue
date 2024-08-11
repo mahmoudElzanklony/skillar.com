@@ -1,6 +1,7 @@
 <template>
   <!-- Modal of update introduction video -->
-  <div class="modal fade" id="apply_for_job" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="apply_for_job"
+       tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog"
          v-if="Object.keys($parent.$parent.$attrs).length > 0  &&  Object.keys($parent.$parent.$attrs.words).length > 0">
       <div class="modal-content">
@@ -46,6 +47,7 @@
               <div>
                 <span class="mrl-1">{{ $parent.$parent.$attrs.words.general.upload_file_here }}</span>
                 <span class="gray"><i class="bi bi-cloud-arrow-up"></i></span>
+                <p class="mb-0 mt-2 gray"></p>
               </div>
               <input type="file" name="file" required>
             </div>
