@@ -1,7 +1,7 @@
 <template>
   <div class="notifications current_page">
     <div class="container mt-4 mb-4">
-      <h2>{{ $parent.$attrs.words.general.admin.notifications }}</h2>
+      <h2>{{ $parent.$attrs.words.navbar.notifications }}</h2>
       <div class="outer infinite_scroll"
            action_path="notifications/notificationsAction" method="get">
         <div class="notification unread d-flex align-items-center" v-for="(i,key) in data" :key="key">
