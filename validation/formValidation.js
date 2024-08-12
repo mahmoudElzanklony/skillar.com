@@ -46,8 +46,10 @@ export default function (data,target,url = '',reset = false,router = null){
     }
     // check if visit another page
     if(url != ''){
+
       setTimeout(()=>{
         router.app.refresh()
+        router.push(url);
        // window.vm.$inertia.visit(url);
       },2000);
     }

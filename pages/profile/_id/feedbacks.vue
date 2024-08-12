@@ -19,7 +19,7 @@
                   <div :class="'value box_'+index" v-for="(i,index) in feedbacks" :key="index">
                     <div class="d-flex align-items-center justify-content-between">
                       <image-component
-                        :src="'/users/'+i?.sender?.image?.name"></image-component>
+                        :src="'https://cvapi.skillar.com/images/users/'+i?.sender?.image?.name"></image-component>
                       <div class="mrl-reverse-10">
                         <div class="mb-0 fw-bold d-flex align-items-center justify-content-between">
                           <span>{{ i?.sender?.username }}</span>

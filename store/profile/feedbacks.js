@@ -42,7 +42,7 @@ export const actions = {
           icon:'success',
           title:e.data?.message
         });
-        this.$router.push(page);
+        window.location = page;
       })
   },
   async getDataAction({ state,commit },payload) {
