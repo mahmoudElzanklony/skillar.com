@@ -50,7 +50,7 @@
         <div class="col-lg-9 mb-2" v-if="authorizeControl">
           <div class="job_description" v-if="specific_job">
             <div class="heading d-flex align-items-center justify-content-between mb-3">
-               <image-component :src="'/users/'+specific_job?.company?.image?.name"></image-component>
+               <image-component :src="'https://cvapi.skillar.com/images/users/'+specific_job?.company?.image?.name"></image-component>
                <div class="controls d-flex justify-content-between">
                  <p class="gray mrl-1 position-relative top-3">{{ specific_job?.published }}</p>
                  <a class="mrl-half" :href="'/jobs/save?id='+specific_job?.id">

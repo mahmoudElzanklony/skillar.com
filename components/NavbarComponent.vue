@@ -24,7 +24,7 @@
             <nuxt-link class="nav-link line-hover" to="/best-companies">{{ $attrs.words.navbar.companies_rank }}</nuxt-link>
           </li>
           <li class="nav-item link mrl-1" v-if="$auth?.state?.user?.role?.name === 'company'">
-            <nuxt-link class="nav-link line-hover" to="/jobs/save">{{ $attrs.words.navbar.add_job }}</nuxt-link>
+            <a class="nav-link line-hover" href="/jobs/save">{{ $attrs.words.navbar.add_job }}</a>
           </li>
           <li class="nav-item link mrl-1">
             <nuxt-link class="nav-link line-hover" to="/colleagues">{{ $attrs.words.navbar.colleagues }}</nuxt-link>

@@ -17,7 +17,7 @@
                  <label>{{ $parent.$attrs.words.jobs.save_job.job_name }}</label>
                  <input class="form-control" name="name" v-model="job_data.name">
                  <span><i class="bi bi-info"></i></span>
-                 <p class="alert alert-danger"></p>
+                 <p class="alert alert-danger w-100 mt-2 block"></p>
               </div>
               <div class="mb-3 input-icon flex-wrap">
                 <label>{{ $parent.$attrs.words.jobs.save_job.job_category }}</label>
@@ -27,7 +27,7 @@
                           :selected="job_info?.category?.id === i?.id">{{ i?.name }}</option>
                 </select>
                 <span><i class="bi bi-arrow-down"></i></span>
-                <p class="alert alert-danger"></p>
+                <p class="alert alert-danger w-100 mt-2 block"></p>
 
               </div>
               <div class="row">
@@ -38,7 +38,7 @@
                            v-model="job_data.min_experience"
                            required>
                     <span><i class="bi bi-arrow-up-circle"></i></span>
-                    <p class="alert alert-danger"></p>
+                    <p class="alert alert-danger w-100 mt-2 block"></p>
 
                   </div>
                 </div>
@@ -49,7 +49,7 @@
                            v-model="job_data.max_experience"
                            required>
                     <span><i class="bi bi-arrow-down-circle"></i></span>
-                    <p class="alert alert-danger"></p>
+                    <p class="alert alert-danger w-100 mt-2 block"></p>
 
                   </div>
                 </div>
@@ -68,7 +68,7 @@
               <div class="mb-3 input-icon flex-wrap">
                 <label class="w-100">{{ $parent.$attrs.words.jobs.save_job.short_description }}</label>
                 <textarea name="description" class="editor form-control" v-html="job_data.description"></textarea>
-                <p class="alert alert-danger"></p>
+                <p class="alert alert-danger w-100 mt-2 block"></p>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@
               <div class="mb-3 input-icon flex-wrap">
                 <label class="w-100">{{ $parent.$attrs.words.jobs.save_job.job_responsibilities }}</label>
                 <textarea name="responsibilities" class="editor form-control" v-html="job_data.responsibilities" ></textarea>
-                <p class="alert alert-danger"></p>
+                <p class="alert alert-danger w-100 mt-2 block"></p>
               </div>
             </div>
           </div>
@@ -253,8 +253,8 @@ export default {
        try{
          await store.dispatch('jobs/getJobInfoAction',route.query.id+'?has_not_view=true');
          // check authorization of job
-         if(!($auth?.$state?.user?.role?.name === 'admin' || route?.query?.id === store.getters['jobs/get_item']['company_id'])){
-           redirect('/');
+         if(!($auth?.$state?.user?.role?.name === 'admin' || route?.query?.id === store.getters['jobs/get_item']['id'])){
+           //redirect('/');
          }
        }catch (e){
          redirect('/jobs');
@@ -271,6 +271,9 @@ export default {
     }
   },
   mounted() {
+    console.log('job--------------------')
+    this.job_data = {}
+
     if(document.URL.split('?id=')[1] !== undefined){
       this.id = document.URL.split('?id=')[1]
     }
@@ -316,7 +319,7 @@ export default {
         }
       },
       set(newValue) {
-        this.job_data.salary = newValue +':'+ this.job_data.salary.slice(this.job_data.salary.indexOf(':') + 1);
+        this.job_data.salary = newValue +':'+ document.querySelector('input[name="max_salary"]').value > 0 ? document.querySelector('input[name="max_salary"]').value : '';
       }
     },
     computedMaxSalary:{
